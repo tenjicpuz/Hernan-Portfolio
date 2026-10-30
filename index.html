@@ -227,6 +227,12 @@
     .contact-remove { background: rgba(255,255,255,.1); flex: 0 0 auto; }
     .contact-form button { grid-column: 1 / -1; }
     .contact-status { min-height: 1.4em; color: #ffb5bd; font-size: .85rem; }
+    .admin-panel { display:none; margin-top:22px; padding:24px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+    .admin-panel.is-visible { display:block; }
+    .admin-panel input, .admin-panel select { width:100%; min-width:0; padding:12px; margin:5px 0 12px; border:1px solid var(--line); border-radius:7px; background:#0e0c11; color:var(--text); font:inherit; }
+    .admin-panel button { padding:10px 14px; border:0; border-radius:7px; background:var(--site-primary); color:#fff; font:inherit; font-weight:700; cursor:pointer; margin:4px 6px 4px 0; }
+    .admin-panel .admin-secondary { background:rgba(255,255,255,.12); }
+    .admin-contact-row { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); overflow-wrap:anywhere; }
     .portfolio-tools { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 22px; }
     .portfolio-tools input { flex:1 1 240px; min-width:0; padding:13px 15px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:var(--surface); font:inherit; }
     .tool-button { display:inline-flex; align-items:center; justify-content:center; padding:11px 15px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:rgba(255,255,255,.06); font:inherit; font-weight:700; text-decoration:none; cursor:pointer; }
@@ -423,9 +429,9 @@
       <section class="highlight"><strong>Areas of interest</strong><p>Information Technology · Software and web development · Computing · Digital tools</p></section>
       <section class="cta-panel" id="contact"><h3>Let's build something useful.</h3><p>I'm interested in learning opportunities, internships, collaborations, and entry-level projects where I can contribute, solve problems, and grow as a developer.</p><a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">Connect on GitHub ↗</a><div class="tag-list"><span class="tag">Open to learning opportunities</span><span class="tag">Independent projects</span><span class="tag">Continuous improvement</span></div></section>
       <section class="highlight"><strong>Find me online</strong><div id="contact-links"><p>GitHub: <a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">github.com/tenjicpuz</a><br>Social profile: <a href="https://guns.lol/kensojukisaki" target="_blank" rel="noopener noreferrer">guns.lol/kensojukisaki</a></p></div></section>
-      <section class="contact-manager" aria-labelledby="contact-manager-title"><h3 id="contact-manager-title">Contact link manager</h3><p>Organize your public contact details into tabs. Add, edit, or remove links without changing the page code. Changes are saved in this browser on this device only.</p><div class="contact-tabs" id="contact-tabs" role="tablist" aria-label="Contact link categories"><button class="contact-tab" type="button" data-filter="all" role="tab" aria-selected="true">All</button><button class="contact-tab" type="button" data-filter="social" role="tab" aria-selected="false">Social</button><button class="contact-tab" type="button" data-filter="professional" role="tab" aria-selected="false">Professional</button><button class="contact-tab" type="button" data-filter="direct" role="tab" aria-selected="false">Direct contact</button></div><div id="contact-list" class="contact-list"></div><form id="contact-form" class="contact-form"><input id="contact-label" type="text" placeholder="Label (e.g. LinkedIn)" maxlength="40" required><select id="contact-category" aria-label="Contact category"><option value="social">Social</option><option value="professional">Professional</option><option value="direct">Direct contact</option></select><select id="contact-type" aria-label="Contact link type"><option value="url">Website / profile URL</option><option value="email">Email address</option><option value="phone">Phone number</option></select><input id="contact-value" type="text" placeholder="Link, email, or phone" maxlength="180" required><button type="submit">＋ Add contact link</button></form><div id="contact-status" class="contact-status" role="status" aria-live="polite"></div></section>
+      <section class="admin-panel" id="contact-admin" aria-labelledby="contact-admin-title"><h3 id="contact-admin-title">Private contact management</h3><p>Sign in with your owner account to publish contact links for every visitor.</p><form id="contact-admin-login"><label for="admin-email">Admin email</label><input id="admin-email" type="email" autocomplete="username" required><label for="admin-password">Password</label><input id="admin-password" type="password" autocomplete="current-password" required><button type="submit">Sign in</button></form><div id="contact-admin-tools" hidden><form id="contact-admin-form"><label for="admin-link-label">Contact label</label><input id="admin-link-label" maxlength="40" required><label for="admin-link-category">Category</label><select id="admin-link-category"><option value="social">Social</option><option value="professional">Professional</option><option value="direct">Direct contact</option></select><label for="admin-link-type">Link type</label><select id="admin-link-type"><option value="url">Website / profile URL</option><option value="email">Email address</option><option value="phone">Phone number</option></select><label for="admin-link-value">URL, email, or phone</label><input id="admin-link-value" maxlength="180" required><button type="submit">Publish contact link</button></form><div id="admin-contact-list"></div><button class="admin-secondary" id="contact-admin-logout" type="button">Sign out</button></div><p id="contact-admin-status" class="contact-status" role="status" aria-live="polite"></p></section>
     </main>
-    <footer>© 2026 Hernan Glenn Belarmino Amon · Student portfolio</footer>
+    <footer>© 2026 Hernan Glenn Belarmino Amon · Student portfolio · <a href="?admin=1#contact-admin">Owner sign in</a></footer>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./config.js"></script>
@@ -466,7 +472,7 @@
       }
       loadPublicProjects();
       loadGithubProfileStats();
-      initializeContactManager();
+      initializeContactAdmin();
     })();
     async function loadGithubProfileStats() {
       try {
@@ -521,67 +527,42 @@
       gallery.innerHTML = data.map(item => '<article class="certificate-card"><a href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">' + (/\.pdf$/i.test(item.storage_path || '') ? '<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>' : '<img src="' + encodeURI(item.public_url) + '" alt="' + escapeHtml(item.title) + '" loading="lazy">') + '</a><div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ' · ' + escapeHtml(item.issued_on) : '') + '</p><p style="margin-top:10px"><a class="project-link" href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p></div></article>').join('');
     })();
     function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character])); }
-    function initializeContactManager() {
-      const storageKey = 'hernan-portfolio-contact-links-v1';
-      const defaults = [
-        { label: 'GitHub', type: 'url', category: 'professional', value: 'https://github.com/tenjicpuz' },
-        { label: 'Social profile', type: 'url', category: 'social', value: 'https://guns.lol/kensojukisaki' }
-      ];
-      const list = document.getElementById('contact-list');
+    async function initializeContactAdmin() {
+      const panel = document.getElementById('contact-admin');
+      if (new URLSearchParams(location.search).get('admin') === '1') panel.classList.add('is-visible');
       const links = document.getElementById('contact-links');
-      const form = document.getElementById('contact-form');
-      const status = document.getElementById('contact-status');
-      const tabs = document.getElementById('contact-tabs');
-      let contacts = defaults;
-      let activeFilter = 'all';
-      try { const saved = localStorage.getItem(storageKey); if (saved) contacts = JSON.parse(saved); } catch (error) { status.textContent = 'Browser storage is unavailable. Your changes may not persist.'; }
-      if (!Array.isArray(contacts)) contacts = defaults;
-      function destination(item) {
-        const value = String(item.value || '').trim();
-        if (item.type === 'email') return /^\S+@\S+\.\S+$/.test(value) ? 'mailto:' + value : '';
-        if (item.type === 'phone') return /^\+?[0-9() .-]{7,25}$/.test(value) ? 'tel:' + value.replace(/[^+0-9]/g, '') : '';
-        try { const url = new URL(value); return ['http:', 'https:'].includes(url.protocol) ? url.href : ''; } catch (error) { return ''; }
+      const status = document.getElementById('contact-admin-status');
+      const login = document.getElementById('contact-admin-login');
+      const tools = document.getElementById('contact-admin-tools');
+      if (!window.PORTFOLIO_CONFIG || !window.supabase) { status.textContent = 'Supabase configuration is unavailable.'; return; }
+      const client = window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl, PORTFOLIO_CONFIG.supabaseAnonKey);
+      const ownerId = '95f82a16-c195-44d0-88fd-e3b648ea0e12';
+      function hrefFor(item) { if (item.type === 'email') return 'mailto:' + item.value; if (item.type === 'phone') return 'tel:' + item.value.replace(/[^+0-9]/g, ''); return item.value; }
+      async function loadPublicLinks() {
+        const { data, error } = await client.from('contact_links').select('id,label,category,type,value').order('sort_order').order('created_at');
+        if (error) { console.info('Contact links table is not configured yet.', error); return; }
+        if (data && data.length) links.innerHTML = '<p>' + data.map(item => '<strong>' + escapeHtml(item.label) + ':</strong> <a href="' + escapeHtml(hrefFor(item)) + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a>').join('<br>') + '</p>';
       }
-      function save() {
-        try { localStorage.setItem(storageKey, JSON.stringify(contacts)); status.textContent = 'Saved on this device.'; }
-        catch (error) { status.textContent = 'Could not save in this browser. Check storage settings.'; }
-        render();
+      async function renderAdminLinks() {
+        const { data, error } = await client.from('contact_links').select('id,label,category,type,value').order('sort_order').order('created_at');
+        if (error) { status.textContent = 'Could not load links. Run the contact-links SQL setup first.'; return; }
+        document.getElementById('admin-contact-list').innerHTML = (data || []).map(item => '<div class="admin-contact-row"><span><strong>' + escapeHtml(item.label) + '</strong><br>' + escapeHtml(item.value) + '</span><button type="button" data-delete-contact="' + item.id + '" class="admin-secondary">Delete</button></div>').join('') || '<p>No published contact links yet.</p>';
       }
-      function render() {
-        tabs.querySelectorAll('[data-filter]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.filter === activeFilter)));
-        list.innerHTML = contacts.map((item, index) => ({item, index})).filter(entry => activeFilter === 'all' || (entry.item.category || 'social') === activeFilter).map(({item, index}) => '<div class="contact-row"><span><strong>' + escapeHtml(item.label) + '</strong><br><a href="' + escapeHtml(destination(item) || '#') + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a><br><small>' + escapeHtml(item.category || 'social') + '</small></span><span><button class="contact-remove" type="button" data-edit="' + index + '">Edit</button> <button class="contact-remove" type="button" data-remove="' + index + '">Remove</button></span></div>').join('') || '<p>No links in this tab yet.</p>';
-        links.innerHTML = '<p>' + contacts.filter(item => destination(item)).map(item => '<strong>' + escapeHtml(item.label) + ':</strong> <a href="' + escapeHtml(destination(item)) + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a>').join('<br>') + '</p>';
+      async function updateSession() {
+        const { data } = await client.auth.getSession();
+        const user = data.session && data.session.user;
+        const isOwner = !!user && user.id === ownerId;
+        login.hidden = isOwner;
+        tools.hidden = !isOwner;
+        if (user && !isOwner) { await client.auth.signOut(); status.textContent = 'This account is not authorized to manage portfolio contacts.'; }
+        if (isOwner) { status.textContent = 'Signed in as portfolio owner.'; await renderAdminLinks(); }
       }
-      tabs.addEventListener('click', event => { const tab = event.target.closest('[data-filter]'); if (!tab) return; activeFilter = tab.dataset.filter; render(); });
-      list.addEventListener('click', event => {
-        const editButton = event.target.closest('[data-edit]');
-        if (editButton) {
-          const index = Number(editButton.dataset.edit);
-          const item = contacts[index];
-          document.getElementById('contact-label').value = item.label;
-          document.getElementById('contact-category').value = item.category || 'social';
-          document.getElementById('contact-type').value = item.type;
-          document.getElementById('contact-value').value = item.value;
-          contacts.splice(index, 1);
-          form.querySelector('button[type="submit"]').textContent = 'Save contact changes';
-          status.textContent = 'Edit the fields, then save your changes.';
-          return;
-        }
-        const button = event.target.closest('[data-remove]');
-        if (!button) return;
-        contacts.splice(Number(button.dataset.remove), 1);
-        save();
-      });
-      form.addEventListener('submit', event => {
-        event.preventDefault();
-        const item = { label: document.getElementById('contact-label').value.trim(), category: document.getElementById('contact-category').value, type: document.getElementById('contact-type').value, value: document.getElementById('contact-value').value.trim() };
-        if (!item.label || !destination(item)) { status.textContent = 'Enter a valid website URL, email address, or phone number.'; return; }
-        contacts.push(item);
-        form.reset();
-        form.querySelector('button[type="submit"]').textContent = '＋ Add contact link';
-        save();
-      });
-      render();
+      login.addEventListener('submit', async event => { event.preventDefault(); status.textContent = 'Signing in…'; const { error } = await client.auth.signInWithPassword({ email: document.getElementById('admin-email').value.trim(), password: document.getElementById('admin-password').value }); if (error) { status.textContent = 'Sign-in failed. Check your email and password.'; return; } await updateSession(); });
+      document.getElementById('contact-admin-form').addEventListener('submit', async event => { event.preventDefault(); const item = { label: document.getElementById('admin-link-label').value.trim(), category: document.getElementById('admin-link-category').value, type: document.getElementById('admin-link-type').value, value: document.getElementById('admin-link-value').value.trim() }; if (!item.label || !item.value) { status.textContent = 'Complete all contact fields.'; return; } const { error } = await client.from('contact_links').insert(item); if (error) { status.textContent = 'Could not publish. Check the contact-links table and owner policies.'; return; } event.target.reset(); status.textContent = 'Contact link published for all visitors.'; await renderAdminLinks(); await loadPublicLinks(); });
+      document.getElementById('admin-contact-list').addEventListener('click', async event => { const button = event.target.closest('[data-delete-contact]'); if (!button) return; const { error } = await client.from('contact_links').delete().eq('id', button.dataset.deleteContact); status.textContent = error ? 'Could not delete this link.' : 'Contact link deleted.'; await renderAdminLinks(); await loadPublicLinks(); });
+      document.getElementById('contact-admin-logout').addEventListener('click', async () => { await client.auth.signOut(); await updateSession(); status.textContent = 'Signed out.'; });
+      await loadPublicLinks();
+      await updateSession();
     }
   </script>
 </body>

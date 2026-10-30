@@ -1,156 +1,623 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio of Hernan Glenn Belarmino Amon, an independent BSIT student from Silang, Cavite, Philippines, showcasing personal projects and learning at Olivarez College." />
+  <meta name="description" content="Portfolio of Hernan Glenn Belarmino Amon, an independent BSIT student from Silang, Cavite, Philippines.">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Portfolio" />
-  <meta property="og:description" content="Independent student portfolio featuring projects, skills, and learning in Information Technology." />
+  <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Portfolio">
+  <meta property="og:description" content="Independent student portfolio featuring projects, skills, and learning in Information Technology.">
   <title>Hernan Glenn Belarmino Amon | BSIT Portfolio</title>
+
   <style>
     :root {
       --site-primary: #e23b4b;
       --site-secondary: #160d16;
       --site-background: #09090d;
-      --site-on-primary: #ffffff;
-      --site-on-secondary: #eef5ff;
       --site-on-background: #edf4ff;
-      --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --site-heading-scale: 1;
-      --site-spacing-scale: 1;
-      --site-radius-scale: 1;
-      --site-decoration-opacity: 1;
       --surface: #151319;
       --surface-soft: #1c151c;
       --text: #f7edf0;
       --muted: #b8aab1;
       --line: #38232d;
     }
+
     * { box-sizing: border-box; }
-    body { margin: 0; color: var(--site-on-background); background: var(--site-background); font-family: var(--site-font-body); }
-    .app { min-height: 100vh; width: 100%; border-radius: 0; background-color: var(--site-background); color: var(--site-on-background); overflow: hidden; }
-    .topbar { background: var(--site-secondary); color: var(--site-on-secondary); padding: calc(18px * var(--site-spacing-scale)) max(6vw, 22px); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { font-weight: 800; letter-spacing: .02em; }
-    .topbar span { color: #c3d6f0; font-size: .9rem; }
-    .topbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
-    .topbar nav a { color: #e5efff; text-decoration: none; font-size: .9rem; font-weight: 650; }
+
+    body {
+      margin: 0;
+      color: var(--site-on-background);
+      background: var(--site-background);
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    .app {
+      min-height: 100vh;
+      background: var(--site-background);
+      overflow: hidden;
+    }
+
+    .topbar {
+      background: var(--site-secondary);
+      padding: 18px max(6vw, 22px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .topbar nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .topbar nav a {
+      color: #e5efff;
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 650;
+    }
+
     .topbar nav a:hover { text-decoration: underline; }
-    .hero { position: relative; padding: clamp(56px, 9vw, 104px) max(7vw, 24px) 68px; background: radial-gradient(circle at 82% 25%, rgba(226,59,75,.22), transparent 30%), linear-gradient(135deg, #160d16, #28121c 65%, #3b1722); }
-    .hero:after { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; right: 5%; top: -130px; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 0 0 34px rgba(255,255,255,.035), 0 0 0 70px rgba(255,255,255,.025); opacity: var(--site-decoration-opacity); pointer-events: none; }
-    .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .76rem; font-weight: 800; color: #cfe2ff; }
-    h1 { font-family: var(--site-font-heading); font-size: clamp(2.3rem, 6vw, 4.8rem); line-height: 1.04; letter-spacing: -.045em; max-width: 850px; margin: 18px 0; }
-    .hero p { font-size: clamp(1.05rem, 2vw, 1.25rem); color: #e1edff; max-width: 680px; line-height: 1.7; margin: 0; }
-    .location { display: inline-flex; align-items: center; gap: 9px; margin-top: 28px; border: 1px solid rgba(255,255,255,.28); background: rgba(7,20,38,.18); padding: 10px 15px; border-radius: 999px; font-weight: 650; }
-    main { max-width: 1080px; margin: auto; padding: 42px 24px 76px; }
-    .section-title { font-size: calc(1.45rem * var(--site-heading-scale)); margin: 0 0 20px; letter-spacing: -.025em; }
-    .intro { color: var(--muted); line-height: 1.75; font-size: 1.04rem; max-width: 780px; margin: 0 0 38px; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
-    .card { background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: calc(20px * var(--site-radius-scale)); padding: calc(25px * var(--site-spacing-scale)); box-shadow: 0 12px 34px rgba(0,0,0,.08); }
-    .card .icon { font-size: 1.55rem; }
-    .card h3 { margin: 12px 0 8px; font-size: 1.12rem; }
-    .card p { margin: 0; line-height: 1.65; color: var(--muted); }
-    .project-card { display: flex; flex-direction: column; min-height: 220px; }
-    .project-meta { color: var(--site-primary); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-    .project-card .project-link { margin-top: auto; padding-top: 20px; color: var(--site-primary); font-weight: 750; text-decoration: none; }
-    .project-card .project-link:hover { text-decoration: underline; }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-    .hero-actions a { display: inline-block; border-radius: 999px; padding: 12px 18px; text-decoration: none; font-weight: 750; }
-    .primary-action { background: #fff; color: #12345c; }
-    .secondary-action { border: 1px solid rgba(255,255,255,.55); color: #fff; }
-    .hero-layout { display: flex; align-items: center; gap: clamp(28px, 6vw, 76px); position: relative; z-index: 1; }
+
+    .hero {
+      position: relative;
+      padding: clamp(56px, 9vw, 104px) max(7vw, 24px) 68px;
+      background:
+        radial-gradient(circle at 82% 25%, rgba(226,59,75,.22), transparent 30%),
+        linear-gradient(135deg, #160d16, #28121c 65%, #3b1722);
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      right: 5%;
+      top: -130px;
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 0 0 34px rgba(255,255,255,.035),
+                  0 0 0 70px rgba(255,255,255,.025);
+      pointer-events: none;
+    }
+
+    .hero-layout {
+      display: flex;
+      align-items: center;
+      gap: clamp(28px, 6vw, 76px);
+      position: relative;
+      z-index: 1;
+    }
+
     .hero-copy { flex: 1; min-width: 0; }
-    .avatar { width: clamp(132px, 20vw, 220px); aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid rgba(255,255,255,.8); box-shadow: 0 0 0 9px rgba(226,59,75,.22), 0 20px 55px rgba(0,0,0,.4); }
-    .project-meta, .project-card .project-link { color: #ff6877; }
-    .project-card .project-link:hover { color: #ff9aa4; }
-    .primary-action { background: var(--site-primary); color: #fff; }
-    .highlight { margin-top: 24px; background: var(--surface-soft); color: var(--text); border-radius: calc(20px * var(--site-radius-scale)); padding: 26px; border: 1px solid var(--line); }
-    .highlight p { margin: 7px 0 0; color: var(--muted); line-height: 1.65; }
-    .certificate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-    .certificate-card { overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
-    .certificate-card img { display: block; width: 100%; height: 170px; object-fit: cover; background: #211820; }
-    .certificate-card .certificate-info { padding: 16px; }
-    .certificate-card h3 { margin: 0 0 6px; font-size: 1rem; }
-    .certificate-card p { margin: 0; color: var(--muted); font-size: .9rem; }
-    .empty-certificates { color: var(--muted); padding: 24px; border: 1px dashed var(--line); border-radius: 16px; }
-    footer { border-top: 1px solid var(--line); padding: 24px; text-align: center; color: var(--muted); font-size: .9rem; }
-    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } .topbar span { display:none; } main { padding-top: 32px; } .hero-layout { flex-direction: column-reverse; align-items: flex-start; } .avatar { width: 132px; } }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .76rem;
+      font-weight: 800;
+      color: #cfe2ff;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      max-width: 850px;
+      margin: 18px 0;
+    }
+
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: #e1edff;
+      max-width: 680px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .location {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 28px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(7,20,38,.18);
+      padding: 10px 15px;
+      border-radius: 999px;
+      font-weight: 650;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .hero-actions a {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .primary-action {
+      background: var(--site-primary);
+      color: #fff;
+    }
+
+    .secondary-action {
+      border: 1px solid rgba(255,255,255,.55);
+      color: #fff;
+    }
+
+    .avatar {
+      width: clamp(132px, 20vw, 220px);
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.8);
+      box-shadow: 0 0 0 9px rgba(226,59,75,.22),
+                  0 20px 55px rgba(0,0,0,.4);
+    }
+
+    main {
+      max-width: 1080px;
+      margin: auto;
+      padding: 42px 24px 76px;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      margin: 0 0 20px;
+      letter-spacing: -.025em;
+    }
+
+    .intro {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.04rem;
+      max-width: 780px;
+      margin: 0 0 38px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 12px 34px rgba(0,0,0,.08);
+    }
+
+    .card .icon { font-size: 1.55rem; }
+
+    .card h3 {
+      margin: 12px 0 8px;
+      font-size: 1.12rem;
+      overflow-wrap: anywhere;
+    }
+
+    .card p {
+      margin: 0;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+    }
+
+    .project-meta {
+      color: #ff6877;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .project-card .project-link {
+      margin-top: auto;
+      padding-top: 20px;
+      color: #ff6877;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .project-card .project-link:hover {
+      color: #ff9aa4;
+      text-decoration: underline;
+    }
+
+    .highlight {
+      margin-top: 24px;
+      background: var(--surface-soft);
+      color: var(--text);
+      border-radius: 20px;
+      padding: 26px;
+      border: 1px solid var(--line);
+    }
+
+    .highlight p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .certificate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .certificate-card {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .certificate-card img {
+      display: block;
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      background: #211820;
+    }
+
+    .certificate-info { padding: 16px; }
+
+    .certificate-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .certificate-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .empty-certificates {
+      color: var(--muted);
+      padding: 24px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      main { padding-top: 32px; }
+      .hero-layout {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+      .avatar { width: 132px; }
+    }
   </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Hernan Glenn Belarmino Amon",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Silang",
-      "addressRegion": "Cavite",
-      "addressCountry": "PH"
-    },
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "Olivarez College Tagaytay"
-    },
-    "description": "Information Technology student from Silang, Cavite, Philippines."
-  }
-  </script>
 </head>
+
 <body>
-  <div class="app">
-    <header class="topbar"><div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div><nav aria-label="Main navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#contact">Contact</a></nav></header>
-    <section class="hero">
-      <div class="hero-layout"><div class="hero-copy">
-      <div class="eyebrow">BSIT student · Independent creator</div>
-      <h1>Hernan Glenn<br>Belarmino Amon</h1>
-      <p>I'm an Information Technology student building projects independently, learning by doing, and turning ideas into practical digital solutions.</p>
-      <div class="location">⌖ &nbsp; Silang, Cavite, Philippines</div>
-      <div class="hero-actions"><a class="primary-action" href="#projects">Explore my projects</a><a class="secondary-action" href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div>
-      </div><img class="avatar" src="https://github.com/tenjicpuz.png" alt="GitHub profile avatar of Hernan Glenn Belarmino Amon" loading="lazy"></div>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <div class="eyebrow">BSIT student · Independent creator</div>
+        <h1>Hernan Glenn<br>Belarmino Amon</h1>
+        <p>
+          I'm an Information Technology student building projects independently,
+          learning by doing, and turning ideas into practical digital solutions.
+        </p>
+        <div class="location">⌖ &nbsp; Silang, Cavite, Philippines</div>
+        <div class="hero-actions">
+          <a class="primary-action" href="#projects">Explore my projects</a>
+          <a class="secondary-action" href="https://github.com/tenjicpuz"
+             target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
+        </div>
+      </div>
+
+      <img class="avatar"
+           src="https://github.com/tenjicpuz.png"
+           alt="GitHub profile avatar"
+           loading="lazy">
+    </div>
+  </section>
+
+  <main>
+
+    <h2 class="section-title" id="about">About me</h2>
+    <p class="intro">
+      I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in
+      Information Technology student at Olivarez College. Based in Silang,
+      Cavite, Philippines, I use independent projects to practice my skills,
+      explore ideas, and grow as a developer.
+    </p>
+
+    <h2 class="section-title" id="projects">My GitHub projects</h2>
+    <p class="intro">
+      My public GitHub repositories are loaded automatically below.
+      Create a new public repository and it can appear here without
+      manually editing this section.
+    </p>
+
+    <div id="github-projects" class="grid">
+      <p class="empty-certificates">Loading public GitHub repositories…</p>
+    </div>
+
+    <h2 class="section-title" id="certificates" style="margin-top:48px">
+      Certificates & achievements
+    </h2>
+    <p class="intro">
+      A growing collection of certificates and achievements.
+      Newly uploaded certificates will appear here automatically.
+    </p>
+
+    <div id="certificate-gallery" class="certificate-grid">
+      <p class="empty-certificates">Loading certificates…</p>
+    </div>
+
+    <h2 class="section-title" id="education">Education</h2>
+
+    <div class="grid">
+      <article class="card">
+        <div class="icon">🎓</div>
+        <h3>Current College Studies</h3>
+        <p>
+          <strong>Olivarez College</strong><br>
+          Currently a 2nd-year college student taking Bachelor of Science
+          in Information Technology (BSIT).
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="icon">📘</div>
+        <h3>Senior High School Graduate</h3>
+        <p>
+          <strong>Olivarez College Tagaytay</strong><br>
+          Senior High School graduate.
+        </p>
+      </article>
+    </div>
+
+    <section class="highlight">
+      <strong>How I work</strong>
+      <p>
+        Independent planning · Hands-on development · Problem-solving ·
+        Continuous learning
+      </p>
     </section>
-    <main>
-      <h2 class="section-title" id="about">About me</h2>
-      <p class="intro">I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in Information Technology student at Olivarez College. Based in Silang, Cavite, Philippines, I use independent projects to practice my skills, explore ideas, and grow as a developer.</p>
-      <h2 class="section-title" id="projects">Selected projects</h2>
-      <p class="intro">A collection of repositories I've worked on independently. Explore the source code and project details on GitHub.</p>
-      <div class="grid">
-        <article class="card project-card"><div class="project-meta">Python · Game</div><h3>Snake-game-but-in-relapse</h3><p>A snake game project, described on GitHub as being made for lazy people.</p><a class="project-link" href="https://github.com/tenjicpuz/Snake-game-but-in-relapse" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
-        <article class="card project-card"><div class="project-meta">HTML · Guides</div><h3>Book-of-guides</h3><p>A collection of guides, described on GitHub as being for lazy people.</p><a class="project-link" href="https://github.com/tenjicpuz/Book-of-guides" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
-        <article class="card project-card"><div class="project-meta">Batchfile · Windows utility</div><h3>OpenDriverUpdater</h3><p>A transparent, zero-dependency batch script designed to safely back up and update Windows 10/11 drivers.</p><a class="project-link" href="https://github.com/tenjicpuz/OpenDriverUpdater" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
-        <article class="card project-card"><div class="project-meta">Python · Developer tool</div><h3>Code-Archaeologist</h3><p>Evidence-grounded code intelligence for developers.</p><a class="project-link" href="https://github.com/tenjicpuz/Code-Archaeologist" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
-      </div>
-      <h2 class="section-title" id="certificates" style="margin-top:48px">Certificates & achievements</h2>
-      <p class="intro">A growing collection of certificates and achievements. Newly uploaded certificates will appear here automatically.</p>
-      <div id="certificate-gallery" class="certificate-grid"><p class="empty-certificates">Loading certificates…</p></div>
-      <h2 class="section-title" id="education">Education</h2>
-      <div class="grid">
-        <article class="card"><div class="icon">🎓</div><h3>Current College Studies</h3><p><strong>Olivarez College</strong><br>Currently a 2nd-year college student taking Bachelor of Science in Information Technology (BSIT).</p></article>
-        <article class="card"><div class="icon">📘</div><h3>Senior High School Graduate</h3><p><strong>Olivarez College Tagaytay</strong><br>Senior High School graduate.</p></article>
-      </div>
-      <section class="highlight"><strong>How I work</strong><p>Independent planning · Hands-on development · Problem-solving · Continuous learning</p></section>
-      <section class="highlight"><strong>Areas of interest</strong><p>Information Technology · Software and web development · Computing · Digital tools</p></section>
-      <section class="highlight" id="contact"><strong>Find me online</strong><p>GitHub: <a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">github.com/tenjicpuz</a><br>Social profile: <a href="https://guns.lol/kensojukisaki" target="_blank" rel="noopener noreferrer">guns.lol/kensojukisaki</a></p></section>
-    </main>
-    <footer>© 2026 Hernan Glenn Belarmino Amon · Student portfolio</footer>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="./config.js"></script>
-  <script>
-    (async function () {
-      const gallery = document.getElementById('certificate-gallery');
-      if (!window.PORTFOLIO_CONFIG || !PORTFOLIO_CONFIG.supabaseUrl || !PORTFOLIO_CONFIG.supabaseAnonKey || PORTFOLIO_CONFIG.supabaseUrl.includes('YOUR_')) {
-        gallery.innerHTML = '<p class="empty-certificates">Certificate gallery is ready. Supabase setup is needed to load your certificates.</p>';
+
+    <section class="highlight">
+      <strong>Areas of interest</strong>
+      <p>
+        Information Technology · Software and web development ·
+        Computing · Digital tools
+      </p>
+    </section>
+
+    <section class="highlight" id="contact">
+      <strong>Find me online</strong>
+      <p>
+        GitHub:
+        <a href="https://github.com/tenjicpuz" target="_blank"
+           rel="noopener noreferrer">github.com/tenjicpuz</a>
+        <br>
+        Social profile:
+        <a href="https://guns.lol/kensojukisaki" target="_blank"
+           rel="noopener noreferrer">guns.lol/kensojukisaki</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Hernan Glenn Belarmino Amon · Student portfolio
+  </footer>
+
+</div>
+
+<!-- Supabase library and existing configuration -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js"></script>
+
+<script>
+  // Automatically load public GitHub repositories
+  async function loadGitHubProjects() {
+    const container = document.getElementById('github-projects');
+
+    try {
+      const response = await fetch(
+        'https://api.github.com/users/tenjicpuz/repos?sort=updated&per_page=100'
+      );
+
+      if (!response.ok) {
+        throw new Error('GitHub API request failed');
+      }
+
+      const repos = (await response.json())
+        .filter(repo => !repo.fork && !repo.archived);
+
+      if (!repos.length) {
+        container.innerHTML =
+          '<p class="empty-certificates">No public repositories found yet.</p>';
         return;
       }
-      const client = window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl, PORTFOLIO_CONFIG.supabaseAnonKey);
-      const { data, error } = await client.from('certificates').select('id,title,issuer,issued_on,public_url,storage_path').order('created_at', { ascending: false });
-      if (error || !data || !data.length) {
-        gallery.innerHTML = '<p class="empty-certificates">No certificates have been added yet.</p>';
+
+      container.innerHTML = repos.map(repo => `
+        <article class="card project-card">
+          <div class="project-meta">
+            ${escapeHtml(repo.language || 'GitHub repository')}
+          </div>
+
+          <h3>${escapeHtml(repo.name)}</h3>
+
+          <p>
+            ${escapeHtml(
+              repo.description ||
+              'A public project by Hernan Glenn Belarmino Amon.'
+            )}
+          </p>
+
+          <a class="project-link"
+             href="${encodeURI(repo.html_url)}"
+             target="_blank"
+             rel="noopener noreferrer">
+            View repository ↗
+          </a>
+        </article>
+      `).join('');
+
+    } catch (error) {
+      container.innerHTML = `
+        <p class="empty-certificates">
+          GitHub projects could not be loaded right now.
+          Visit
+          <a href="https://github.com/tenjicpuz?tab=repositories"
+             target="_blank"
+             rel="noopener noreferrer">
+            my GitHub repositories
+          </a>.
+        </p>
+      `;
+    }
+  }
+
+  // Load certificates from Supabase
+  async function loadCertificates() {
+    const gallery = document.getElementById('certificate-gallery');
+
+    if (
+      !window.PORTFOLIO_CONFIG ||
+      !PORTFOLIO_CONFIG.supabaseUrl ||
+      !PORTFOLIO_CONFIG.supabaseAnonKey ||
+      PORTFOLIO_CONFIG.supabaseUrl.includes('YOUR_')
+    ) {
+      gallery.innerHTML =
+        '<p class="empty-certificates">Supabase setup is needed to load certificates.</p>';
+      return;
+    }
+
+    try {
+      const client = window.supabase.createClient(
+        PORTFOLIO_CONFIG.supabaseUrl,
+        PORTFOLIO_CONFIG.supabaseAnonKey
+      );
+
+      const { data, error } = await client
+        .from('certificates')
+        .select('id,title,issuer,issued_on,public_url,storage_path')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (!data || !data.length) {
+        gallery.innerHTML =
+          '<p class="empty-certificates">No certificates have been added yet.</p>';
         return;
       }
-      gallery.innerHTML = data.map(item => '<article class="certificate-card"><a href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">' + (/\.pdf$/i.test(item.storage_path || '') ? '<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>' : '<img src="' + encodeURI(item.public_url) + '" alt="' + escapeHtml(item.title) + '" loading="lazy">') + '</a><div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ' · ' + escapeHtml(item.issued_on) : '') + '</p><p style="margin-top:10px"><a class="project-link" href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p></div></article>').join('');
-    })();
-    function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character])); }
-  </script>
+
+      gallery.innerHTML = data.map(item => {
+        const isPDF = /\.pdf$/i.test(item.storage_path || '');
+
+        const preview = isPDF
+          ? `<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>`
+          : `<img src="${escapeAttribute(item.public_url)}"
+                  alt="${escapeAttribute(item.title)}"
+                  loading="lazy">`;
+
+        return `
+          <article class="certificate-card">
+            <a href="${escapeAttribute(item.public_url)}"
+               target="_blank"
+               rel="noopener noreferrer">
+              ${preview}
+            </a>
+
+            <div class="certificate-info">
+              <h3>${escapeHtml(item.title)}</h3>
+
+              <p>
+                ${escapeHtml(item.issuer || 'Certificate')}
+                ${item.issued_on
+                  ? ' · ' + escapeHtml(item.issued_on)
+                  : ''}
+              </p>
+
+              <p style="margin-top:10px">
+                <a class="project-link"
+                   href="${escapeAttribute(item.public_url)}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  View certificate ↗
+                </a>
+              </p>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+    } catch (error) {
+      gallery.innerHTML =
+        '<p class="empty-certificates">Could not load certificates. Please try again later.</p>';
+    }
+  }
+
+  // Safely display text from external sources
+  function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, character => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[character]));
+  }
+
+  function escapeAttribute(value) {
+    return escapeHtml(value);
+  }
+
+  // Start loading both sections
+  loadGitHubProjects();
+  loadCertificates();
+</script>
+
 </body>
 </html>

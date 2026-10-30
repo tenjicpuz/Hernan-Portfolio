@@ -3,10 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio of Hernan Glenn Belarmino Amon, an independent BSIT student from Silang, Cavite, Philippines, showcasing personal projects and learning at Olivarez College." />
+  <meta name="description" content="Official portfolio of Hernan Glenn Belarmino Amon, an Information Technology student and independent developer from Cavite, Philippines. Explore software projects, web development, programming, GitHub repositories, and certificates." />
   <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Hernan Glenn Belarmino Amon">
+  <meta name="keywords" content="Hernan Glenn Belarmino Amon, Hernan Amon, IT student Philippines, developer portfolio, web development, software projects, GitHub, programming, Silang Cavite">
+  <link rel="canonical" href="https://tenjicpuz.github.io/Hernan-Portfolio/">
   <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Portfolio" />
-  <meta property="og:description" content="Independent student portfolio featuring projects, skills, and learning in Information Technology." />
+  <meta property="og:description" content="Explore the projects, skills, GitHub repositories, and learning journey of Hernan Glenn Belarmino Amon, an independent IT student and aspiring developer from the Philippines." />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tenjicpuz.github.io/Hernan-Portfolio/">
+  <meta property="og:image" content="https://github.com/tenjicpuz.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hernan Glenn Belarmino Amon | Developer Portfolio">
+  <meta name="twitter:description" content="IT student and independent project builder from the Philippines. Explore projects, skills, and GitHub work.">
+  <meta name="twitter:image" content="https://github.com/tenjicpuz.png">
   <title>Hernan Glenn Belarmino Amon | BSIT Portfolio</title>
   <style>
     :root {
@@ -169,6 +180,66 @@
     .certificate-card { border-radius: 12px; background: #17141a; }
     .certificate-card img { height: 190px; }
     footer { padding: 30px 20px; letter-spacing: .025em; }
+    .skill-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .skill-card { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(145deg, #1a171e, #111015); }
+    .skill-card h3 { margin: 0 0 10px; font-size: 1rem; }
+    .skill-card p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .tag { display: inline-flex; padding: 6px 10px; border: 1px solid rgba(240,91,107,.24); border-radius: 6px; color: #f2c2c8; background: rgba(240,91,107,.07); font-size: .78rem; font-weight: 650; }
+    .cta-panel { margin-top: 22px; padding: clamp(24px, 5vw, 42px); border: 1px solid rgba(240,91,107,.25); border-radius: 14px; background: radial-gradient(ellipse at 90% 0%, rgba(240,91,107,.14), transparent 45%), #17131a; }
+    .cta-panel h3 { margin: 0 0 10px; font-size: clamp(1.3rem, 3vw, 1.8rem); }
+    .cta-panel p { max-width: 680px; color: var(--muted); margin: 0 0 20px; }
+    .cta-panel a { display: inline-flex; padding: 12px 18px; border-radius: 7px; background: var(--site-primary); color: #fff; font-weight: 750; text-decoration: none; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0 0 48px; }
+    .stat-card { padding: 24px; border: 1px solid rgba(240,91,107,.22); border-radius: 12px; background: linear-gradient(145deg, #201720, #121015); }
+    .stat-number { display: block; color: var(--site-primary); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1; font-weight: 850; letter-spacing: -.06em; }
+    .stat-label { display: block; margin-top: 10px; color: #c8bbc3; font-size: .82rem; line-height: 1.45; }
+    .stat-note { margin: -28px 0 42px; color: #938791; font-size: .78rem; }
+    .focus-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .focus-card { padding: 24px; border: 1px solid rgba(240,91,107,.18); border-radius: 12px; background: #151219; }
+    .focus-card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .focus-card p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+    .principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+    .principle { padding: 18px; border-left: 2px solid var(--site-primary); background: rgba(255,255,255,.035); }
+    .principle strong { display: block; margin-bottom: 6px; font-size: .9rem; }
+    .principle span { color: var(--muted); font-size: .82rem; line-height: 1.55; }
+    .process-grid, .service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .process-step, .service-card { padding: 23px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(145deg, #1a171e, #111015); }
+    .step-index { display: inline-block; margin-bottom: 14px; color: var(--site-primary); font-size: .76rem; font-weight: 850; letter-spacing: .15em; }
+    .process-step h3, .service-card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .process-step p, .service-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.7; }
+    .proof-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 22px; padding: 0; margin: 18px 0 0; list-style: none; }
+    .proof-list li { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; color: #d8cbd2; background: rgba(255,255,255,.025); font-size: .9rem; }
+    .proof-list li:before { content: "✓"; color: var(--site-primary); font-weight: 900; margin-right: 10px; }
+    .availability-note { margin-top: 18px; padding: 18px 20px; border-left: 3px solid var(--site-primary); background: rgba(240,91,107,.06); color: #d8cbd2; font-size: .9rem; line-height: 1.7; }
+    .contact-manager { margin-top: 22px; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: #151219; }
+    .contact-manager h3 { margin: 0 0 8px; }
+    .contact-manager p { color: var(--muted); font-size: .9rem; }
+    .contact-list { display: grid; gap: 10px; margin: 18px 0; }
+    .contact-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 10px; }
+    .contact-tab { padding: 9px 13px; border: 1px solid var(--line); border-radius: 7px; color: #d8cbd2; background: rgba(255,255,255,.035); font: inherit; font-size: .84rem; cursor: pointer; }
+    .contact-tab[aria-selected="true"] { color: #fff; background: var(--site-primary); border-color: var(--site-primary); }
+    .contact-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; overflow-wrap: anywhere; }
+    .contact-row a { color: #ff8994; }
+    .contact-form { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .contact-form input, .contact-form select { width: 100%; min-width: 0; padding: 12px; color: var(--text); background: #0e0c11; border: 1px solid var(--line); border-radius: 7px; font: inherit; }
+    .contact-form button, .contact-remove { padding: 10px 14px; border: 0; border-radius: 7px; background: var(--site-primary); color: white; font: inherit; font-weight: 700; cursor: pointer; }
+    .contact-remove { background: rgba(255,255,255,.1); flex: 0 0 auto; }
+    .contact-form button { grid-column: 1 / -1; }
+    .contact-status { min-height: 1.4em; color: #ffb5bd; font-size: .85rem; }
+    .portfolio-tools { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 22px; }
+    .portfolio-tools input { flex:1 1 240px; min-width:0; padding:13px 15px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:var(--surface); font:inherit; }
+    .tool-button { display:inline-flex; align-items:center; justify-content:center; padding:11px 15px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:rgba(255,255,255,.06); font:inherit; font-weight:700; text-decoration:none; cursor:pointer; }
+    .topbar-tools { display:flex; align-items:center; gap:8px; }
+    body[data-theme="light"] { --site-background:#f5f2f3; --site-on-background:#211820; --surface:#fff; --surface-soft:#fff; --text:#211820; --muted:#625760; --line:#ded4d9; background:#f5f2f3; color:#211820; }
+    body[data-theme="light"] .app { background:#f5f2f3; color:#211820; }
+    body[data-theme="light"] main { color:#211820; }
+    body[data-theme="light"] .card, body[data-theme="light"] .skill-card, body[data-theme="light"] .focus-card, body[data-theme="light"] .process-step, body[data-theme="light"] .service-card, body[data-theme="light"] .contact-manager { background:#fff; color:#211820; }
+    body[data-theme="light"] .highlight, body[data-theme="light"] .stat-card { background:#fff; color:#211820; }
+    body[data-theme="light"] .topbar { background:rgba(255,255,255,.94); }
+    body[data-theme="light"] .topbar nav a, body[data-theme="light"] .brand { color:#211820; }
+    body[data-theme="light"] .project-card p, body[data-theme="light"] .intro { color:#625760; }
+    @media print { .topbar, .hero-actions, .contact-manager, .portfolio-tools, footer, .cta-panel a { display:none !important; } body, .app, main { background:#fff !important; color:#111 !important; } .hero { min-height:0; padding:28px; background:#fff !important; color:#111 !important; } .hero p, .intro, .card p, .skill-card p, .highlight p { color:#333 !important; } .avatar { width:100px; box-shadow:none; } .card, .skill-card, .focus-card, .process-step, .service-card, .highlight { break-inside:avoid; box-shadow:none; border:1px solid #ccc; } a { color:#111 !important; text-decoration:none; } }
     @media (max-width: 680px) {
       .hero { min-height: auto; padding: 58px 24px 76px; }
       .hero:before { right: 24px; bottom: 18px; font-size: .58rem; }
@@ -180,6 +251,14 @@
       .intro { margin-left: 19px; margin-bottom: 44px; }
       .card { padding: 24px; }
       .project-card { min-height: 225px; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; gap: 10px; }
+      .stat-card { display: flex; align-items: center; gap: 18px; padding: 18px 20px; }
+      .stat-label { margin-top: 0; }
+      .focus-grid, .principles { grid-template-columns: 1fr; }
+      .process-grid, .service-grid, .proof-list { grid-template-columns: 1fr; }
+      .contact-form { grid-template-columns: 1fr; }
+      .contact-form button { grid-column: auto; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -237,12 +316,19 @@
       "name": "Olivarez College Tagaytay"
     },
     "description": "Information Technology student from Silang, Cavite, Philippines."
+    ,"url": "https://tenjicpuz.github.io/Hernan-Portfolio/"
+    ,"image": "https://github.com/tenjicpuz.png"
+    ,"sameAs": [
+      "https://github.com/tenjicpuz",
+      "https://guns.lol/kensojukisaki"
+    ],
+    "knowsAbout": ["Information Technology", "Web Development", "JavaScript", "Python", "Software Projects", "Roblox Scripting", "GameMaker"]
   }
   </script>
 </head>
 <body>
   <div class="app">
-    <header class="topbar"><div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button><nav id="main-navigation" aria-label="Main navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#contact">Contact</a></nav></header>
+    <header class="topbar"><div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div><div class="topbar-tools"><button class="tool-button" id="theme-toggle" type="button" aria-label="Switch color theme">☼ Theme</button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button></div><nav id="main-navigation" aria-label="Main navigation"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#contact">Contact</a></nav></header>
     <section class="hero">
       <div class="hero-layout"><div class="hero-copy">
       <div class="eyebrow">BSIT student · Independent creator</div>
@@ -250,19 +336,81 @@
       <p>I'm an Information Technology student building projects independently, learning by doing, and turning ideas into practical digital solutions.</p>
       <div class="location">⌖ &nbsp; Silang, Cavite, Philippines</div>
       <div class="hero-actions"><a class="primary-action" href="#projects">Explore my projects</a><a class="secondary-action" href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div>
+      <div class="hero-actions"><button class="tool-button" id="print-resume" type="button">↓ Print / Save portfolio as PDF</button></div>
       </div><img class="avatar" src="https://github.com/tenjicpuz.png" alt="GitHub profile avatar of Hernan Glenn Belarmino Amon" loading="lazy"></div>
     </section>
     <main>
       <h2 class="section-title" id="about">About me</h2>
-      <p class="intro">I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in Information Technology student at Olivarez College. Based in Silang, Cavite, Philippines, I use independent projects to practice my skills, explore ideas, and grow as a developer.</p>
+      <p class="intro">I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in Information Technology student at Olivarez College. Based in Silang, Cavite, Philippines, I build independent software projects to turn ideas into useful tools, strengthen my engineering fundamentals, and keep learning across the development stack. I'm working toward full-stack development through hands-on practice and project-based learning.</p>
+      <div class="stats-grid" aria-label="Portfolio highlights">
+        <article class="stat-card"><strong class="stat-number" id="github-repo-count">—</strong><span class="stat-label">Public GitHub repositories</span></article>
+        <article class="stat-card"><strong class="stat-number" id="github-star-count">—</strong><span class="stat-label">Stars earned across public repositories</span></article>
+        <article class="stat-card"><strong class="stat-number" id="github-follower-count">—</strong><span class="stat-label">GitHub followers</span></article>
+      </div>
+      <p class="stat-note">Live public GitHub profile statistics. Counts update when the portfolio loads; stars reflect community appreciation of your repositories.</p>
+      <h2 class="section-title" id="skills">Technical skills & tools</h2>
+      <p class="intro">A practical snapshot of the technologies and creative tools I've explored through personal projects. I'm continuously expanding this toolkit through implementation, debugging, experimentation, and independent study.</p>
+      <div class="skill-grid">
+        <article class="skill-card"><h3>Web development</h3><p>Building responsive interfaces and connecting browser experiences to hosted services.</p><div class="tag-list"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Responsive design</span></div></article>
+        <article class="skill-card"><h3>Programming & scripting</h3><p>Writing practical scripts, exploring application logic, and automating desktop tasks.</p><div class="tag-list"><span class="tag">Python</span><span class="tag">Windows batch</span><span class="tag">Problem-solving</span></div></article>
+        <article class="skill-card"><h3>Tools & platforms</h3><p>Managing source code, deploying web projects, and working with hosted data services.</p><div class="tag-list"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">GitHub Pages</span><span class="tag">Supabase</span></div></article>
+        <article class="skill-card"><h3>Game scripting & creation</h3><p>Early hands-on experience experimenting with Roblox scripts and classic GameMaker projects, building curiosity about game logic and interactive systems.</p><div class="tag-list"><span class="tag">Roblox scripting</span><span class="tag">GameMaker</span><span class="tag">Game logic</span></div></article>
+      </div>
+      <h2 class="section-title" style="margin-top:48px">What I can work on</h2>
+      <div class="grid">
+        <article class="card"><div class="icon">⌘</div><h3>Responsive websites</h3><p>Personal portfolios, landing pages, and clean interfaces designed to work across phones, tablets, and desktops.</p></article>
+        <article class="card"><div class="icon">⚙</div><h3>Useful tools & automation</h3><p>Small utilities and scripts that simplify repetitive tasks and solve focused, practical problems.</p></article>
+        <article class="card"><div class="icon">▤</div><h3>Data-connected features</h3><p>Learning and building features such as file uploads, content galleries, and database-backed experiences.</p></article>
+        <article class="card"><div class="icon">⌕</div><h3>Debugging & improvement</h3><p>Investigating issues, reading documentation, refining existing code, and improving usability.</p></article>
+      </div>
       <h2 class="section-title" id="projects">Selected projects</h2>
       <p class="intro">A collection of repositories I've worked on independently. Explore the source code and project details on GitHub.</p>
-      <div class="grid">
+      <div class="portfolio-tools"><input id="project-search" type="search" placeholder="Search projects by name, language, or description" aria-label="Search projects"><span class="tool-button" id="project-count" aria-live="polite">Loading projects…</span></div>
+      <section class="highlight"><strong>Earlier creative coding experience</strong><p>Before focusing more on web and software projects, I experimented with Roblox scripting and older GameMaker tools. These early projects helped spark my interest in programming, game logic, and creating interactive experiences. This is an area of personal exploration rather than a claim of current professional game-development experience.</p></section>
+      <div class="grid" id="project-grid">
         <article class="card project-card"><div class="project-meta">Python · Game</div><h3>Snake-game-but-in-relapse</h3><p>A snake game project, described on GitHub as being made for lazy people.</p><a class="project-link" href="https://github.com/tenjicpuz/Snake-game-but-in-relapse" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
         <article class="card project-card"><div class="project-meta">HTML · Guides</div><h3>Book-of-guides</h3><p>A collection of guides, described on GitHub as being for lazy people.</p><a class="project-link" href="https://github.com/tenjicpuz/Book-of-guides" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
         <article class="card project-card"><div class="project-meta">Batchfile · Windows utility</div><h3>OpenDriverUpdater</h3><p>A transparent, zero-dependency batch script designed to safely back up and update Windows 10/11 drivers.</p><a class="project-link" href="https://github.com/tenjicpuz/OpenDriverUpdater" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
         <article class="card project-card"><div class="project-meta">Python · Developer tool</div><h3>Code-Archaeologist</h3><p>Evidence-grounded code intelligence for developers.</p><a class="project-link" href="https://github.com/tenjicpuz/Code-Archaeologist" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
       </div>
+      <section class="highlight"><strong>My development approach</strong><p>I start by understanding the problem, break it into manageable tasks, build and test a practical solution, then refine it based on what works. I use documentation, version control, and debugging to keep learning and improving each project.</p></section>
+      <h2 class="section-title" style="margin-top:48px">Currently learning & exploring</h2>
+      <div class="skill-grid">
+        <article class="skill-card"><h3>Full-stack foundations</h3><p>Strengthening front-end skills while learning how applications connect to back-end services, APIs, and databases.</p><div class="tag-list"><span class="tag">JavaScript</span><span class="tag">APIs</span><span class="tag">Databases</span></div></article>
+        <article class="skill-card"><h3>Software quality</h3><p>Practicing clearer code, troubleshooting, testing ideas, and writing useful project documentation.</p><div class="tag-list"><span class="tag">Debugging</span><span class="tag">Git</span><span class="tag">Documentation</span></div></article>
+        <article class="skill-card"><h3>Interactive experiences</h3><p>Keeping an interest in game logic and interactive projects while building stronger programming fundamentals.</p><div class="tag-list"><span class="tag">Programming logic</span><span class="tag">Roblox</span><span class="tag">GameMaker</span></div></article>
+      </div>
+      <h2 class="section-title" style="margin-top:48px">Professional development focus</h2>
+      <p class="intro">The areas I am actively developing through coursework, independent projects, and practical experimentation.</p>
+      <div class="focus-grid">
+        <article class="focus-card"><h3>Front-end engineering</h3><p>Creating clear page structures, reusable interface patterns, responsive layouts, and accessible interactions with HTML, CSS, and JavaScript.</p></article>
+        <article class="focus-card"><h3>Back-end & data integration</h3><p>Learning how client applications communicate with APIs, authentication, hosted databases, and file storage.</p></article>
+        <article class="focus-card"><h3>Developer tooling</h3><p>Building small utilities, scripts, and workflow helpers that make common computer tasks easier to understand and repeat.</p></article>
+        <article class="focus-card"><h3>Interactive software</h3><p>Exploring programming logic through games, experiments, and interactive features, including earlier Roblox and GameMaker work.</p></article>
+      </div>
+      <h2 class="section-title" style="margin-top:42px">Quality principles</h2>
+      <div class="principles">
+        <div class="principle"><strong>Responsive first</strong><span>Layouts designed to adapt to mobile, tablet, and desktop screens.</span></div>
+        <div class="principle"><strong>Usability</strong><span>Simple navigation, readable content, and clear actions.</span></div>
+        <div class="principle"><strong>Maintainability</strong><span>Organized code, version control, and useful documentation.</span></div>
+        <div class="principle"><strong>Continuous learning</strong><span>Testing ideas, learning from errors, and improving with each iteration.</span></div>
+      </div>
+      <h2 class="section-title" style="margin-top:48px">How I approach a project</h2>
+      <p class="intro">A practical workflow helps me turn an idea into something that can be tested, understood, and improved.</p>
+      <div class="process-grid">
+        <article class="process-step"><span class="step-index">01 / UNDERSTAND</span><h3>Define the problem</h3><p>Clarify the goal, intended users, key requirements, and what a useful result should accomplish.</p></article>
+        <article class="process-step"><span class="step-index">02 / BUILD</span><h3>Develop in steps</h3><p>Break the work into manageable parts, choose suitable tools, and implement the core experience.</p></article>
+        <article class="process-step"><span class="step-index">03 / REFINE</span><h3>Test and improve</h3><p>Check the result, investigate issues, improve clarity, and document what was learned.</p></article>
+      </div>
+      <h2 class="section-title" style="margin-top:48px">Ways I can contribute</h2>
+      <div class="service-grid">
+        <article class="service-card"><h3>Website updates</h3><p>Content changes, layout refinements, responsive fixes, and straightforward interface improvements.</p></article>
+        <article class="service-card"><h3>Small development tasks</h3><p>Focused features, simple scripts, bug investigation, and beginner-friendly implementation tasks.</p></article>
+        <article class="service-card"><h3>Technical learning support</h3><p>Researching documentation, reproducing issues, organizing findings, and communicating progress clearly.</p></article>
+      </div>
+      <h2 class="section-title" style="margin-top:48px">Working principles</h2>
+      <ul class="proof-list"><li>Honest communication about progress and limitations</li><li>Willingness to learn unfamiliar tools and workflows</li><li>Careful testing before calling work complete</li><li>Respect for feedback, deadlines, and project requirements</li><li>Readable code and organized project files</li><li>Curiosity, initiative, and steady improvement</li></ul>
+      <p class="availability-note">Early-career profile: currently building experience through academic work and independent projects. Interested in internships, mentorship, collaborative projects, and entry-level opportunities where I can contribute while continuing to learn.</p>
       <h2 class="section-title" id="certificates" style="margin-top:48px">Certificates & achievements</h2>
       <p class="intro">A growing collection of certificates and achievements. Newly uploaded certificates will appear here automatically.</p>
       <div id="certificate-gallery" class="certificate-grid"><p class="empty-certificates">Loading certificates…</p></div>
@@ -273,7 +421,9 @@
       </div>
       <section class="highlight"><strong>How I work</strong><p>Independent planning · Hands-on development · Problem-solving · Continuous learning</p></section>
       <section class="highlight"><strong>Areas of interest</strong><p>Information Technology · Software and web development · Computing · Digital tools</p></section>
-      <section class="highlight" id="contact"><strong>Find me online</strong><p>GitHub: <a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">github.com/tenjicpuz</a><br>Social profile: <a href="https://guns.lol/kensojukisaki" target="_blank" rel="noopener noreferrer">guns.lol/kensojukisaki</a></p></section>
+      <section class="cta-panel" id="contact"><h3>Let's build something useful.</h3><p>I'm interested in learning opportunities, internships, collaborations, and entry-level projects where I can contribute, solve problems, and grow as a developer.</p><a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">Connect on GitHub ↗</a><div class="tag-list"><span class="tag">Open to learning opportunities</span><span class="tag">Independent projects</span><span class="tag">Continuous improvement</span></div></section>
+      <section class="highlight"><strong>Find me online</strong><div id="contact-links"><p>GitHub: <a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">github.com/tenjicpuz</a><br>Social profile: <a href="https://guns.lol/kensojukisaki" target="_blank" rel="noopener noreferrer">guns.lol/kensojukisaki</a></p></div></section>
+      <section class="contact-manager" aria-labelledby="contact-manager-title"><h3 id="contact-manager-title">Contact link manager</h3><p>Organize your public contact details into tabs. Add, edit, or remove links without changing the page code. Changes are saved in this browser on this device only.</p><div class="contact-tabs" id="contact-tabs" role="tablist" aria-label="Contact link categories"><button class="contact-tab" type="button" data-filter="all" role="tab" aria-selected="true">All</button><button class="contact-tab" type="button" data-filter="social" role="tab" aria-selected="false">Social</button><button class="contact-tab" type="button" data-filter="professional" role="tab" aria-selected="false">Professional</button><button class="contact-tab" type="button" data-filter="direct" role="tab" aria-selected="false">Direct contact</button></div><div id="contact-list" class="contact-list"></div><form id="contact-form" class="contact-form"><input id="contact-label" type="text" placeholder="Label (e.g. LinkedIn)" maxlength="40" required><select id="contact-category" aria-label="Contact category"><option value="social">Social</option><option value="professional">Professional</option><option value="direct">Direct contact</option></select><select id="contact-type" aria-label="Contact link type"><option value="url">Website / profile URL</option><option value="email">Email address</option><option value="phone">Phone number</option></select><input id="contact-value" type="text" placeholder="Link, email, or phone" maxlength="180" required><button type="submit">＋ Add contact link</button></form><div id="contact-status" class="contact-status" role="status" aria-live="polite"></div></section>
     </main>
     <footer>© 2026 Hernan Glenn Belarmino Amon · Student portfolio</footer>
   </div>
@@ -288,6 +438,17 @@
         menuButton.setAttribute('aria-expanded', String(isOpen));
         menuButton.textContent = isOpen ? '✕ Close' : '☰ Menu';
       });
+      const themeButton = document.getElementById('theme-toggle');
+      const savedTheme = localStorage.getItem('hernan-portfolio-theme');
+      if (savedTheme === 'light') document.body.dataset.theme = 'light';
+      themeButton.addEventListener('click', function () {
+        const nextTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+        if (nextTheme === 'light') document.body.dataset.theme = 'light'; else delete document.body.dataset.theme;
+        localStorage.setItem('hernan-portfolio-theme', nextTheme);
+      });
+      document.getElementById('print-resume').addEventListener('click', () => window.print());
+      document.getElementById('project-search').addEventListener('input', filterProjects);
+      filterProjects();
       nav.querySelectorAll('a').forEach(link => link.addEventListener('click', function () {
         nav.classList.remove('is-open');
         menuButton.setAttribute('aria-expanded', 'false');
@@ -303,7 +464,48 @@
       } else {
         revealTargets.forEach(element => element.classList.add('is-visible'));
       }
+      loadPublicProjects();
+      loadGithubProfileStats();
+      initializeContactManager();
     })();
+    async function loadGithubProfileStats() {
+      try {
+        const [profileResponse, reposResponse] = await Promise.all([
+          fetch('https://api.github.com/users/tenjicpuz', { headers: { 'Accept': 'application/vnd.github+json' } }),
+          fetch('https://api.github.com/users/tenjicpuz/repos?per_page=100', { headers: { 'Accept': 'application/vnd.github+json' } })
+        ]);
+        if (!profileResponse.ok || !reposResponse.ok) return;
+        const profile = await profileResponse.json();
+        const repositories = await reposResponse.json();
+        document.getElementById('github-repo-count').textContent = profile.public_repos;
+        document.getElementById('github-follower-count').textContent = profile.followers;
+        document.getElementById('github-star-count').textContent = repositories.reduce((total, repo) => total + repo.stargazers_count, 0);
+      } catch (error) {
+        console.info('GitHub profile statistics are temporarily unavailable.', error);
+      }
+    }
+    async function loadPublicProjects() {
+      const grid = document.getElementById('project-grid');
+      if (!grid) return;
+      try {
+        const response = await fetch('https://api.github.com/users/tenjicpuz/repos?sort=updated&per_page=100', { headers: { 'Accept': 'application/vnd.github+json' } });
+        if (!response.ok) return;
+        const repositories = await response.json();
+        const projects = repositories.filter(repo => !repo.fork && !repo.archived).sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 8);
+        if (!projects.length) return;
+        grid.innerHTML = projects.map(repo => '<article class="card project-card"><div class="project-meta">' + escapeHtml(repo.language || 'Software project') + ' · ★ ' + repo.stargazers_count + '</div><h3>' + escapeHtml(repo.name) + '</h3><p>' + escapeHtml(repo.description || 'An independent project. Visit the repository to explore its source code and details.') + '</p><a class="project-link" href="' + escapeHtml(repo.html_url) + '" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>').join('');
+        filterProjects();
+      } catch (error) {
+        console.info('Using the featured project list because GitHub projects could not be loaded.', error);
+      }
+    }
+    function filterProjects() {
+      const query = (document.getElementById('project-search').value || '').trim().toLowerCase();
+      const cards = Array.from(document.querySelectorAll('#project-grid .project-card'));
+      let visible = 0;
+      cards.forEach(card => { const match = card.textContent.toLowerCase().includes(query); card.hidden = !match; if (match) visible++; });
+      document.getElementById('project-count').textContent = visible + ' project' + (visible === 1 ? '' : 's');
+    }
     (async function () {
       const gallery = document.getElementById('certificate-gallery');
       if (!window.PORTFOLIO_CONFIG || !PORTFOLIO_CONFIG.supabaseUrl || !PORTFOLIO_CONFIG.supabaseAnonKey || PORTFOLIO_CONFIG.supabaseUrl.includes('YOUR_')) {
@@ -319,6 +521,68 @@
       gallery.innerHTML = data.map(item => '<article class="certificate-card"><a href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">' + (/\.pdf$/i.test(item.storage_path || '') ? '<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>' : '<img src="' + encodeURI(item.public_url) + '" alt="' + escapeHtml(item.title) + '" loading="lazy">') + '</a><div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ' · ' + escapeHtml(item.issued_on) : '') + '</p><p style="margin-top:10px"><a class="project-link" href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p></div></article>').join('');
     })();
     function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character])); }
+    function initializeContactManager() {
+      const storageKey = 'hernan-portfolio-contact-links-v1';
+      const defaults = [
+        { label: 'GitHub', type: 'url', category: 'professional', value: 'https://github.com/tenjicpuz' },
+        { label: 'Social profile', type: 'url', category: 'social', value: 'https://guns.lol/kensojukisaki' }
+      ];
+      const list = document.getElementById('contact-list');
+      const links = document.getElementById('contact-links');
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('contact-status');
+      const tabs = document.getElementById('contact-tabs');
+      let contacts = defaults;
+      let activeFilter = 'all';
+      try { const saved = localStorage.getItem(storageKey); if (saved) contacts = JSON.parse(saved); } catch (error) { status.textContent = 'Browser storage is unavailable. Your changes may not persist.'; }
+      if (!Array.isArray(contacts)) contacts = defaults;
+      function destination(item) {
+        const value = String(item.value || '').trim();
+        if (item.type === 'email') return /^\S+@\S+\.\S+$/.test(value) ? 'mailto:' + value : '';
+        if (item.type === 'phone') return /^\+?[0-9() .-]{7,25}$/.test(value) ? 'tel:' + value.replace(/[^+0-9]/g, '') : '';
+        try { const url = new URL(value); return ['http:', 'https:'].includes(url.protocol) ? url.href : ''; } catch (error) { return ''; }
+      }
+      function save() {
+        try { localStorage.setItem(storageKey, JSON.stringify(contacts)); status.textContent = 'Saved on this device.'; }
+        catch (error) { status.textContent = 'Could not save in this browser. Check storage settings.'; }
+        render();
+      }
+      function render() {
+        tabs.querySelectorAll('[data-filter]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.filter === activeFilter)));
+        list.innerHTML = contacts.map((item, index) => ({item, index})).filter(entry => activeFilter === 'all' || (entry.item.category || 'social') === activeFilter).map(({item, index}) => '<div class="contact-row"><span><strong>' + escapeHtml(item.label) + '</strong><br><a href="' + escapeHtml(destination(item) || '#') + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a><br><small>' + escapeHtml(item.category || 'social') + '</small></span><span><button class="contact-remove" type="button" data-edit="' + index + '">Edit</button> <button class="contact-remove" type="button" data-remove="' + index + '">Remove</button></span></div>').join('') || '<p>No links in this tab yet.</p>';
+        links.innerHTML = '<p>' + contacts.filter(item => destination(item)).map(item => '<strong>' + escapeHtml(item.label) + ':</strong> <a href="' + escapeHtml(destination(item)) + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a>').join('<br>') + '</p>';
+      }
+      tabs.addEventListener('click', event => { const tab = event.target.closest('[data-filter]'); if (!tab) return; activeFilter = tab.dataset.filter; render(); });
+      list.addEventListener('click', event => {
+        const editButton = event.target.closest('[data-edit]');
+        if (editButton) {
+          const index = Number(editButton.dataset.edit);
+          const item = contacts[index];
+          document.getElementById('contact-label').value = item.label;
+          document.getElementById('contact-category').value = item.category || 'social';
+          document.getElementById('contact-type').value = item.type;
+          document.getElementById('contact-value').value = item.value;
+          contacts.splice(index, 1);
+          form.querySelector('button[type="submit"]').textContent = 'Save contact changes';
+          status.textContent = 'Edit the fields, then save your changes.';
+          return;
+        }
+        const button = event.target.closest('[data-remove]');
+        if (!button) return;
+        contacts.splice(Number(button.dataset.remove), 1);
+        save();
+      });
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const item = { label: document.getElementById('contact-label').value.trim(), category: document.getElementById('contact-category').value, type: document.getElementById('contact-type').value, value: document.getElementById('contact-value').value.trim() };
+        if (!item.label || !destination(item)) { status.textContent = 'Enter a valid website URL, email address, or phone number.'; return; }
+        contacts.push(item);
+        form.reset();
+        form.querySelector('button[type="submit"]').textContent = '＋ Add contact link';
+        save();
+      });
+      render();
+    }
   </script>
 </body>
 </html>

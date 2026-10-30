@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tenjicpuz.github.io/Hernan-Portfolio/sitemap.xml

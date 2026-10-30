@@ -1,623 +1,324 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio of Hernan Glenn Belarmino Amon, an independent BSIT student from Silang, Cavite, Philippines.">
+  <meta name="description" content="Portfolio of Hernan Glenn Belarmino Amon, an independent BSIT student from Silang, Cavite, Philippines, showcasing personal projects and learning at Olivarez College." />
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Portfolio">
-  <meta property="og:description" content="Independent student portfolio featuring projects, skills, and learning in Information Technology.">
+  <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Portfolio" />
+  <meta property="og:description" content="Independent student portfolio featuring projects, skills, and learning in Information Technology." />
   <title>Hernan Glenn Belarmino Amon | BSIT Portfolio</title>
-
   <style>
     :root {
       --site-primary: #e23b4b;
       --site-secondary: #160d16;
       --site-background: #09090d;
+      --site-on-primary: #ffffff;
+      --site-on-secondary: #eef5ff;
       --site-on-background: #edf4ff;
+      --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-heading-scale: 1;
+      --site-spacing-scale: 1;
+      --site-radius-scale: 1;
+      --site-decoration-opacity: 1;
       --surface: #151319;
       --surface-soft: #1c151c;
       --text: #f7edf0;
       --muted: #b8aab1;
       --line: #38232d;
     }
-
     * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      color: var(--site-on-background);
-      background: var(--site-background);
-      font-family: Inter, system-ui, sans-serif;
-    }
-
-    .app {
-      min-height: 100vh;
-      background: var(--site-background);
-      overflow: hidden;
-    }
-
-    .topbar {
-      background: var(--site-secondary);
-      padding: 18px max(6vw, 22px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand {
-      font-weight: 800;
-      letter-spacing: .02em;
-    }
-
-    .topbar nav {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .topbar nav a {
-      color: #e5efff;
-      text-decoration: none;
-      font-size: .9rem;
-      font-weight: 650;
-    }
-
+    body { margin: 0; color: var(--site-on-background); background: var(--site-background); font-family: var(--site-font-body); }
+    .app { min-height: 100vh; width: 100%; border-radius: 0; background-color: var(--site-background); color: var(--site-on-background); overflow: hidden; }
+    .topbar { background: var(--site-secondary); color: var(--site-on-secondary); padding: calc(18px * var(--site-spacing-scale)) max(6vw, 22px); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-weight: 800; letter-spacing: .02em; }
+    .topbar span { color: #c3d6f0; font-size: .9rem; }
+    .topbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .topbar nav a { color: #e5efff; text-decoration: none; font-size: .9rem; font-weight: 650; }
     .topbar nav a:hover { text-decoration: underline; }
-
-    .hero {
-      position: relative;
-      padding: clamp(56px, 9vw, 104px) max(7vw, 24px) 68px;
-      background:
-        radial-gradient(circle at 82% 25%, rgba(226,59,75,.22), transparent 30%),
-        linear-gradient(135deg, #160d16, #28121c 65%, #3b1722);
-    }
-
-    .hero:after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      right: 5%;
-      top: -130px;
-      border: 1px solid rgba(255,255,255,.16);
-      box-shadow: 0 0 0 34px rgba(255,255,255,.035),
-                  0 0 0 70px rgba(255,255,255,.025);
-      pointer-events: none;
-    }
-
-    .hero-layout {
-      display: flex;
-      align-items: center;
-      gap: clamp(28px, 6vw, 76px);
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-copy { flex: 1; min-width: 0; }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      font-size: .76rem;
-      font-weight: 800;
-      color: #cfe2ff;
-    }
-
-    h1 {
-      font-size: clamp(2.3rem, 6vw, 4.8rem);
-      line-height: 1.04;
-      letter-spacing: -.045em;
-      max-width: 850px;
-      margin: 18px 0;
-    }
-
-    .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: #e1edff;
-      max-width: 680px;
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .location {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 28px;
-      border: 1px solid rgba(255,255,255,.28);
-      background: rgba(7,20,38,.18);
-      padding: 10px 15px;
-      border-radius: 999px;
-      font-weight: 650;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-
-    .hero-actions a {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 12px 18px;
-      text-decoration: none;
-      font-weight: 750;
-    }
-
-    .primary-action {
-      background: var(--site-primary);
-      color: #fff;
-    }
-
-    .secondary-action {
-      border: 1px solid rgba(255,255,255,.55);
-      color: #fff;
-    }
-
-    .avatar {
-      width: clamp(132px, 20vw, 220px);
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,.8);
-      box-shadow: 0 0 0 9px rgba(226,59,75,.22),
-                  0 20px 55px rgba(0,0,0,.4);
-    }
-
-    main {
-      max-width: 1080px;
-      margin: auto;
-      padding: 42px 24px 76px;
-    }
-
-    .section-title {
-      font-size: 1.45rem;
-      margin: 0 0 20px;
-      letter-spacing: -.025em;
-    }
-
-    .intro {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 1.04rem;
-      max-width: 780px;
-      margin: 0 0 38px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 12px 34px rgba(0,0,0,.08);
-    }
-
+    .hero { position: relative; padding: clamp(56px, 9vw, 104px) max(7vw, 24px) 68px; background: radial-gradient(circle at 82% 25%, rgba(226,59,75,.22), transparent 30%), linear-gradient(135deg, #160d16, #28121c 65%, #3b1722); }
+    .hero:after { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; right: 5%; top: -130px; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 0 0 34px rgba(255,255,255,.035), 0 0 0 70px rgba(255,255,255,.025); opacity: var(--site-decoration-opacity); pointer-events: none; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .76rem; font-weight: 800; color: #cfe2ff; }
+    h1 { font-family: var(--site-font-heading); font-size: clamp(2.3rem, 6vw, 4.8rem); line-height: 1.04; letter-spacing: -.045em; max-width: 850px; margin: 18px 0; }
+    .hero p { font-size: clamp(1.05rem, 2vw, 1.25rem); color: #e1edff; max-width: 680px; line-height: 1.7; margin: 0; }
+    .location { display: inline-flex; align-items: center; gap: 9px; margin-top: 28px; border: 1px solid rgba(255,255,255,.28); background: rgba(7,20,38,.18); padding: 10px 15px; border-radius: 999px; font-weight: 650; }
+    main { max-width: 1080px; margin: auto; padding: 42px 24px 76px; }
+    .section-title { font-size: calc(1.45rem * var(--site-heading-scale)); margin: 0 0 20px; letter-spacing: -.025em; }
+    .intro { color: var(--muted); line-height: 1.75; font-size: 1.04rem; max-width: 780px; margin: 0 0 38px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    .card { background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: calc(20px * var(--site-radius-scale)); padding: calc(25px * var(--site-spacing-scale)); box-shadow: 0 12px 34px rgba(0,0,0,.08); }
     .card .icon { font-size: 1.55rem; }
+    .card h3 { margin: 12px 0 8px; font-size: 1.12rem; }
+    .card p { margin: 0; line-height: 1.65; color: var(--muted); }
+    .project-card { display: flex; flex-direction: column; min-height: 220px; }
+    .project-meta { color: var(--site-primary); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .project-card .project-link { margin-top: auto; padding-top: 20px; color: var(--site-primary); font-weight: 750; text-decoration: none; }
+    .project-card .project-link:hover { text-decoration: underline; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .hero-actions a { display: inline-block; border-radius: 999px; padding: 12px 18px; text-decoration: none; font-weight: 750; }
+    .primary-action { background: #fff; color: #12345c; }
+    .secondary-action { border: 1px solid rgba(255,255,255,.55); color: #fff; }
+    .hero-layout { display: flex; align-items: center; gap: clamp(28px, 6vw, 76px); position: relative; z-index: 1; }
+    .hero-copy { flex: 1; min-width: 0; }
+    .avatar { width: clamp(132px, 20vw, 220px); aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid rgba(255,255,255,.8); box-shadow: 0 0 0 9px rgba(226,59,75,.22), 0 20px 55px rgba(0,0,0,.4); }
+    .project-meta, .project-card .project-link { color: #ff6877; }
+    .project-card .project-link:hover { color: #ff9aa4; }
+    .primary-action { background: var(--site-primary); color: #fff; }
+    .highlight { margin-top: 24px; background: var(--surface-soft); color: var(--text); border-radius: calc(20px * var(--site-radius-scale)); padding: 26px; border: 1px solid var(--line); }
+    .highlight p { margin: 7px 0 0; color: var(--muted); line-height: 1.65; }
+    .certificate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .certificate-card { overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+    .certificate-card img { display: block; width: 100%; height: 170px; object-fit: cover; background: #211820; }
+    .certificate-card .certificate-info { padding: 16px; }
+    .certificate-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .certificate-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .empty-certificates { color: var(--muted); padding: 24px; border: 1px dashed var(--line); border-radius: 16px; }
+    footer { border-top: 1px solid var(--line); padding: 24px; text-align: center; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } .topbar span { display:none; } main { padding-top: 32px; } .hero-layout { flex-direction: column-reverse; align-items: flex-start; } .avatar { width: 132px; } }
 
-    .card h3 {
-      margin: 12px 0 8px;
-      font-size: 1.12rem;
-      overflow-wrap: anywhere;
-    }
-
-    .card p {
-      margin: 0;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    .project-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 220px;
-    }
-
-    .project-meta {
-      color: #ff6877;
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .project-card .project-link {
-      margin-top: auto;
-      padding-top: 20px;
-      color: #ff6877;
-      font-weight: 750;
-      text-decoration: none;
-    }
-
-    .project-card .project-link:hover {
-      color: #ff9aa4;
-      text-decoration: underline;
-    }
-
-    .highlight {
-      margin-top: 24px;
-      background: var(--surface-soft);
-      color: var(--text);
-      border-radius: 20px;
-      padding: 26px;
-      border: 1px solid var(--line);
-    }
-
-    .highlight p {
-      margin: 7px 0 0;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .certificate-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .certificate-card {
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-    }
-
-    .certificate-card img {
-      display: block;
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      background: #211820;
-    }
-
-    .certificate-info { padding: 16px; }
-
-    .certificate-card h3 {
-      margin: 0 0 6px;
-      font-size: 1rem;
-    }
-
-    .certificate-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    .empty-certificates {
-      color: var(--muted);
-      padding: 24px;
-      border: 1px dashed var(--line);
-      border-radius: 16px;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 24px;
-      text-align: center;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
+    /* Professional visual refinement */
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { line-height: 1.6; letter-spacing: -.01em; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(17, 12, 19, .92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .brand { font-size: .95rem; letter-spacing: .08em; white-space: nowrap; }
+    .topbar nav a { padding: 8px 2px; color: #d8d0d5; transition: color .2s ease; }
+    .topbar nav a:hover, .topbar nav a:focus-visible { color: #ff8994; }
+    .hero { min-height: 470px; display: flex; align-items: center; background: radial-gradient(ellipse at 82% 30%, rgba(226,59,75,.2), transparent 34%), linear-gradient(125deg, #100d14 0%, #21131d 58%, #351923 100%); }
+    .hero:after { opacity: .55; }
+    .hero-layout { width: 100%; max-width: 1180px; margin: 0 auto; }
+    .eyebrow { color: #ff9aa4; letter-spacing: .2em; }
+    h1 { font-weight: 800; }
+    .hero p { color: #d8cbd2; }
+    .avatar { border-color: rgba(255,255,255,.9); box-shadow: 0 0 0 10px rgba(226,59,75,.12), 0 24px 70px rgba(0,0,0,.45); }
+    .hero-actions a { transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .hero-actions a:hover { transform: translateY(-2px); }
+    .primary-action { box-shadow: 0 8px 24px rgba(226,59,75,.22); }
+    main { max-width: 1120px; padding-top: 64px; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 14px; }
+    .intro { max-width: 740px; margin-bottom: 44px; color: #bdb0b8; }
+    .grid { gap: 20px; }
+    .card { background: linear-gradient(145deg, #19151c, #121016); border-color: rgba(255,255,255,.09); border-radius: 18px; box-shadow: 0 12px 32px rgba(0,0,0,.14); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(255,104,119,.42); box-shadow: 0 18px 38px rgba(0,0,0,.24); }
+    .project-card { min-height: 232px; }
+    .project-meta { letter-spacing: .12em; }
+    .project-card h3 { font-size: 1.18rem; overflow-wrap: anywhere; }
+    .project-card p { color: #bdb2b9; }
+    .project-card .project-link { display: inline-flex; align-items: center; gap: 6px; }
+    .highlight { background: linear-gradient(120deg, #1b151d, #151219); border-color: rgba(255,255,255,.09); border-radius: 18px; }
+    .certificate-card { border-color: rgba(255,255,255,.1); transition: transform .2s ease, border-color .2s ease; }
+    .certificate-card:hover { transform: translateY(-3px); border-color: rgba(255,104,119,.4); }
+    a { transition: color .2s ease; }
+    a:focus-visible { outline: 2px solid #ff8994; outline-offset: 4px; border-radius: 4px; }
+    footer { background: #100d13; border-color: rgba(255,255,255,.08); }
     @media (max-width: 680px) {
-      .grid { grid-template-columns: 1fr; }
-      main { padding-top: 32px; }
-      .hero-layout {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-      }
-      .avatar { width: 132px; }
+      .topbar { align-items: flex-start; flex-direction: column; padding: 14px 20px; }
+      .topbar nav { width: 100%; gap: 8px 16px; }
+      .topbar nav a { font-size: .82rem; }
+      .hero { min-height: auto; padding-top: 46px; }
+      .hero-layout { gap: 28px; }
+      main { padding: 42px 20px 60px; }
+      .intro { margin-bottom: 32px; }
+    }
+    /* Distinctive editorial portfolio direction */
+    :root {
+      --site-primary: #f05b6b;
+      --surface: #17151b;
+      --surface-soft: #201a22;
+      --line: rgba(255,255,255,.11);
+    }
+    body { background: #0b0a0e; }
+    .app { background: #0b0a0e; }
+    .topbar { padding: 17px max(6vw, 24px); }
+    .brand { font-size: .82rem; letter-spacing: .16em; }
+    .topbar nav { gap: clamp(12px, 2vw, 25px); }
+    .topbar nav a { font-size: .82rem; letter-spacing: .02em; }
+    .hero {
+      min-height: min(720px, calc(100vh - 60px));
+      padding: clamp(58px, 10vw, 124px) max(7vw, 24px);
+      background: radial-gradient(ellipse at 75% 48%, rgba(240,91,107,.16), transparent 33%), linear-gradient(115deg, #0d0b10 0%, #17121b 58%, #2a151f 100%);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .hero:before { content: "PORTFOLIO / 2026"; position: absolute; right: 7vw; bottom: 30px; color: rgba(255,255,255,.3); font-size: .68rem; letter-spacing: .22em; font-weight: 800; }
+    .hero:after { width: 360px; height: 360px; right: 8%; top: 8%; border-color: rgba(240,91,107,.2); box-shadow: 0 0 0 42px rgba(240,91,107,.035), 0 0 0 86px rgba(255,255,255,.018); }
+    .hero-layout { max-width: 1240px; gap: clamp(38px, 8vw, 120px); }
+    .hero-copy { max-width: 760px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: .7rem; }
+    .eyebrow:before { content: ""; width: 30px; height: 1px; background: var(--site-primary); }
+    h1 { font-size: clamp(3rem, 7.4vw, 6.4rem); line-height: .98; letter-spacing: -.065em; margin: 25px 0; }
+    .hero p { max-width: 590px; font-size: clamp(1rem, 1.5vw, 1.15rem); }
+    .location { background: rgba(255,255,255,.035); border-color: rgba(255,255,255,.13); font-size: .82rem; }
+    .avatar { width: clamp(150px, 22vw, 260px); border: 1px solid rgba(255,255,255,.45); padding: 7px; background: rgba(255,255,255,.05); box-shadow: 0 30px 90px rgba(0,0,0,.48), 0 0 70px rgba(240,91,107,.12); }
+    .hero-actions a { border-radius: 8px; padding: 14px 20px; font-size: .88rem; }
+    .primary-action { background: var(--site-primary); }
+    .secondary-action { background: rgba(255,255,255,.035); }
+    main { max-width: 1160px; padding: 92px 26px 100px; }
+    .section-title { display: flex; align-items: center; gap: 15px; font-size: clamp(1.65rem, 3vw, 2.25rem); letter-spacing: -.045em; }
+    .section-title:before { content: ""; width: 4px; height: 1.1em; border-radius: 5px; background: var(--site-primary); }
+    .intro { font-size: 1rem; max-width: 760px; margin: 0 0 58px 19px; }
+    .grid { gap: 16px; }
+    .card { position: relative; padding: 29px; background: linear-gradient(145deg, #1a171e, #111015); border-radius: 12px; }
+    .project-card { min-height: 255px; padding-top: 34px; }
+    .project-card:before { content: ""; position: absolute; top: 0; left: 28px; right: 28px; height: 2px; background: linear-gradient(90deg, var(--site-primary), transparent); opacity: .75; }
+    .project-meta { font-size: .68rem; }
+    .project-card h3 { font-size: 1.3rem; letter-spacing: -.025em; }
+    .project-card p { font-size: .94rem; }
+    .project-card .project-link { font-size: .86rem; }
+    .highlight { margin-top: 18px; padding: 28px 30px; border-radius: 12px; }
+    .highlight strong { font-size: 1.02rem; letter-spacing: -.02em; }
+    .certificate-card { border-radius: 12px; background: #17141a; }
+    .certificate-card img { height: 190px; }
+    footer { padding: 30px 20px; letter-spacing: .025em; }
+    @media (max-width: 680px) {
+      .hero { min-height: auto; padding: 58px 24px 76px; }
+      .hero:before { right: 24px; bottom: 18px; font-size: .58rem; }
+      .hero:after { width: 220px; height: 220px; right: -70px; top: 12px; }
+      h1 { font-size: clamp(2.8rem, 13vw, 4.2rem); }
+      .hero-layout { gap: 30px; }
+      .avatar { width: 142px; }
+      main { padding: 64px 20px 76px; }
+      .intro { margin-left: 19px; margin-bottom: 44px; }
+      .card { padding: 24px; }
+      .project-card { min-height: 225px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *:before, *:after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+    /* Motion system: subtle on touch, richer on larger screens */
+    @keyframes hero-enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes avatar-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes ring-pulse { 0%, 100% { transform: scale(.96); opacity: .45; } 50% { transform: scale(1.04); opacity: .9; } }
+    .hero-copy > * { animation: hero-enter .75s both; }
+    .hero-copy > *:nth-child(1) { animation-delay: .08s; }
+    .hero-copy > *:nth-child(2) { animation-delay: .18s; }
+    .hero-copy > *:nth-child(3) { animation-delay: .28s; }
+    .hero-copy > *:nth-child(4) { animation-delay: .38s; }
+    .hero-copy > *:nth-child(5) { animation-delay: .48s; }
+    .avatar { animation: hero-enter .9s .25s both, avatar-float 6s 1.2s ease-in-out infinite; }
+    .hero:after { animation: ring-pulse 9s ease-in-out infinite; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .menu-toggle { display: none; border: 1px solid rgba(255,255,255,.2); color: #fff; background: rgba(255,255,255,.06); border-radius: 8px; padding: 9px 12px; font: inherit; font-size: .86rem; cursor: pointer; }
+    @media (min-width: 681px) {
+      .card { transform: translateY(0); }
+      .project-card:hover { transform: translateY(-7px) scale(1.012); }
+      .hero:after { transform-origin: center; }
+    }
+    @media (max-width: 680px) {
+      .topbar { position: sticky; top: 0; flex-direction: row; align-items: center; flex-wrap: wrap; }
+      .menu-toggle { display: inline-flex; align-items: center; gap: 8px; }
+      .topbar nav { display: none; flex-basis: 100%; padding: 8px 0 4px; }
+      .topbar nav.is-open { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .topbar nav a { padding: 10px 12px; background: rgba(255,255,255,.045); border-radius: 7px; }
+      .hero-copy > * { animation-duration: .55s; }
+      .avatar { animation: hero-enter .7s .15s both; }
+      .hero:after { animation-duration: 12s; }
+      .reveal { transform: translateY(16px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-copy > *, .avatar, .hero:after { animation: none !important; }
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hernan Glenn Belarmino Amon",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Silang",
+      "addressRegion": "Cavite",
+      "addressCountry": "PH"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Olivarez College Tagaytay"
+    },
+    "description": "Information Technology student from Silang, Cavite, Philippines."
+  }
+  </script>
 </head>
-
 <body>
-<div class="app">
-
-  <header class="topbar">
-    <div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div>
-    <nav aria-label="Main navigation">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#certificates">Certificates</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-layout">
-      <div class="hero-copy">
-        <div class="eyebrow">BSIT student · Independent creator</div>
-        <h1>Hernan Glenn<br>Belarmino Amon</h1>
-        <p>
-          I'm an Information Technology student building projects independently,
-          learning by doing, and turning ideas into practical digital solutions.
-        </p>
-        <div class="location">⌖ &nbsp; Silang, Cavite, Philippines</div>
-        <div class="hero-actions">
-          <a class="primary-action" href="#projects">Explore my projects</a>
-          <a class="secondary-action" href="https://github.com/tenjicpuz"
-             target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
-        </div>
+  <div class="app">
+    <header class="topbar"><div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button><nav id="main-navigation" aria-label="Main navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#contact">Contact</a></nav></header>
+    <section class="hero">
+      <div class="hero-layout"><div class="hero-copy">
+      <div class="eyebrow">BSIT student · Independent creator</div>
+      <h1>Hernan Glenn<br>Belarmino Amon</h1>
+      <p>I'm an Information Technology student building projects independently, learning by doing, and turning ideas into practical digital solutions.</p>
+      <div class="location">⌖ &nbsp; Silang, Cavite, Philippines</div>
+      <div class="hero-actions"><a class="primary-action" href="#projects">Explore my projects</a><a class="secondary-action" href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div>
+      </div><img class="avatar" src="https://github.com/tenjicpuz.png" alt="GitHub profile avatar of Hernan Glenn Belarmino Amon" loading="lazy"></div>
+    </section>
+    <main>
+      <h2 class="section-title" id="about">About me</h2>
+      <p class="intro">I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in Information Technology student at Olivarez College. Based in Silang, Cavite, Philippines, I use independent projects to practice my skills, explore ideas, and grow as a developer.</p>
+      <h2 class="section-title" id="projects">Selected projects</h2>
+      <p class="intro">A collection of repositories I've worked on independently. Explore the source code and project details on GitHub.</p>
+      <div class="grid">
+        <article class="card project-card"><div class="project-meta">Python · Game</div><h3>Snake-game-but-in-relapse</h3><p>A snake game project, described on GitHub as being made for lazy people.</p><a class="project-link" href="https://github.com/tenjicpuz/Snake-game-but-in-relapse" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
+        <article class="card project-card"><div class="project-meta">HTML · Guides</div><h3>Book-of-guides</h3><p>A collection of guides, described on GitHub as being for lazy people.</p><a class="project-link" href="https://github.com/tenjicpuz/Book-of-guides" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
+        <article class="card project-card"><div class="project-meta">Batchfile · Windows utility</div><h3>OpenDriverUpdater</h3><p>A transparent, zero-dependency batch script designed to safely back up and update Windows 10/11 drivers.</p><a class="project-link" href="https://github.com/tenjicpuz/OpenDriverUpdater" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
+        <article class="card project-card"><div class="project-meta">Python · Developer tool</div><h3>Code-Archaeologist</h3><p>Evidence-grounded code intelligence for developers.</p><a class="project-link" href="https://github.com/tenjicpuz/Code-Archaeologist" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
       </div>
-
-      <img class="avatar"
-           src="https://github.com/tenjicpuz.png"
-           alt="GitHub profile avatar"
-           loading="lazy">
-    </div>
-  </section>
-
-  <main>
-
-    <h2 class="section-title" id="about">About me</h2>
-    <p class="intro">
-      I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in
-      Information Technology student at Olivarez College. Based in Silang,
-      Cavite, Philippines, I use independent projects to practice my skills,
-      explore ideas, and grow as a developer.
-    </p>
-
-    <h2 class="section-title" id="projects">My GitHub projects</h2>
-    <p class="intro">
-      My public GitHub repositories are loaded automatically below.
-      Create a new public repository and it can appear here without
-      manually editing this section.
-    </p>
-
-    <div id="github-projects" class="grid">
-      <p class="empty-certificates">Loading public GitHub repositories…</p>
-    </div>
-
-    <h2 class="section-title" id="certificates" style="margin-top:48px">
-      Certificates & achievements
-    </h2>
-    <p class="intro">
-      A growing collection of certificates and achievements.
-      Newly uploaded certificates will appear here automatically.
-    </p>
-
-    <div id="certificate-gallery" class="certificate-grid">
-      <p class="empty-certificates">Loading certificates…</p>
-    </div>
-
-    <h2 class="section-title" id="education">Education</h2>
-
-    <div class="grid">
-      <article class="card">
-        <div class="icon">🎓</div>
-        <h3>Current College Studies</h3>
-        <p>
-          <strong>Olivarez College</strong><br>
-          Currently a 2nd-year college student taking Bachelor of Science
-          in Information Technology (BSIT).
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="icon">📘</div>
-        <h3>Senior High School Graduate</h3>
-        <p>
-          <strong>Olivarez College Tagaytay</strong><br>
-          Senior High School graduate.
-        </p>
-      </article>
-    </div>
-
-    <section class="highlight">
-      <strong>How I work</strong>
-      <p>
-        Independent planning · Hands-on development · Problem-solving ·
-        Continuous learning
-      </p>
-    </section>
-
-    <section class="highlight">
-      <strong>Areas of interest</strong>
-      <p>
-        Information Technology · Software and web development ·
-        Computing · Digital tools
-      </p>
-    </section>
-
-    <section class="highlight" id="contact">
-      <strong>Find me online</strong>
-      <p>
-        GitHub:
-        <a href="https://github.com/tenjicpuz" target="_blank"
-           rel="noopener noreferrer">github.com/tenjicpuz</a>
-        <br>
-        Social profile:
-        <a href="https://guns.lol/kensojukisaki" target="_blank"
-           rel="noopener noreferrer">guns.lol/kensojukisaki</a>
-      </p>
-    </section>
-
-  </main>
-
-  <footer>
-    © 2026 Hernan Glenn Belarmino Amon · Student portfolio
-  </footer>
-
-</div>
-
-<!-- Supabase library and existing configuration -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js"></script>
-
-<script>
-  // Automatically load public GitHub repositories
-  async function loadGitHubProjects() {
-    const container = document.getElementById('github-projects');
-
-    try {
-      const response = await fetch(
-        'https://api.github.com/users/tenjicpuz/repos?sort=updated&per_page=100'
-      );
-
-      if (!response.ok) {
-        throw new Error('GitHub API request failed');
+      <h2 class="section-title" id="certificates" style="margin-top:48px">Certificates & achievements</h2>
+      <p class="intro">A growing collection of certificates and achievements. Newly uploaded certificates will appear here automatically.</p>
+      <div id="certificate-gallery" class="certificate-grid"><p class="empty-certificates">Loading certificates…</p></div>
+      <h2 class="section-title" id="education">Education</h2>
+      <div class="grid">
+        <article class="card"><div class="icon">🎓</div><h3>Current College Studies</h3><p><strong>Olivarez College</strong><br>Currently a 2nd-year college student taking Bachelor of Science in Information Technology (BSIT).</p></article>
+        <article class="card"><div class="icon">📘</div><h3>Senior High School Graduate</h3><p><strong>Olivarez College Tagaytay</strong><br>Senior High School graduate.</p></article>
+      </div>
+      <section class="highlight"><strong>How I work</strong><p>Independent planning · Hands-on development · Problem-solving · Continuous learning</p></section>
+      <section class="highlight"><strong>Areas of interest</strong><p>Information Technology · Software and web development · Computing · Digital tools</p></section>
+      <section class="highlight" id="contact"><strong>Find me online</strong><p>GitHub: <a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">github.com/tenjicpuz</a><br>Social profile: <a href="https://guns.lol/kensojukisaki" target="_blank" rel="noopener noreferrer">guns.lol/kensojukisaki</a></p></section>
+    </main>
+    <footer>© 2026 Hernan Glenn Belarmino Amon · Student portfolio</footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <script>
+    (function () {
+      const menuButton = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('main-navigation');
+      menuButton.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('is-open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.textContent = isOpen ? '✕ Close' : '☰ Menu';
+      });
+      nav.querySelectorAll('a').forEach(link => link.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰ Menu';
+      }));
+      const revealTargets = document.querySelectorAll('main > .section-title, main > .intro, main > .grid, main > .certificate-grid, main > .highlight');
+      revealTargets.forEach(element => element.classList.add('reveal'));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+        }), { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+        revealTargets.forEach(element => observer.observe(element));
+      } else {
+        revealTargets.forEach(element => element.classList.add('is-visible'));
       }
-
-      const repos = (await response.json())
-        .filter(repo => !repo.fork && !repo.archived);
-
-      if (!repos.length) {
-        container.innerHTML =
-          '<p class="empty-certificates">No public repositories found yet.</p>';
+    })();
+    (async function () {
+      const gallery = document.getElementById('certificate-gallery');
+      if (!window.PORTFOLIO_CONFIG || !PORTFOLIO_CONFIG.supabaseUrl || !PORTFOLIO_CONFIG.supabaseAnonKey || PORTFOLIO_CONFIG.supabaseUrl.includes('YOUR_')) {
+        gallery.innerHTML = '<p class="empty-certificates">Certificate gallery is ready. Supabase setup is needed to load your certificates.</p>';
         return;
       }
-
-      container.innerHTML = repos.map(repo => `
-        <article class="card project-card">
-          <div class="project-meta">
-            ${escapeHtml(repo.language || 'GitHub repository')}
-          </div>
-
-          <h3>${escapeHtml(repo.name)}</h3>
-
-          <p>
-            ${escapeHtml(
-              repo.description ||
-              'A public project by Hernan Glenn Belarmino Amon.'
-            )}
-          </p>
-
-          <a class="project-link"
-             href="${encodeURI(repo.html_url)}"
-             target="_blank"
-             rel="noopener noreferrer">
-            View repository ↗
-          </a>
-        </article>
-      `).join('');
-
-    } catch (error) {
-      container.innerHTML = `
-        <p class="empty-certificates">
-          GitHub projects could not be loaded right now.
-          Visit
-          <a href="https://github.com/tenjicpuz?tab=repositories"
-             target="_blank"
-             rel="noopener noreferrer">
-            my GitHub repositories
-          </a>.
-        </p>
-      `;
-    }
-  }
-
-  // Load certificates from Supabase
-  async function loadCertificates() {
-    const gallery = document.getElementById('certificate-gallery');
-
-    if (
-      !window.PORTFOLIO_CONFIG ||
-      !PORTFOLIO_CONFIG.supabaseUrl ||
-      !PORTFOLIO_CONFIG.supabaseAnonKey ||
-      PORTFOLIO_CONFIG.supabaseUrl.includes('YOUR_')
-    ) {
-      gallery.innerHTML =
-        '<p class="empty-certificates">Supabase setup is needed to load certificates.</p>';
-      return;
-    }
-
-    try {
-      const client = window.supabase.createClient(
-        PORTFOLIO_CONFIG.supabaseUrl,
-        PORTFOLIO_CONFIG.supabaseAnonKey
-      );
-
-      const { data, error } = await client
-        .from('certificates')
-        .select('id,title,issuer,issued_on,public_url,storage_path')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      if (!data || !data.length) {
-        gallery.innerHTML =
-          '<p class="empty-certificates">No certificates have been added yet.</p>';
+      const client = window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl, PORTFOLIO_CONFIG.supabaseAnonKey);
+      const { data, error } = await client.from('certificates').select('id,title,issuer,issued_on,public_url,storage_path').order('created_at', { ascending: false });
+      if (error || !data || !data.length) {
+        gallery.innerHTML = '<p class="empty-certificates">No certificates have been added yet.</p>';
         return;
       }
-
-      gallery.innerHTML = data.map(item => {
-        const isPDF = /\.pdf$/i.test(item.storage_path || '');
-
-        const preview = isPDF
-          ? `<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>`
-          : `<img src="${escapeAttribute(item.public_url)}"
-                  alt="${escapeAttribute(item.title)}"
-                  loading="lazy">`;
-
-        return `
-          <article class="certificate-card">
-            <a href="${escapeAttribute(item.public_url)}"
-               target="_blank"
-               rel="noopener noreferrer">
-              ${preview}
-            </a>
-
-            <div class="certificate-info">
-              <h3>${escapeHtml(item.title)}</h3>
-
-              <p>
-                ${escapeHtml(item.issuer || 'Certificate')}
-                ${item.issued_on
-                  ? ' · ' + escapeHtml(item.issued_on)
-                  : ''}
-              </p>
-
-              <p style="margin-top:10px">
-                <a class="project-link"
-                   href="${escapeAttribute(item.public_url)}"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                  View certificate ↗
-                </a>
-              </p>
-            </div>
-          </article>
-        `;
-      }).join('');
-
-    } catch (error) {
-      gallery.innerHTML =
-        '<p class="empty-certificates">Could not load certificates. Please try again later.</p>';
-    }
-  }
-
-  // Safely display text from external sources
-  function escapeHtml(value) {
-    return String(value || '').replace(/[&<>"']/g, character => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    }[character]));
-  }
-
-  function escapeAttribute(value) {
-    return escapeHtml(value);
-  }
-
-  // Start loading both sections
-  loadGitHubProjects();
-  loadCertificates();
-</script>
-
+      gallery.innerHTML = data.map(item => '<article class="certificate-card"><a href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">' + (/\.pdf$/i.test(item.storage_path || '') ? '<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>' : '<img src="' + encodeURI(item.public_url) + '" alt="' + escapeHtml(item.title) + '" loading="lazy">') + '</a><div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ' · ' + escapeHtml(item.issued_on) : '') + '</p><p style="margin-top:10px"><a class="project-link" href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p></div></article>').join('');
+    })();
+    function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character])); }
+  </script>
 </body>
 </html>

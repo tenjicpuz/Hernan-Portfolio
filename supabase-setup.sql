@@ -22,3 +22,6 @@ create policy "Authenticated admins manage portfolio content" on public.portfoli
 -- IMPORTANT: restrict authenticated access to trusted admin accounts. For a single-owner portfolio,
 -- use Supabase Dashboard -> Authentication -> Users and do not create public sign-up flows.
 -- If other authenticated users exist, replace the broad authenticated policy with an admin allowlist.
+
+-- Refresh the Supabase REST API schema cache after table creation.
+notify pgrst, 'reload schema';

@@ -41,8 +41,14 @@
       <div class="metrics">
         <div class="metric">Published certificates<strong id="certificate-count">—</strong></div>
         <div class="metric">Social/contact links<strong id="social-count">—</strong></div>
+        <div class="metric">Admin connection<strong id="connection-state">Checking…</strong></div>
       </div>
-      <p class="hint">Counts update when you open the dashboard or finish a change.</p>
+      <div class="row">
+        <div><strong>Recent certificate updates</strong><br><small>Latest items currently saved in Supabase</small></div>
+        <button class="secondary" id="dashboard-refresh" type="button">Refresh dashboard</button>
+      </div>
+      <div id="recent-certificates"><p class="hint">Sign in to load your portfolio summary.</p></div>
+      <p class="hint">Dashboard counts are read from your existing certificates and contact_links tables. Other sections will be added in the next build steps.</p>
     </section>
 
     <section class="view" id="view-certificates">
@@ -99,6 +105,10 @@
       `<div class="row"><div><strong>${safe(item.title)}</strong><br><small>${safe(item.issuer||'')}${item.issued_on?' · '+fmtDate(item.issued_on):''}</small></div><button class="secondary" data-delete-cert="${safe(item.id)}" data-path="${safe(item.storage_path)}">Delete</button></div>`
     ).join('') : '<p>No certificates uploaded yet.</p>';
     document.getElementById('certificate-count').textContent = data.length;
+    const recent = document.getElementById('recent-certificates');
+    recent.innerHTML = data.length ? data.slice(0,5).map(item =>
+      `<div class="row"><div><strong>${safe(item.title)}</strong><br><small>${safe(item.issuer || 'Issuer not specified')}${item.issued_on ? ' · Issued ' + fmtDate(item.issued_on) : ''}</small></div><small>Saved</small></div>`
+    ).join('') : '<p>No certificates yet. Add your first one in the Certificates tab.</p>';
   }
 
   async function refreshSocial() {
@@ -110,13 +120,19 @@
     document.getElementById('social-count').textContent = data.length;
   }
 
-  async function refreshAll(){await Promise.all([refreshCertificates(),refreshSocial()]);}
+  async function refreshAll(){
+    const connection = document.getElementById('connection-state');
+    connection.textContent = 'Connected';
+    const results = await Promise.allSettled([refreshCertificates(),refreshSocial()]);
+    if(results.some(result => result.status === 'rejected')) connection.textContent = 'Check errors';
+  }
   async function showSession(){
     const {data,error}=await db.auth.getSession();
     if(error){say(error.message);return;}
     const signed=!!data.session;
     loginPanel.classList.toggle('hidden',signed);manager.classList.toggle('hidden',!signed);
     if(signed)await refreshAll();
+    else document.getElementById('connection-state').textContent = 'Signed out';
   }
 
   document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
@@ -124,6 +140,11 @@
     document.querySelectorAll('.view').forEach(view => view.classList.toggle('active',view.id==='view-'+button.dataset.tab));
     if(button.dataset.tab==='dashboard')refreshAll();
   }));
+  document.getElementById('dashboard-refresh').addEventListener('click', async () => {
+    say('Refreshing dashboard…');
+    await refreshAll();
+    say('Dashboard refreshed.');
+  });
 
   document.getElementById('login-form').addEventListener('submit',async e=>{
     e.preventDefault();say('Signing in…');

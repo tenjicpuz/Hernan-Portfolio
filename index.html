@@ -9,16 +9,23 @@
   <meta name="google-site-verification" content="QzaJb3s_4d4kLQa0RGnneeS3dXMYHgKEO2kmUhCAuR8" />
   <meta name="author" content="Hernan Glenn Belarmino Amon">
   <meta name="keywords" content="Hernan Glenn Belarmino Amon, Hernan Amon, IT student Philippines, developer portfolio, web development, software projects, GitHub, programming, Silang Cavite">
-  <link rel="canonical" href="https://tenjicpuzporfolio.com/">
+  <link rel="canonical" href="https://tenjicpuz.github.io/Hernan-Portfolio/">
   <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Portfolio" />
   <meta property="og:description" content="Explore the projects, skills, GitHub repositories, and learning journey of Hernan Glenn Belarmino Amon, an independent IT student and aspiring developer from the Philippines." />
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tenjicpuzporfolio.com/">
+  <meta property="og:site_name" content="Hernan Glenn Belarmino Amon">
+  <meta property="og:locale" content="en_PH">
+  <meta property="og:url" content="https://tenjicpuz.github.io/Hernan-Portfolio/">
   <meta property="og:image" content="https://github.com/tenjicpuz.png">
   <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0b0a0e">
   <meta name="twitter:title" content="Hernan Glenn Belarmino Amon | Developer Portfolio">
   <meta name="twitter:description" content="IT student and independent project builder from the Philippines. Explore projects, skills, and GitHub work.">
   <meta name="twitter:image" content="https://github.com/tenjicpuz.png">
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://tnljrrqwksohabjfvqhd.supabase.co" crossorigin>
+  <link rel="icon" href="https://github.com/tenjicpuz.png">
   <title>Hernan Glenn Belarmino Amon | BSIT Portfolio</title>
   <style>
     :root {
@@ -238,14 +245,62 @@
     .portfolio-tools input { flex:1 1 240px; min-width:0; padding:13px 15px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:var(--surface); font:inherit; }
     .tool-button { display:inline-flex; align-items:center; justify-content:center; padding:11px 15px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:rgba(255,255,255,.06); font:inherit; font-weight:700; text-decoration:none; cursor:pointer; }
     .topbar-tools { display:flex; align-items:center; gap:8px; }
-    body[data-theme="light"] { --site-background:#f5f2f3; --site-on-background:#211820; --surface:#fff; --surface-soft:#fff; --text:#211820; --muted:#625760; --line:#ded4d9; background:#f5f2f3; color:#211820; }
-    body[data-theme="light"] .app { background:#f5f2f3; color:#211820; }
-    body[data-theme="light"] main { color:#211820; }
-    body[data-theme="light"] .card, body[data-theme="light"] .skill-card, body[data-theme="light"] .focus-card, body[data-theme="light"] .process-step, body[data-theme="light"] .service-card, body[data-theme="light"] .contact-manager { background:#fff; color:#211820; }
-    body[data-theme="light"] .highlight, body[data-theme="light"] .stat-card { background:#fff; color:#211820; }
-    body[data-theme="light"] .topbar { background:rgba(255,255,255,.94); }
+        /* ===== Light theme: one coherent palette, all text >= WCAG AA ===== */
+    .brand-dot { color: #ff6877; }
+    .section-title.spaced { margin-top: 48px; }
+    body[data-theme="light"] {
+      --site-background:#f6f3f4; --site-on-background:#211820; --surface:#fff; --surface-soft:#fbf8f9;
+      --text:#211820; --muted:#5a4f57; --line:#ddd2d7; --accent-text:#b4202f; --accent-btn:#c42434;
+      background:#f6f3f4; color:#211820;
+    }
+    body:not([data-theme="light"]) { --accent-text:#ff6877; --accent-btn:#e23b4b; }
+    body[data-theme="light"] .app, body[data-theme="light"] main { background:#f6f3f4; color:#211820; }
+    body[data-theme="light"] .topbar { background:#fff; color:#211820; border-bottom:1px solid var(--line); }
     body[data-theme="light"] .topbar nav a, body[data-theme="light"] .brand { color:#211820; }
-    body[data-theme="light"] .project-card p, body[data-theme="light"] .intro { color:#625760; }
+    body[data-theme="light"] .brand-dot { color:#c42434; }
+    body[data-theme="light"] .tool-button, body[data-theme="light"] .menu-toggle { color:#211820; background:#f3eef0; border-color:#cfc3c9; }
+    body[data-theme="light"] .hero { background: radial-gradient(circle at 82% 25%, rgba(196,36,52,.12), transparent 32%), linear-gradient(135deg,#fff,#f7ecee 65%,#f3dde1); color:#211820; }
+    body[data-theme="light"] h1, body[data-theme="light"] .hero p { color:#211820; }
+    body[data-theme="light"] .hero p { color:#4a3f47; }
+    body[data-theme="light"] .eyebrow { color:#b4202f; }
+    body[data-theme="light"] .location { color:#211820; border-color:#cfc3c9; background:rgba(255,255,255,.7); }
+    body[data-theme="light"] .hero:after { border-color:rgba(33,24,32,.12); box-shadow:0 0 0 34px rgba(33,24,32,.03), 0 0 0 70px rgba(33,24,32,.02); }
+    body[data-theme="light"] .secondary-action { color:#211820; border-color:#b9acb3; background:#fff; }
+    body[data-theme="light"] .primary-action, body[data-theme="light"] .cta-panel a { background:var(--accent-btn); color:#fff; }
+    body[data-theme="light"] .card, body[data-theme="light"] .skill-card, body[data-theme="light"] .focus-card,
+    body[data-theme="light"] .process-step, body[data-theme="light"] .service-card, body[data-theme="light"] .highlight,
+    body[data-theme="light"] .stat-card, body[data-theme="light"] .managed-card, body[data-theme="light"] .certificate-card { background:#fff; color:#211820; border-color:var(--line); }
+    body[data-theme="light"] .card p, body[data-theme="light"] .skill-card p, body[data-theme="light"] .intro,
+    body[data-theme="light"] .focus-card p, body[data-theme="light"] .process-step p, body[data-theme="light"] .service-card p,
+    body[data-theme="light"] .highlight p, body[data-theme="light"] .stat-label, body[data-theme="light"] .stat-note { color:#5a4f57; }
+    body[data-theme="light"] .stat-number, body[data-theme="light"] .project-meta, body[data-theme="light"] .project-link,
+    body[data-theme="light"] .step-index, body[data-theme="light"] .managed-card a { color:var(--accent-text); }
+    body[data-theme="light"] .tag { color:#7d1623; background:#f9e6e9; border-color:#e8bcc3; }
+    body[data-theme="light"] .cta-panel { background:linear-gradient(135deg,#fff,#f8e9ec); color:#211820; border:1px solid #e8bcc3; }
+    body[data-theme="light"] .cta-panel h3 { color:#211820; }
+    body[data-theme="light"] .cta-panel p { color:#4a3f47; }
+    body[data-theme="light"] footer { background:#ece6e8; color:#4a3f47; }
+    body[data-theme="light"] input[type="search"] { background:#fff; color:#211820; border-color:#cfc3c9; }
+    body[data-theme="light"] a:focus-visible, body[data-theme="light"] button:focus-visible { outline-color:#b4202f; }
+    /* Dark theme accent text that was too dim on dark cards stays bright */
+    body:not([data-theme="light"]) .project-link, body:not([data-theme="light"]) .project-meta { color:var(--accent-text); }
+    /* Skip link must keep AA contrast */
+    .skip-link { background:#b4202f; color:#fff; }
+        /* ===== Contrast fixes (verified with an automated WCAG audit) ===== */
+    :root { --site-primary: #d42f40; }                       /* white text on this = 4.9:1 */
+    .skip-link, .cta-panel a, .contact-form button { background:#c42434; color:#fff; }
+    .cta-panel a:hover, .primary-action:hover { filter:brightness(1.08); }
+    .primary-action { background:#fff; color:#12345c; }
+    main a:not([class]):not(.cta-panel a), .highlight a { color:var(--accent-text, #ff6877); text-underline-offset:3px; }
+    main a:not([class]):hover, .highlight a:hover { text-decoration-thickness:2px; }
+    body[data-theme="light"] .proof-list li, body[data-theme="light"] .availability-note { color:#3f343c; }
+    body[data-theme="light"] .availability-note { background:#fbeef0; }
+    body[data-theme="light"] .highlight strong, body[data-theme="light"] .cta-panel strong { color:#211820; }
+        /* Dark theme: bright accent for text, deeper accent only for filled buttons */
+    body:not([data-theme="light"]) .stat-number, body:not([data-theme="light"]) .step-index { color:#ff6877; }
+    .cta-panel a, .cta-panel a:hover { color:#fff; }
+    main a.primary-action, main .cta-panel a { color:#fff; }
+    main a.primary-action { color:#12345c; }
     @media print { .topbar, .hero-actions, .contact-manager, .portfolio-tools, footer, .cta-panel a { display:none !important; } body, .app, main { background:#fff !important; color:#111 !important; } .hero { min-height:0; padding:28px; background:#fff !important; color:#111 !important; } .hero p, .intro, .card p, .skill-card p, .highlight p { color:#333 !important; } .avatar { width:100px; box-shadow:none; } .card, .skill-card, .focus-card, .process-step, .service-card, .highlight { break-inside:avoid; box-shadow:none; border:1px solid #ccc; } a { color:#111 !important; text-decoration:none; } }
     @media (max-width: 680px) {
       .hero { min-height: auto; padding: 58px 24px 76px; }
@@ -306,36 +361,98 @@
       .hero-copy > *, .avatar, .hero:after { animation: none !important; }
       .reveal { opacity: 1; transform: none; transition: none; }
     }
+  
+    /* --- Additions: replaces former inline styles + accessibility --- */
+    .skip-link { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 8px; background: var(--site-primary); color: #fff; font-weight: 700; text-decoration: none; transition: top .2s ease; }
+    .skip-link:focus { top: 12px; }
+    .pdf-thumb { height: 190px; display: grid; place-items: center; background: #211820; color: #ff6877; font-size: 3rem; font-weight: 800; }
+    .cert-link-row { margin-top: 10px !important; }
+    .certificate-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    button:focus-visible, input:focus-visible, select:focus-visible, .tool-button:focus-visible, .menu-toggle:focus-visible { outline: 2px solid #ff8994; outline-offset: 3px; }
+    .managed-content { margin: 70px 0 0; }
+    .managed-group { margin: 24px 0; }
+    .managed-group h3 { text-transform: capitalize; margin: 0 0 14px; }
+    .managed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .managed-card { padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .managed-card img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .managed-card h4 { margin: 0 0 6px; }
+    .managed-card p { color: var(--muted); margin: 0 0 8px; line-height: 1.6; }
+    .managed-card a { color: var(--site-primary); font-weight: 700; text-decoration: none; }
+    @media print { .skip-link, .menu-toggle, .topbar-tools { display: none !important; } .reveal { opacity: 1 !important; transform: none !important; } }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Hernan Glenn Belarmino Amon",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Silang",
-      "addressRegion": "Cavite",
-      "addressCountry": "PH"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#website",
+      "url": "https://tenjicpuz.github.io/Hernan-Portfolio/",
+      "name": "Hernan Glenn Belarmino Amon | Portfolio",
+      "inLanguage": "en-PH",
+      "publisher": {
+        "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#person"
+      }
     },
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "Olivarez College Tagaytay"
+    {
+      "@type": "ProfilePage",
+      "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#profile",
+      "url": "https://tenjicpuz.github.io/Hernan-Portfolio/",
+      "isPartOf": {
+        "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#website"
+      },
+      "mainEntity": {
+        "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#person"
+      },
+      "dateModified": "2026-11-01"
     },
-    "description": "Information Technology student from Silang, Cavite, Philippines."
-    ,"url": "https://tenjicpuz.github.io/Hernan-Portfolio/"
-    ,"image": "https://github.com/tenjicpuz.png"
-    ,"sameAs": [
-      "https://github.com/tenjicpuz",
-      "https://guns.lol/kensojukisaki"
-    ],
-    "knowsAbout": ["Information Technology", "Web Development", "JavaScript", "Python", "Software Projects", "Roblox Scripting", "GameMaker"]
-  }
+    {
+      "@type": "Person",
+      "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#person",
+      "name": "Hernan Glenn Belarmino Amon",
+      "url": "https://tenjicpuz.github.io/Hernan-Portfolio/",
+      "image": "https://github.com/tenjicpuz.png",
+      "jobTitle": "Information Technology student and independent developer",
+      "description": "BSIT student at Olivarez College from Silang, Cavite, Philippines, building independent software and web projects.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Silang",
+        "addressRegion": "Cavite",
+        "addressCountry": "PH"
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Olivarez College"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Olivarez College Tagaytay"
+        }
+      ],
+      "sameAs": [
+        "https://github.com/tenjicpuz",
+        "https://guns.lol/kensojukisaki"
+      ],
+      "knowsAbout": [
+        "Information Technology",
+        "Web Development",
+        "JavaScript",
+        "Python",
+        "Windows batch scripting",
+        "Software Projects",
+        "Roblox Scripting",
+        "GameMaker"
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
   <div class="app">
-    <header class="topbar"><div class="brand">HGA<span style="color:#ff6877">.</span> PORTFOLIO</div><div class="topbar-tools"><button class="tool-button" id="theme-toggle" type="button" aria-label="Switch color theme">☼ Theme</button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button></div><nav id="main-navigation" aria-label="Main navigation"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#contact">Contact</a></nav></header>
+    <header class="topbar"><div class="brand">HGA<span class="brand-dot">.</span> PORTFOLIO</div><div class="topbar-tools"><button class="tool-button" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark theme">☼ Theme</button><button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button></div><nav id="main-navigation" aria-label="Main navigation"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#contact">Contact</a></nav></header>
     <section class="hero">
       <div class="hero-layout"><div class="hero-copy">
       <div class="eyebrow">BSIT student · Independent creator</div>
@@ -344,9 +461,9 @@
       <div class="location">⌖ &nbsp; Silang, Cavite, Philippines</div>
       <div class="hero-actions"><a class="primary-action" href="#projects">Explore my projects</a><a class="secondary-action" href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div>
       <div class="hero-actions"><button class="tool-button" id="print-resume" type="button">↓ Print / Save portfolio as PDF</button></div>
-      </div><img class="avatar" src="https://github.com/tenjicpuz.png" alt="GitHub profile avatar of Hernan Glenn Belarmino Amon" loading="lazy"></div>
+      </div><img class="avatar" src="https://github.com/tenjicpuz.png" alt="GitHub profile avatar of Hernan Glenn Belarmino Amon" width="260" height="260" fetchpriority="high" decoding="async"></div>
     </section>
-    <main>
+    <main id="content">
       <h2 class="section-title" id="about">About me</h2>
       <p class="intro">I'm Hernan Glenn Belarmino Amon, a 2nd-year Bachelor of Science in Information Technology student at Olivarez College. Based in Silang, Cavite, Philippines, I build independent software projects to turn ideas into useful tools, strengthen my engineering fundamentals, and keep learning across the development stack. I'm working toward full-stack development through hands-on practice and project-based learning.</p>
       <div class="stats-grid" aria-label="Portfolio highlights">
@@ -354,7 +471,7 @@
         <article class="stat-card"><strong class="stat-number" id="github-star-count">—</strong><span class="stat-label">Stars earned across public repositories</span></article>
         <article class="stat-card"><strong class="stat-number" id="github-follower-count">—</strong><span class="stat-label">GitHub followers</span></article>
       </div>
-      <p class="stat-note">Live public GitHub profile statistics. Counts update when the portfolio loads; stars reflect community appreciation of your repositories.</p>
+      <p class="stat-note">Live public GitHub profile statistics, refreshed whenever the page loads.</p>
       <h2 class="section-title" id="skills">Technical skills & tools</h2>
       <p class="intro">A practical snapshot of the technologies and creative tools I've explored through personal projects. I'm continuously expanding this toolkit through implementation, debugging, experimentation, and independent study.</p>
       <div class="skill-grid">
@@ -363,7 +480,7 @@
         <article class="skill-card"><h3>Tools & platforms</h3><p>Managing source code, deploying web projects, and working with hosted data services.</p><div class="tag-list"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">GitHub Pages</span><span class="tag">Supabase</span></div></article>
         <article class="skill-card"><h3>Game scripting & creation</h3><p>Early hands-on experience experimenting with Roblox scripts and classic GameMaker projects, building curiosity about game logic and interactive systems.</p><div class="tag-list"><span class="tag">Roblox scripting</span><span class="tag">GameMaker</span><span class="tag">Game logic</span></div></article>
       </div>
-      <h2 class="section-title" style="margin-top:48px">What I can work on</h2>
+      <h2 class="section-title spaced">What I can work on</h2>
       <div class="grid">
         <article class="card"><div class="icon">⌘</div><h3>Responsive websites</h3><p>Personal portfolios, landing pages, and clean interfaces designed to work across phones, tablets, and desktops.</p></article>
         <article class="card"><div class="icon">⚙</div><h3>Useful tools & automation</h3><p>Small utilities and scripts that simplify repetitive tasks and solve focused, practical problems.</p></article>
@@ -381,13 +498,13 @@
         <article class="card project-card"><div class="project-meta">Python · Developer tool</div><h3>Code-Archaeologist</h3><p>Evidence-grounded code intelligence for developers.</p><a class="project-link" href="https://github.com/tenjicpuz/Code-Archaeologist" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>
       </div>
       <section class="highlight"><strong>My development approach</strong><p>I start by understanding the problem, break it into manageable tasks, build and test a practical solution, then refine it based on what works. I use documentation, version control, and debugging to keep learning and improving each project.</p></section>
-      <h2 class="section-title" style="margin-top:48px">Currently learning & exploring</h2>
+      <h2 class="section-title spaced">Currently learning & exploring</h2>
       <div class="skill-grid">
         <article class="skill-card"><h3>Full-stack foundations</h3><p>Strengthening front-end skills while learning how applications connect to back-end services, APIs, and databases.</p><div class="tag-list"><span class="tag">JavaScript</span><span class="tag">APIs</span><span class="tag">Databases</span></div></article>
         <article class="skill-card"><h3>Software quality</h3><p>Practicing clearer code, troubleshooting, testing ideas, and writing useful project documentation.</p><div class="tag-list"><span class="tag">Debugging</span><span class="tag">Git</span><span class="tag">Documentation</span></div></article>
         <article class="skill-card"><h3>Interactive experiences</h3><p>Keeping an interest in game logic and interactive projects while building stronger programming fundamentals.</p><div class="tag-list"><span class="tag">Programming logic</span><span class="tag">Roblox</span><span class="tag">GameMaker</span></div></article>
       </div>
-      <h2 class="section-title" style="margin-top:48px">Professional development focus</h2>
+      <h2 class="section-title spaced">Professional development focus</h2>
       <p class="intro">The areas I am actively developing through coursework, independent projects, and practical experimentation.</p>
       <div class="focus-grid">
         <article class="focus-card"><h3>Front-end engineering</h3><p>Creating clear page structures, reusable interface patterns, responsive layouts, and accessible interactions with HTML, CSS, and JavaScript.</p></article>
@@ -402,20 +519,20 @@
         <div class="principle"><strong>Maintainability</strong><span>Organized code, version control, and useful documentation.</span></div>
         <div class="principle"><strong>Continuous learning</strong><span>Testing ideas, learning from errors, and improving with each iteration.</span></div>
       </div>
-      <h2 class="section-title" style="margin-top:48px">How I approach a project</h2>
+      <h2 class="section-title spaced">How I approach a project</h2>
       <p class="intro">A practical workflow helps me turn an idea into something that can be tested, understood, and improved.</p>
       <div class="process-grid">
         <article class="process-step"><span class="step-index">01 / UNDERSTAND</span><h3>Define the problem</h3><p>Clarify the goal, intended users, key requirements, and what a useful result should accomplish.</p></article>
         <article class="process-step"><span class="step-index">02 / BUILD</span><h3>Develop in steps</h3><p>Break the work into manageable parts, choose suitable tools, and implement the core experience.</p></article>
         <article class="process-step"><span class="step-index">03 / REFINE</span><h3>Test and improve</h3><p>Check the result, investigate issues, improve clarity, and document what was learned.</p></article>
       </div>
-      <h2 class="section-title" style="margin-top:48px">Ways I can contribute</h2>
+      <h2 class="section-title spaced">Ways I can contribute</h2>
       <div class="service-grid">
         <article class="service-card"><h3>Website updates</h3><p>Content changes, layout refinements, responsive fixes, and straightforward interface improvements.</p></article>
         <article class="service-card"><h3>Small development tasks</h3><p>Focused features, simple scripts, bug investigation, and beginner-friendly implementation tasks.</p></article>
         <article class="service-card"><h3>Technical learning support</h3><p>Researching documentation, reproducing issues, organizing findings, and communicating progress clearly.</p></article>
       </div>
-      <h2 class="section-title" style="margin-top:48px">Working principles</h2>
+      <h2 class="section-title spaced">Working principles</h2>
       <ul class="proof-list"><li>Honest communication about progress and limitations</li><li>Willingness to learn unfamiliar tools and workflows</li><li>Careful testing before calling work complete</li><li>Respect for feedback, deadlines, and project requirements</li><li>Readable code and organized project files</li><li>Curiosity, initiative, and steady improvement</li></ul>
       <p class="availability-note">Early-career profile: currently building experience through academic work and independent projects. Interested in internships, mentorship, collaborative projects, and entry-level opportunities where I can contribute while continuing to learn.</p>
       <h2 class="section-title" id="certificates" style="margin-top:48px">Certificates & achievements</h2>
@@ -430,144 +547,163 @@
       <section class="highlight"><strong>Areas of interest</strong><p>Information Technology · Software and web development · Computing · Digital tools</p></section>
       <section class="cta-panel" id="contact"><h3>Let's build something useful.</h3><p>I'm interested in learning opportunities, internships, collaborations, and entry-level projects where I can contribute, solve problems, and grow as a developer.</p><a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">Connect on GitHub ↗</a><div class="tag-list"><span class="tag">Open to learning opportunities</span><span class="tag">Independent projects</span><span class="tag">Continuous improvement</span></div></section>
       <section class="highlight"><strong>Find me online</strong><div id="contact-links"><p>GitHub: <a href="https://github.com/tenjicpuz" target="_blank" rel="noopener noreferrer">github.com/tenjicpuz</a><br>Social profile: <a href="https://guns.lol/kensojukisaki" target="_blank" rel="noopener noreferrer">guns.lol/kensojukisaki</a></p></div></section>
-      <section class="admin-panel" id="contact-admin" aria-labelledby="contact-admin-title"><h3 id="contact-admin-title">Private contact management</h3><p>Sign in with your owner account to publish contact links for every visitor.</p><form id="contact-admin-login"><label for="admin-email">Admin email</label><input id="admin-email" type="email" autocomplete="username" required><label for="admin-password">Password</label><input id="admin-password" type="password" autocomplete="current-password" required><button type="submit">Sign in</button></form><div id="contact-admin-tools" hidden><form id="contact-admin-form"><label for="admin-link-label">Contact label</label><input id="admin-link-label" maxlength="40" required><label for="admin-link-category">Category</label><select id="admin-link-category"><option value="social">Social</option><option value="professional">Professional</option><option value="direct">Direct contact</option></select><label for="admin-link-type">Link type</label><select id="admin-link-type"><option value="url">Website / profile URL</option><option value="email">Email address</option><option value="phone">Phone number</option></select><label for="admin-link-value">URL, email, or phone</label><input id="admin-link-value" maxlength="180" required><button type="submit">Publish contact link</button></form><div id="admin-contact-list"></div><button class="admin-secondary" id="contact-admin-logout" type="button">Sign out</button></div><p id="contact-admin-status" class="contact-status" role="status" aria-live="polite"></p></section>
+      
     </main>
+    <noscript><p style="text-align:center;padding:16px;margin:0;background:#2a1a20;color:#fff">Some live sections (GitHub stats, certificates, extra links) need JavaScript. Everything else works without it.</p></noscript>
     <footer>© 2026 Hernan Glenn Belarmino Amon · Student portfolio</footer>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="./config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script defer src="./config.js"></script>
   <script>
-    (function () {
-      const menuButton = document.querySelector('.menu-toggle');
-      const nav = document.getElementById('main-navigation');
-      menuButton.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('is-open');
-        menuButton.setAttribute('aria-expanded', String(isOpen));
-        menuButton.textContent = isOpen ? '✕ Close' : '☰ Menu';
-      });
-      const themeButton = document.getElementById('theme-toggle');
-      const savedTheme = localStorage.getItem('hernan-portfolio-theme');
-      if (savedTheme === 'light') document.body.dataset.theme = 'light';
-      themeButton.addEventListener('click', function () {
-        const nextTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
-        if (nextTheme === 'light') document.body.dataset.theme = 'light'; else delete document.body.dataset.theme;
-        localStorage.setItem('hernan-portfolio-theme', nextTheme);
-      });
-      document.getElementById('print-resume').addEventListener('click', () => window.print());
-      document.getElementById('project-search').addEventListener('input', filterProjects);
-      filterProjects();
-      nav.querySelectorAll('a').forEach(link => link.addEventListener('click', function () {
-        nav.classList.remove('is-open');
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.textContent = '☰ Menu';
-      }));
-      const revealTargets = document.querySelectorAll('main > .section-title, main > .intro, main > .grid, main > .certificate-grid, main > .highlight');
-      revealTargets.forEach(element => element.classList.add('reveal'));
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-        }), { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
-        revealTargets.forEach(element => observer.observe(element));
-      } else {
-        revealTargets.forEach(element => element.classList.add('is-visible'));
-      }
-      loadPublicProjects();
-      loadGithubProfileStats();
-      initializeContactAdmin();
-    })();
-    async function loadGithubProfileStats() {
-      try {
-        const [profileResponse, reposResponse] = await Promise.all([
-          fetch('https://api.github.com/users/tenjicpuz', { headers: { 'Accept': 'application/vnd.github+json' } }),
-          fetch('https://api.github.com/users/tenjicpuz/repos?per_page=100', { headers: { 'Accept': 'application/vnd.github+json' } })
-        ]);
-        if (!profileResponse.ok || !reposResponse.ok) return;
-        const profile = await profileResponse.json();
-        const repositories = await reposResponse.json();
-        document.getElementById('github-repo-count').textContent = profile.public_repos;
-        document.getElementById('github-follower-count').textContent = profile.followers;
-        document.getElementById('github-star-count').textContent = repositories.reduce((total, repo) => total + repo.stargazers_count, 0);
-      } catch (error) {
-        console.info('GitHub profile statistics are temporarily unavailable.', error);
-      }
-    }
-    async function loadPublicProjects() {
-      const grid = document.getElementById('project-grid');
-      if (!grid) return;
-      try {
-        const response = await fetch('https://api.github.com/users/tenjicpuz/repos?sort=updated&per_page=100', { headers: { 'Accept': 'application/vnd.github+json' } });
-        if (!response.ok) return;
-        const repositories = await response.json();
-        const projects = repositories.filter(repo => !repo.fork && !repo.archived).sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 8);
-        if (!projects.length) return;
-        grid.innerHTML = projects.map(repo => '<article class="card project-card"><div class="project-meta">' + escapeHtml(repo.language || 'Software project') + ' · ★ ' + repo.stargazers_count + '</div><h3>' + escapeHtml(repo.name) + '</h3><p>' + escapeHtml(repo.description || 'An independent project. Visit the repository to explore its source code and details.') + '</p><a class="project-link" href="' + escapeHtml(repo.html_url) + '" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>').join('');
-        filterProjects();
-      } catch (error) {
-        console.info('Using the featured project list because GitHub projects could not be loaded.', error);
-      }
-    }
-    function filterProjects() {
-      const query = (document.getElementById('project-search').value || '').trim().toLowerCase();
-      const cards = Array.from(document.querySelectorAll('#project-grid .project-card'));
-      let visible = 0;
-      cards.forEach(card => { const match = card.textContent.toLowerCase().includes(query); card.hidden = !match; if (match) visible++; });
-      document.getElementById('project-count').textContent = visible + ' project' + (visible === 1 ? '' : 's');
-    }
-    (async function () {
-      const gallery = document.getElementById('certificate-gallery');
-      if (!window.PORTFOLIO_CONFIG || !PORTFOLIO_CONFIG.supabaseUrl || !PORTFOLIO_CONFIG.supabaseAnonKey || PORTFOLIO_CONFIG.supabaseUrl.includes('YOUR_')) {
-        gallery.innerHTML = '<p class="empty-certificates">Certificate gallery is ready. Supabase setup is needed to load your certificates.</p>';
-        return;
-      }
-      const client = window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl, PORTFOLIO_CONFIG.supabaseAnonKey);
-      const { data, error } = await client.from('certificates').select('id,title,issuer,issued_on,public_url,storage_path').order('created_at', { ascending: false });
-      if (error || !data || !data.length) {
-        gallery.innerHTML = '<p class="empty-certificates">No certificates have been added yet.</p>';
-        return;
-      }
-      gallery.innerHTML = data.map(item => '<article class="certificate-card"><a href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">' + (/\.pdf$/i.test(item.storage_path || '') ? '<div style="height:170px;display:grid;place-items:center;background:#211820;color:#ff6877;font-size:3rem;font-weight:800">PDF</div>' : '<img src="' + encodeURI(item.public_url) + '" alt="' + escapeHtml(item.title) + '" loading="lazy">') + '</a><div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ' · ' + escapeHtml(item.issued_on) : '') + '</p><p style="margin-top:10px"><a class="project-link" href="' + encodeURI(item.public_url) + '" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p></div></article>').join('');
-    })();
-    function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character])); }
-    async function initializeContactAdmin() {
-      const panel = document.getElementById('contact-admin');
-      if (new URLSearchParams(location.search).get('admin') === '1') panel.classList.add('is-visible');
-      const links = document.getElementById('contact-links');
-      const status = document.getElementById('contact-admin-status');
-      const login = document.getElementById('contact-admin-login');
-      const tools = document.getElementById('contact-admin-tools');
-      if (!window.PORTFOLIO_CONFIG || !window.supabase) { status.textContent = 'Supabase configuration is unavailable.'; return; }
-      const client = window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl, PORTFOLIO_CONFIG.supabaseAnonKey);
-      const ownerId = '95f82a16-c195-44d0-88fd-e3b648ea0e12';
-      function hrefFor(item) { if (item.type === 'email') return 'mailto:' + item.value; if (item.type === 'phone') return 'tel:' + item.value.replace(/[^+0-9]/g, ''); return item.value; }
-      async function loadPublicLinks() {
-        const { data, error } = await client.from('contact_links').select('id,label,category,type,value').order('sort_order').order('created_at');
-        if (error) { console.info('Contact links table is not configured yet.', error); return; }
-        if (data && data.length) links.innerHTML = '<p>' + data.map(item => '<strong>' + escapeHtml(item.label) + ':</strong> <a href="' + escapeHtml(hrefFor(item)) + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a>').join('<br>') + '</p>';
-      }
-      async function renderAdminLinks() {
-        const { data, error } = await client.from('contact_links').select('id,label,category,type,value').order('sort_order').order('created_at');
-        if (error) { status.textContent = 'Could not load links. Run the contact-links SQL setup first.'; return; }
-        document.getElementById('admin-contact-list').innerHTML = (data || []).map(item => '<div class="admin-contact-row"><span><strong>' + escapeHtml(item.label) + '</strong><br>' + escapeHtml(item.value) + '</span><button type="button" data-delete-contact="' + item.id + '" class="admin-secondary">Delete</button></div>').join('') || '<p>No published contact links yet.</p>';
-      }
-      async function updateSession() {
-        const { data } = await client.auth.getSession();
-        const user = data.session && data.session.user;
-        const isOwner = !!user && user.id === ownerId;
-        login.hidden = isOwner;
-        tools.hidden = !isOwner;
-        if (user && !isOwner) { await client.auth.signOut(); status.textContent = 'This account is not authorized to manage portfolio contacts.'; }
-        if (isOwner) { status.textContent = 'Signed in as portfolio owner.'; await renderAdminLinks(); }
-      }
-      login.addEventListener('submit', async event => { event.preventDefault(); status.textContent = 'Signing in…'; const { error } = await client.auth.signInWithPassword({ email: document.getElementById('admin-email').value.trim(), password: document.getElementById('admin-password').value }); if (error) { status.textContent = 'Sign-in failed. Check your email and password.'; return; } await updateSession(); });
-      document.getElementById('contact-admin-form').addEventListener('submit', async event => { event.preventDefault(); const item = { label: document.getElementById('admin-link-label').value.trim(), category: document.getElementById('admin-link-category').value, type: document.getElementById('admin-link-type').value, value: document.getElementById('admin-link-value').value.trim() }; if (!item.label || !item.value) { status.textContent = 'Complete all contact fields.'; return; } const { error } = await client.from('contact_links').insert(item); if (error) { status.textContent = 'Could not publish. Check the contact-links table and owner policies.'; return; } event.target.reset(); status.textContent = 'Contact link published for all visitors.'; await renderAdminLinks(); await loadPublicLinks(); });
-      document.getElementById('admin-contact-list').addEventListener('click', async event => { const button = event.target.closest('[data-delete-contact]'); if (!button) return; const { error } = await client.from('contact_links').delete().eq('id', button.dataset.deleteContact); status.textContent = error ? 'Could not delete this link.' : 'Contact link deleted.'; await renderAdminLinks(); await loadPublicLinks(); });
-      document.getElementById('contact-admin-logout').addEventListener('click', async () => { await client.auth.signOut(); await updateSession(); status.textContent = 'Signed out.'; });
-      await loadPublicLinks();
-      await updateSession();
-    }
-  </script>
+window.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+  const GITHUB_USER = 'tenjicpuz';
+  const $ = (id) => document.getElementById(id);
+  const escapeHtml = (value) => String(value == null ? '' : value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  // Only allow safe link schemes in anything that comes from the database.
+  const safeUrl = (value) => { try { const u = new URL(String(value), location.href); return ['http:', 'https:'].includes(u.protocol) ? u.href : '#'; } catch (e) { return '#'; } };
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><script>
-(async()=>{try{if(!window.PORTFOLIO_CONFIG?.supabaseUrl||!window.PORTFOLIO_CONFIG?.supabaseAnonKey)return;const db=window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl,PORTFOLIO_CONFIG.supabaseAnonKey);const {data,error}=await db.from('portfolio_content').select('section,title,subtitle,description,url,image_url,display_date,sort_order').eq('is_published',true).order('sort_order');if(error||!data?.length)return;const root=document.createElement('section');root.id='managed-portfolio-content';root.style.cssText='max-width:1100px;margin:40px auto;padding:24px';const groups={};for(const item of data)(groups[item.section]??=[]).push(item);const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));root.innerHTML='<h2>More portfolio content</h2>'+Object.entries(groups).map(([name,items])=>'<section style="margin:24px 0"><h3>'+safe(name)+'</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">'+items.map(x=>'<article style="padding:16px;border:1px solid #55404b;border-radius:12px">'+(x.image_url?'<img src="'+safe(x.image_url)+'" alt="" loading="lazy" style="width:100%;max-height:180px;object-fit:cover;border-radius:8px">':'')+'<h4>'+safe(x.title)+'</h4>'+(x.subtitle?'<p>'+safe(x.subtitle)+'</p>':'')+(x.description?'<p>'+safe(x.description)+'</p>':'')+(x.display_date?'<small>'+safe(x.display_date)+'</small>':'')+(x.url?'<p><a href="'+safe(x.url)+'" target="_blank" rel="noopener noreferrer">View details</a></p>':'')+'</article>').join('')+'</div></section>').join('');const main=document.querySelector('main')||document.body;main.appendChild(root)}catch(e){console.warn('Managed content could not load',e)}})();</script>
+  /* ---------- One shared Supabase client ---------- */
+  const cfg = window.PORTFOLIO_CONFIG || {};
+  const hasSupabase = !!(window.supabase && cfg.supabaseUrl && cfg.supabaseAnonKey && !String(cfg.supabaseUrl).includes('YOUR_'));
+  const db = hasSupabase ? window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey) : null;
+
+  /* ---------- Navigation, theme, print, reveal ---------- */
+  const menuButton = document.querySelector('.menu-toggle');
+  const nav = $('main-navigation');
+  function setMenu(open) {
+    nav.classList.toggle('is-open', open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.textContent = open ? '✕ Close' : '☰ Menu';
+  }
+  menuButton.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  const themeButton = $('theme-toggle');
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem('hernan-portfolio-theme'); } catch (e) {}
+  if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) savedTheme = 'light';
+  if (savedTheme === 'light') document.body.dataset.theme = 'light';
+  themeButton.setAttribute('aria-pressed', String(savedTheme === 'light'));
+  themeButton.addEventListener('click', () => {
+    const next = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+    if (next === 'light') document.body.dataset.theme = 'light'; else delete document.body.dataset.theme;
+    themeButton.setAttribute('aria-pressed', String(next === 'light'));
+    try { localStorage.setItem('hernan-portfolio-theme', next); } catch (e) {}
+  });
+  $('print-resume').addEventListener('click', () => window.print());
+
+  const revealTargets = document.querySelectorAll('main > .section-title, main > .intro, main > .grid, main > .certificate-grid, main > .highlight');
+  revealTargets.forEach((el) => el.classList.add('reveal'));
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+    }), { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+    revealTargets.forEach((el) => observer.observe(el));
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  /* ---------- GitHub: ONE request feeds both stats and projects ---------- */
+  const CACHE_KEY = 'hernan-portfolio-gh-v1';
+  const CACHE_MS = 15 * 60 * 1000;
+  async function fetchGithub() {
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && Date.now() - cached.t < CACHE_MS) return cached.d;
+    } catch (e) {}
+    const headers = { Accept: 'application/vnd.github+json' };
+    const [profileRes, reposRes] = await Promise.all([
+      fetch('https://api.github.com/users/' + GITHUB_USER, { headers }),
+      fetch('https://api.github.com/users/' + GITHUB_USER + '/repos?sort=updated&per_page=100', { headers })
+    ]);
+    if (!profileRes.ok || !reposRes.ok) throw new Error('GitHub API unavailable');
+    const data = { profile: await profileRes.json(), repos: await reposRes.json() };
+    try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
+    return data;
+  }
+
+  function filterProjects() {
+    const query = ($('project-search').value || '').trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('#project-grid .project-card').forEach((card) => {
+      const match = card.textContent.toLowerCase().includes(query);
+      card.hidden = !match;
+      if (match) visible++;
+    });
+    $('project-count').textContent = visible + ' project' + (visible === 1 ? '' : 's');
+    let empty = $('project-empty');
+    if (!visible && query) {
+      if (!empty) { empty = document.createElement('p'); empty.id = 'project-empty'; empty.className = 'empty-certificates'; $('project-grid').after(empty); }
+      empty.textContent = 'No projects match "' + $('project-search').value.trim() + '".';
+    } else if (empty) { empty.remove(); }
+  }
+  let searchTimer;
+  $('project-search').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(filterProjects, 120); });
+  filterProjects();
+
+  fetchGithub().then(({ profile, repos }) => {
+    $('github-repo-count').textContent = profile.public_repos;
+    $('github-follower-count').textContent = profile.followers;
+    $('github-star-count').textContent = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+    const projects = repos.filter((r) => !r.fork && !r.archived && r.name.toLowerCase() !== GITHUB_USER + '.github.io')
+      .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 8);
+    if (!projects.length) return;
+    $('project-grid').innerHTML = projects.map((r) =>
+      '<article class="card project-card"><div class="project-meta">' + escapeHtml(r.language || 'Software project') + ' · ★ ' + r.stargazers_count + '</div><h3>' + escapeHtml(r.name) + '</h3><p>' +
+      escapeHtml(r.description || 'An independent project. Visit the repository to explore its source code and details.') +
+      '</p><a class="project-link" href="' + escapeHtml(safeUrl(r.html_url)) + '" target="_blank" rel="noopener noreferrer">View repository ↗</a></article>').join('');
+    filterProjects();
+  }).catch((e) => console.info('Showing the built-in project list; GitHub data unavailable.', e));
+
+  /* ---------- Certificates ---------- */
+  (async function loadCertificates() {
+    const gallery = $('certificate-gallery');
+    if (!db) { gallery.innerHTML = '<p class="empty-certificates">Certificates are temporarily unavailable.</p>'; return; }
+    const { data, error } = await db.from('certificates').select('id,title,issuer,issued_on,public_url,storage_path').order('created_at', { ascending: false });
+    if (error) { console.info('Certificates could not be loaded.', error); gallery.innerHTML = '<p class="empty-certificates">Certificates could not be loaded right now. Please try again later.</p>'; return; }
+    if (!data || !data.length) { gallery.innerHTML = '<p class="empty-certificates">No certificates have been added yet.</p>'; return; }
+    gallery.innerHTML = data.map((item) => {
+      const url = escapeHtml(safeUrl(item.public_url));
+      const isPdf = /\.pdf$/i.test(item.storage_path || '');
+      const thumb = isPdf ? '<div class="pdf-thumb" aria-hidden="true">PDF</div>' : '<img src="' + url + '" alt="' + escapeHtml(item.title) + '" loading="lazy" decoding="async">';
+      return '<article class="certificate-card"><a href="' + url + '" target="_blank" rel="noopener noreferrer" aria-label="Open ' + escapeHtml(item.title) + '">' + thumb + '</a><div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ' · ' + escapeHtml(item.issued_on) : '') + '</p><p class="cert-link-row"><a class="project-link" href="' + url + '" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p></div></article>';
+    }).join('');
+  })();
+
+  /* ---------- Public contact links + managed content (read-only, no admin UI here) ---------- */
+  const hrefFor = (item) => item.type === 'email' ? 'mailto:' + item.value : item.type === 'phone' ? 'tel:' + String(item.value).replace(/[^+0-9]/g, '') : safeUrl(item.value);
+  (async function loadContactLinks() {
+    if (!db) return;
+    const { data, error } = await db.from('contact_links').select('id,label,category,type,value').order('sort_order').order('created_at');
+    if (error || !data || !data.length) return;
+    $('contact-links').innerHTML = '<p>' + data.map((item) => '<strong>' + escapeHtml(item.label) + ':</strong> <a href="' + escapeHtml(hrefFor(item)) + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a>').join('<br>') + '</p>';
+  })();
+
+  (async function loadManagedContent() {
+    if (!db) return;
+    try {
+      const { data, error } = await db.from('portfolio_content').select('section,title,subtitle,description,url,image_url,display_date,sort_order').eq('is_published', true).order('sort_order');
+      if (error || !data || !data.length) return;
+      const groups = {};
+      data.forEach((item) => { (groups[item.section] = groups[item.section] || []).push(item); });
+      const root = document.createElement('section');
+      root.id = 'managed-portfolio-content';
+      root.className = 'managed-content';
+      root.innerHTML = '<h2 class="section-title">More portfolio content</h2>' + Object.keys(groups).map((name) =>
+        '<section class="managed-group"><h3>' + escapeHtml(name) + '</h3><div class="managed-grid">' + groups[name].map((x) =>
+          '<article class="managed-card">' + (x.image_url ? '<img src="' + escapeHtml(safeUrl(x.image_url)) + '" alt="" loading="lazy" decoding="async">' : '') +
+          '<h4>' + escapeHtml(x.title) + '</h4>' + (x.subtitle ? '<p>' + escapeHtml(x.subtitle) + '</p>' : '') + (x.description ? '<p>' + escapeHtml(x.description) + '</p>' : '') +
+          (x.display_date ? '<small>' + escapeHtml(x.display_date) + '</small>' : '') +
+          (x.url ? '<p><a href="' + escapeHtml(safeUrl(x.url)) + '" target="_blank" rel="noopener noreferrer">View details ↗</a></p>' : '') + '</article>').join('') + '</div></section>').join('');
+      const contact = $('contact');
+      contact.parentNode.insertBefore(root, contact);
+    } catch (e) { console.warn('Managed content could not load', e); }
+  })();
+});
+</script>
+
+
 </body>
 </html>

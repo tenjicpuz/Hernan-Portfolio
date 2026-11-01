@@ -1,52 +1,142 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Portfolio Admin</title><style>
-:root{color-scheme:dark;--bg:#0b0b10;--panel:#17151d;--line:#38303d;--accent:#e23b4b;--muted:#b8aebc}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f8f3f7;font:15px system-ui}main{max-width:1200px;margin:28px auto;padding:0 16px}h1{margin:0}p,small{color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.metric{background:#0f0e14;border:1px solid var(--line);padding:16px;border-radius:12px}.metric b{font-size:1.8rem;display:block}input,textarea,select{width:100%;padding:11px;border-radius:8px;border:1px solid var(--line);background:#0d0c12;color:white}label{display:block;margin:12px 0 6px;font-weight:650}textarea{min-height:100px}button{padding:10px 14px;border:0;border-radius:8px;background:var(--accent);color:white;font-weight:700;cursor:pointer;margin:5px 5px 5px 0}.secondary{background:#39303d}.danger{background:#762b37}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:15px 0}.tabs button{background:#2b2631}.tabs button.active{background:var(--accent)}.hidden{display:none!important}.item{border-top:1px solid var(--line);padding:12px 0;display:flex;justify-content:space-between;gap:12px}.item p{margin:4px 0}.status{color:#ff9eaa;min-height:24px}.cols{display:grid;grid-template-columns:1fr 1.5fr;gap:16px}@media(max-width:760px){.cols{grid-template-columns:1fr}}
-</style></head><body><main><h1>Portfolio Admin</h1><p>Manage portfolio content. Changes are saved in Supabase; mark entries as Published to make them eligible for the public portfolio renderer.</p>
-<section class="panel" id="login"><h2>Admin sign in</h2><form id="loginForm"><label>Email</label><input id="email" type="email" required autocomplete="username"><label>Password</label><input id="password" type="password" required autocomplete="current-password"><button>Sign in</button></form></section>
-<div id="app" class="hidden"><section class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><h2>Workspace</h2><small id="who">Authenticated session</small></div><button id="logout" class="secondary">Sign out</button></div><div class="grid"><div class="metric">Content records<b id="total">—</b></div><div class="metric">Published<b id="published">—</b></div><div class="metric">Drafts / hidden<b id="drafts">—</b></div></div><p id="status" class="status" role="status"></p></section>
-<section class="panel"><h3>Content manager</h3><p>Choose a section, add or edit an entry, then save. Use Published to control public visibility and Order to arrange items.</p><div class="tabs" id="types"></div><div class="cols"><form id="editor"><input id="recordId" type="hidden"><h3 id="editorHeading">Profile & About</h3><p id="editorHint" class="hint">Add the main information shown on your portfolio.</p><label id="titleLabel" for="title">Name / headline *</label><input id="title" maxlength="180" required><label id="subtitleLabel" for="subtitle">Professional title / location</label><input id="subtitle" maxlength="180"><label id="descriptionLabel" for="description">Biography / about text</label><textarea id="description"></textarea><label id="urlLabel" for="url">Personal website / portfolio URL (optional)</label><input id="url" type="url" placeholder="https://"><label id="imageLabel" for="image">Profile photo / banner image URL (optional)</label><input id="image" type="url" placeholder="https://"><div class="grid"><div><label>Date (optional)</label><input id="date" type="date"></div><div><label>Display order</label><input id="sort" type="number" value="0"></div></div><label><input id="isPublished" type="checkbox" checked style="width:auto"> Published / visible</label><button id="save">Save entry</button><button type="button" class="secondary" id="clear">Clear form</button><p><small>Use external image URLs or public Supabase Storage URLs. Do not put private keys or sensitive data here.</small></p></form><div><h3 id="listTitle">Entries</h3><div id="records"></div></div></div></section>
-<section class="panel"><h3>Existing tools</h3><p>Your original certificate uploader and social-link manager are retained in the previous admin file. If those tables already exist, open the legacy manager below.</p><a href="./admin-legacy.html" style="color:#ff9eaa">Open legacy certificates & social links →</a></section></div></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><script>
-(()=>{const $=id=>document.getElementById(id), types=['Profile & About','Resume / CV','Projects','Certificates','Skills','Education','Experience','Achievements & Awards','Social Links','Contact','Appearance','Sections & Navigation','Blog / Articles','Testimonials','Services','SEO & Sharing','Analytics Notes','File Manager Notes','Backup Notes','Publishing & Preview','Admin Activity'];let current=types[0],db;
-const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const say=s=>$('status').textContent=s;
-if(!window.PORTFOLIO_CONFIG?.supabaseUrl||!window.PORTFOLIO_CONFIG?.supabaseAnonKey){say('Add your Supabase URL and anon/publishable key to config.js.');return}db=window.supabase.createClient(PORTFOLIO_CONFIG.supabaseUrl,PORTFOLIO_CONFIG.supabaseAnonKey);
-const fieldGuide = {
-'Profile & About':['Name / headline *','Professional title / location','Biography / about text','Personal website / portfolio URL','Profile photo / banner image','Main profile and introduction details.'],
-'Resume / CV':['Resume title *','File type / version','Resume notes / summary','Public PDF URL','Cover / preview image URL','Paste the public PDF URL for your resume.'],
-'Projects':['Project name *','Technology / category','Project description and features','Live demo or repository URL','Project screenshot / cover image','Add project details, technology stack, and public links.'],
-'Certificates':['Certificate title *','Issuer / credential category','Credential description','Verification URL','Certificate preview image URL','For uploaded files, use the legacy certificate manager.'],
-'Skills':['Skill name *','Skill group / category','Skill description / experience','Documentation URL (optional)','Icon / image URL (optional)','Group skills by category; include proficiency in the description.'],
-'Education':['School / institution *','Degree / course','Education details','School website URL','School / credential image URL','Add your school, course, dates, and relevant details.'],
-'Experience':['Job / role title *','Company / employment type','Responsibilities and achievements','Company / reference URL','Company logo URL','Add work experience and accomplishments.'],
-'Achievements & Awards':['Award / achievement *','Awarding body / category','Achievement details','Proof / verification URL','Award image URL','Add awards, recognitions, and competition results.'],
-'Social Links':['Display name *','Platform / category','Short description (optional)','Profile URL','Platform icon URL (optional)','For existing public links, use the legacy social-link manager.'],
-'Contact':['Contact item *','Contact type / category','Contact details / instructions','Contact URL / mailto link','Image URL (optional)','Do not enter private information you do not want public.'],
-'Appearance':['Setting name *','Theme / component','Setting description / value','Reference URL (optional)','Preview image URL (optional)','Stores notes; does not automatically change site styling.'],
-'Sections & Navigation':['Section / navigation label *','Section ID / group','Section description','Anchor / destination URL','Image URL (optional)','Use this to document section labels and destinations.'],
-'Blog / Articles':['Article title *','Category / tags','Article body / excerpt','Article URL (optional)','Featured image URL','Add article title, excerpt, and image.'],
-'Testimonials':['Person name *','Role / organization','Testimonial text','Website / profile URL','Person photo URL','Only publish testimonials you have permission to share.'],
-'Services':['Service name *','Service category','Service description','Inquiry / booking URL','Service image / icon URL','Describe the service and link to an inquiry page.'],
-'SEO & Sharing':['Page title *','SEO keywords / category','Search description / metadata','Canonical / sharing URL','Open Graph image URL','Stores SEO notes; site metadata needs separate integration.'],
-'Analytics Notes':['Metric / provider *','Tracking category','Configuration notes','Provider dashboard URL','Chart / report image URL','Notes only; visitor tracking is not installed here.'],
-'File Manager Notes':['File name *','File category / type','File description / storage path','Public file URL','Preview image URL','Stores file references; upload files through Supabase Storage.'],
-'Backup Notes':['Backup name *','Backup type / date','Backup contents / notes','Backup location URL','Preview image URL (optional)','Export records before making destructive changes.'],
-'Publishing & Preview':['Publication title *','Status / release type','Publishing notes','Preview URL','Preview image URL','Published checkbox controls public visibility.'],
-'Admin Activity':['Activity title *','Action / category','Activity details','Related URL (optional)','Screenshot URL (optional)','Manual notes; automatic audit logging is not enabled.']
-};
-function updateEditorForType(){
- const g=fieldGuide[current]||fieldGuide['Profile & About'];
- $('editorHeading').textContent=current+' editor'; $('editorHint').textContent=g[5];
- $('titleLabel').textContent=g[0]; $('subtitleLabel').textContent=g[1];
- $('descriptionLabel').textContent=g[2]; $('urlLabel').textContent=g[3]; $('imageLabel').textContent=g[4];
- $('title').placeholder=g[0].replace(' *',''); $('subtitle').placeholder=g[1];
- $('description').placeholder=g[2]; $('url').placeholder='https://'; $('image').placeholder='https://';
- $('listTitle').textContent=current+' entries';
-}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Portfolio Admin</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0a0e;--panel:#17151d;--line:#38303d;--accent:#e23b4b;--muted:#b8aebc;--ok:#7ee0a1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f8f3f7;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:28px auto;padding:0 16px 60px}
+h1{margin:0 0 4px}h2,h3{margin:0 0 10px}p,small{color:var(--muted)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.metric{background:#0f0e14;border:1px solid var(--line);padding:16px;border-radius:12px}
+.metric b{font-size:1.8rem;display:block}
+label{display:block;margin:12px 0 6px;font-weight:650}
+input,textarea,select{width:100%;padding:11px;border-radius:8px;border:1px solid var(--line);background:#0d0c12;color:#fff;font:inherit}
+input[type=checkbox]{width:auto}textarea{min-height:110px;resize:vertical}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid #ff8994;outline-offset:2px}
+button{padding:10px 14px;border:0;border-radius:8px;background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer;margin:6px 6px 6px 0}
+button:disabled{opacity:.5;cursor:wait}
+.secondary{background:#39303d}.danger{background:#762b37}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.tabs button{background:#2b2631;margin:0}.tabs button.active{background:var(--accent)}
+.hidden{display:none!important}
+.item{border-top:1px solid var(--line);padding:12px 0;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.item>div:first-child{min-width:0;overflow-wrap:anywhere}
+.item p{margin:4px 0}
+.status{min-height:24px;color:#ff9eaa}.status.ok{color:var(--ok)}
+.cols{display:grid;grid-template-columns:1fr 1.4fr;gap:20px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.cols,.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>Portfolio Admin</h1>
+<p>Private management for your certificates, contact links, and extra portfolio content.</p>
 
-function renderTypes(){updateEditorForType();$('types').innerHTML=types.map(t=>`<button type="button" data-type="${esc(t)}" class="${t===current?'active':''}">${esc(t)}</button>`).join('');$('listTitle').textContent=current+' entries'}
-function clear(){ $('editor').reset();$('recordId').value='';$('sort').value='0';$('isPublished').checked=true }
-async function load(){renderTypes();const {data,error}=await db.from('portfolio_content').select('*').eq('section',current).order('sort_order').order('created_at',{ascending:false});if(error){say('Database: '+error.message);return} $('records').innerHTML=data.length?data.map(x=>`<article class="item"><div><b>${esc(x.title)}</b><p>${esc(x.subtitle||'')}${x.is_published?' · Published':' · Draft / hidden'}</p><small>${esc((x.description||'').slice(0,150))}</small></div><div><button class="secondary" data-edit="${esc(x.id)}">Edit</button><button class="danger" data-del="${esc(x.id)}">Delete</button></div></article>`).join(''):'<p>No entries in this section yet.</p>';const {count:total}=await db.from('portfolio_content').select('*',{count:'exact',head:true});const {count:pub}=await db.from('portfolio_content').select('*',{count:'exact',head:true}).eq('is_published',true);$('total').textContent=total??'—';$('published').textContent=pub??'—';$('drafts').textContent=(total??0)-(pub??0)}
-$('types').addEventListener('click',e=>{const b=e.target.closest('[data-type]');if(!b)return;current=b.dataset.type;clear();updateEditorForType();load()});$('clear').onclick=clear;
-$('editor').onsubmit=async e=>{e.preventDefault();const payload={section:current,title:$('title').value.trim(),subtitle:$('subtitle').value.trim()||null,description:$('description').value.trim()||null,url:$('url').value.trim()||null,image_url:$('image').value.trim()||null,display_date:$('date').value||null,sort_order:Number($('sort').value)||0,is_published:$('isPublished').checked};const id=$('recordId').value;const q=id?db.from('portfolio_content').update(payload).eq('id',id):db.from('portfolio_content').insert(payload);const {error}=await q;if(error){say(error.message);return}say('Saved.');clear();load()};
-$('records').onclick=async e=>{const edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-del]');if(edit){updateEditorForType();const {data,error}=await db.from('portfolio_content').select('*').eq('id',edit.dataset.edit).single();if(error){say(error.message);return}$('recordId').value=data.id;$('title').value=data.title||'';$('subtitle').value=data.subtitle||'';$('description').value=data.description||'';$('url').value=data.url||'';$('image').value=data.image_url||'';$('date').value=data.display_date||'';$('sort').value=data.sort_order??0;$('isPublished').checked=!!data.is_published;window.scrollTo({top:0,behavior:'smooth'})}if(del&&confirm('Permanently delete this entry?')){const {error}=await db.from('portfolio_content').delete().eq('id',del.dataset.del);say(error?error.message:'Deleted.');load()}};
-$('loginForm').onsubmit=async e=>{e.preventDefault();say('Signing in…');const {error}=await db.auth.signInWithPassword({email:$('email').value,password:$('password').value});if(error){say(error.message);return}session()};$('logout').onclick=async()=>{await db.auth.signOut();session()};async function session(){const {data}=await db.auth.getSession();const ok=!!data.session;$('login').classList.toggle('hidden',ok);$('app').classList.toggle('hidden',!ok);if(ok){$('who').textContent=data.session.user.email||'Authenticated session';load()}}db.auth.onAuthStateChange(()=>setTimeout(session,0));session();
-})();</script></body></html>
+<section class="panel" id="login">
+  <h2>Admin sign in</h2>
+  <form id="loginForm">
+    <label for="email">Email</label>
+    <input id="email" type="email" required autocomplete="username">
+    <label for="password">Password</label>
+    <input id="password" type="password" required autocomplete="current-password">
+    <button type="submit">Sign in</button>
+  </form>
+</section>
+
+<div id="app" class="hidden">
+  <section class="panel">
+    <div class="bar">
+      <div><h2>Workspace</h2><small id="who">Signed in</small></div>
+      <button id="logout" class="secondary" type="button">Sign out</button>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <div class="metric">Certificates<b id="m-certs">&mdash;</b></div>
+      <div class="metric">Contact links<b id="m-links">&mdash;</b></div>
+      <div class="metric">Published content<b id="m-pub">&mdash;</b></div>
+      <div class="metric">Drafts<b id="m-draft">&mdash;</b></div>
+    </div>
+  </section>
+
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+
+  <nav class="tabs" aria-label="Admin sections">
+    <button type="button" class="active" data-view="certs">Certificates</button>
+    <button type="button" data-view="links">Contact links</button>
+    <button type="button" data-view="content">Extra content</button>
+  </nav>
+
+  <!-- CERTIFICATES -->
+  <section class="panel" id="view-certs">
+    <h3>Upload a certificate</h3>
+    <form id="certForm">
+      <div class="row2">
+        <div><label for="c-title">Title *</label><input id="c-title" maxlength="120" required></div>
+        <div><label for="c-issuer">Issuer</label><input id="c-issuer" maxlength="120"></div>
+        <div><label for="c-date">Date issued</label><input id="c-date" type="date"></div>
+        <div><label for="c-file">File (PDF, PNG, JPG, WEBP, max 10 MB) *</label><input id="c-file" type="file" accept="application/pdf,image/png,image/jpeg,image/webp" required></div>
+      </div>
+      <button id="c-save" type="submit">Upload certificate</button>
+      <p><small>Certificates are public. Do not upload anything containing private numbers or addresses.</small></p>
+    </form>
+    <h3>Published certificates</h3>
+    <div id="certList"></div>
+  </section>
+
+  <!-- CONTACT LINKS -->
+  <section class="panel hidden" id="view-links">
+    <h3>Add a contact or social link</h3>
+    <form id="linkForm">
+      <div class="row2">
+        <div><label for="l-label">Label *</label><input id="l-label" maxlength="80" placeholder="e.g. LinkedIn" required></div>
+        <div><label for="l-category">Category</label><input id="l-category" maxlength="50" value="social"></div>
+        <div><label for="l-type">Type</label>
+          <select id="l-type"><option value="url">Website / URL</option><option value="email">Email</option><option value="phone">Phone</option></select></div>
+        <div><label for="l-value">Value *</label><input id="l-value" maxlength="500" placeholder="https://..." required></div>
+      </div>
+      <button id="l-save" type="submit">Add link</button>
+    </form>
+    <h3>Current links</h3>
+    <div id="linkList"></div>
+  </section>
+
+  <!-- EXTRA CONTENT -->
+  <section class="panel hidden" id="view-content">
+    <div class="tabs" id="sections" aria-label="Content sections"></div>
+    <div class="cols">
+      <form id="editor">
+        <input id="recordId" type="hidden">
+        <h3 id="editorHeading">New entry</h3>
+        <p id="editorHint"></p>
+        <label for="title" id="titleLabel">Title *</label><input id="title" maxlength="180" required>
+        <label for="subtitle" id="subtitleLabel">Subtitle</label><input id="subtitle" maxlength="180">
+        <label for="description" id="descriptionLabel">Description</label><textarea id="description" maxlength="5000"></textarea>
+        <label for="url" id="urlLabel">Link URL</label><input id="url" type="url" placeholder="https://">
+        <label for="image" id="imageLabel">Image URL</label><input id="image" type="url" placeholder="https://">
+        <div class="row2">
+          <div><label for="date">Date</label><input id="date" type="date"></div>
+          <div><label for="sort">Display order</label><input id="sort" type="number" value="0"></div>
+        </div>
+        <label><input id="isPublished" type="checkbox" checked> Published (visible to visitors)</label>
+        <button id="save" type="submit">Save entry</button>
+        <button id="clear" type="button" class="secondary">Clear form</button>
+      </form>
+      <div><h3 id="listTitle">Entries</h3><div id="records"></div></div>
+    </div>
+  </section>
+</div>
+</main>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script defer src="./config.js"></script>
+<script defer src="./admin.js"></script>
+</body>
+</html>

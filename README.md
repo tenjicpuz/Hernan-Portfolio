@@ -1,199 +1,122 @@
-# Tenji --- Personal Portfolio
+# Hernan Glenn Belarmino Amon --- Portfolio
+
+![Portfolio banner](banner.png)
 
 ```{=html}
 <p align="center">
 ```
-`<img src="assets/README/banner.png" alt="Tenji Portfolio Banner" width="100%">`{=html}
-```{=html}
-</p>
-```
-```{=html}
-<h1 align="center">
-```
-TENJI --- Developer Portfolio
-```{=html}
-</h1>
-```
-```{=html}
-<p align="center">
-```
-A personal portfolio showcasing my projects, skills, experience, and
-development journey.
+**BSIT Student · Independent Creator · Aspiring Developer**
 ```{=html}
 </p>
 ```
 ```{=html}
 <p align="center">
 ```
-`<a href="https://tenjicpuz.is-a.dev/">`{=html}`<strong>`{=html}🌐 Visit
-Live Portfolio`</strong>`{=html}`</a>`{=html} ·
-`<a href="https://github.com/tenjicpuz">`{=html}`<strong>`{=html}GitHub
-Profile`</strong>`{=html}`</a>`{=html}
-```{=html}
-</p>
-```
-```{=html}
-<p align="center">
-```
-`<img src="https://img.shields.io/badge/Status-Live-22c55e?style=for-the-badge" alt="Live">`{=html}
-`<img src="https://img.shields.io/badge/Hosted%20on-Cloudflare%20Pages-f38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare Pages">`{=html}
-`<img src="https://img.shields.io/badge/Maintained-Yes-8b5cf6?style=for-the-badge" alt="Maintained">`{=html}
+`<a href="https://tenjicpuz.is-a.dev/">`{=html}Live
+Portfolio`</a>`{=html} ·
+`<a href="https://github.com/tenjicpuz">`{=html}GitHub
+Profile`</a>`{=html}
 ```{=html}
 </p>
 ```
 
 ------------------------------------------------------------------------
 
-## 📸 Preview
+## About
 
-```{=html}
-<p align="center">
-```
-`<img src="assets/README/preview.png" alt="Portfolio Website Preview" width="100%">`{=html}
-```{=html}
-</p>
-```
-## 👋 About
+Welcome to my personal portfolio repository. I'm Hernan Glenn Belarmino
+Amon, a second-year Bachelor of Science in Information Technology
+student at Olivarez College, based in Silang, Cavite, Philippines.
 
-Welcome to my personal portfolio repository!
+I build independent projects to strengthen my programming skills,
+explore web technologies, and turn ideas into practical digital tools.
 
-This project is my personal space on the web where I showcase my work,
-development skills, projects, and achievements. It is designed to
-provide visitors with an easy way to explore my work and learn more
-about me.
+## Preview
 
-**Live website:** https://tenjicpuz.is-a.dev/
+![Portfolio website preview](preview.png)
 
-## ✨ Features
+## Highlights
 
--   **Personal Introduction** --- A dedicated section introducing me and
-    my work.
--   **Projects Showcase** --- Displays selected projects and links to
-    their repositories.
--   **Skills Section** --- Highlights my technical skills and tools.
--   **GitHub Integration** --- Retrieves project information and GitHub
-    statistics.
--   **Certificates** --- A dedicated area for displaying achievements
-    and certificates.
--   **Admin Dashboard** --- Provides management functionality for
-    supported portfolio content.
--   **Responsive Design** --- Designed to work across desktop and mobile
-    devices.
--   **Theme Controls** --- Includes a theme toggle for the viewing
-    experience.
--   **Contact Section** --- Provides ways to connect with me.
+-   Responsive portfolio layout for desktop and mobile
+-   About, skills, projects, certificates, education, and contact
+    sections
+-   Projects loaded from my public GitHub repositories
+-   Live GitHub profile statistics
+-   Certificate gallery connected to Supabase
+-   Light and dark appearance modes
+-   Contact-link management for the portfolio owner
+-   Print-friendly layout for saving the portfolio as a PDF
 
-## 🛠️ Technologies
+## Tech Stack
 
-```{=html}
-<p>
-```
-`<img src="https://skillicons.dev/icons?i=html,css,js,cloudflare,github,supabase" alt="Technologies used">`{=html}
-```{=html}
-</p>
-```
-  Technology         Purpose
-  ------------------ -------------------------------------------
-  HTML5              Website structure
-  CSS3               Styling and responsive layout
-  JavaScript         Interactive functionality
-  GitHub API         GitHub project and profile data
-  Supabase           Backend data services used by the project
-  Cloudflare Pages   Website hosting and deployment
+  Technology                        Purpose
+  --------------------------------- -------------------------------------------
+  HTML5                             Page structure
+  CSS3                              Styling, layout, and responsive design
+  JavaScript                        Interactive features and dynamic content
+  GitHub API                        Public repository and profile information
+  Supabase                          Certificate gallery and contact-link data
+  GitHub Pages / Cloudflare Pages   Website hosting and deployment
 
-## 📂 Project Structure
+## Repository Structure
 
 ``` text
-Portfolio-SRC/
+.
 ├── index.html
 ├── 404.html
 ├── admin.html
 ├── admin-legacy.html
 ├── admin.js
 ├── config.js
-├── README.md
+├── banner.png
+├── preview.png
 ├── .nojekyll
-└── assets/
-    └── README/
-        ├── banner.png
-        └── preview.png
+└── README.md
 ```
 
-*The structure above highlights the main files and README images. Other
-project assets and configuration files may also be present.*
+## Run Locally
 
-## 🚀 Getting Started
+1.  Clone the repository:
 
-### 1. Clone the repository
+    ``` bash
+    git clone https://github.com/tenjicpuz/Portfolio-SRC.git
+    ```
 
-``` bash
-git clone https://github.com/tenjicpuz/Portfolio-SRC.git
-```
+2.  Open the project folder:
 
-### 2. Open the project
+    ``` bash
+    cd Portfolio-SRC
+    ```
 
-``` bash
-cd Portfolio-SRC
-```
+3.  Open `index.html` in your browser.
 
-### 3. Run locally
+Some features, including the certificate gallery and contact management,
+require the appropriate Supabase configuration.
 
-Open `index.html` in your browser, or use a local development server
-such as the VS Code Live Server extension.
+## Configuration
 
-### 4. Configure services
+The website uses `config.js` for its public client-side configuration.
+Add the required Supabase project URL and anon key there if you want to
+enable the connected features.
 
-If you are working with the admin dashboard or connected backend
-features, review the project's configuration files and configure the
-required service credentials.
+**Security note:** Never place a Supabase service-role key, private API
+key, or account password in a public repository. Use only the public
+anon key with properly configured Row Level Security policies.
 
-**Security reminder:** Never commit private API keys, service-role keys,
-passwords, or other secrets to a public repository.
+## Deployment
 
-## 🌍 Deployment
+The site can be hosted using a static hosting provider such as GitHub
+Pages or Cloudflare Pages.
 
-This portfolio is deployed using **Cloudflare Pages**.
+For the live version, visit
+**[tenjicpuz.is-a.dev](https://tenjicpuz.is-a.dev/)**.
 
--   **Live URL:** https://tenjicpuz.is-a.dev/
--   **Hosting:** Cloudflare Pages
--   **Repository:** https://github.com/tenjicpuz/Portfolio-SRC
+## Connect
 
-Updates pushed to the configured deployment branch can be published
-through the Cloudflare Pages deployment workflow.
-
-## 🔐 Security
-
-Security is important. Before deploying your own version:
-
--   Keep private credentials out of public source files.
--   Use environment variables or secure server-side configuration for
-    secrets.
--   Apply appropriate access controls to admin functionality.
--   Configure backend permissions and database policies carefully.
--   Never expose privileged service keys in client-side JavaScript.
-
-## 📬 Connect
-
-```{=html}
-<p align="center">
-```
-`<a href="https://github.com/tenjicpuz">`{=html}
-`<img src="https://img.shields.io/badge/GitHub-tenjicpuz-181717?style=for-the-badge&logo=github" alt="GitHub">`{=html}
-`</a>`{=html} `<a href="https://tenjicpuz.is-a.dev/">`{=html}
-`<img src="https://img.shields.io/badge/Portfolio-Visit%20Website-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio">`{=html}
-`</a>`{=html}
-```{=html}
-</p>
-```
+-   **Portfolio:** https://tenjicpuz.is-a.dev/
+-   **GitHub:** https://github.com/tenjicpuz
+-   **Social profile:** https://guns.lol/kensojukisaki
 
 ------------------------------------------------------------------------
 
-```{=html}
-<p align="center">
-```
-Designed and developed with passion by
-`<strong>`{=html}Tenji`</strong>`{=html}. `<br>`{=html} `<sub>`{=html}©
-2026 Tenji. All rights reserved.`</sub>`{=html}
-```{=html}
-</p>
-```
+*Built and maintained by Hernan Glenn Belarmino Amon.*

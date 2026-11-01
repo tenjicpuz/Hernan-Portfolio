@@ -83,28 +83,33 @@
     })();
   }
 
-  /* ---------- Hanging ID card ----------
-     The strap stays fixed; only the card swings, like a real badge on a clip.
-     Move it by dragging, by tapping either side, by passing a mouse over it, or by tilting a phone (gyro).
-     The animation loop only runs while the card is moving AND on screen, so a settled card costs nothing. */
+  /* ---------- Hanging lanyard + ID card ----------
+     The lanyard hangs from a fixed point above the screen and swings as one piece (strap + card) like a real badge.
+     Move it by dragging the card, tapping either side of it, brushing it with a mouse, or tilting a phone (gyro).
+     The swing is limited so the card can never leave the screen, and the loop only runs while it is moving AND visible. */
   (function lanyard() {
-    const swing = $('swing'), badge = $('badge'), box = $('lanyard'), gyroBtn = $('gyro-btn');
-    if (!swing || reduce) return;
-    const K = 16, C = 1.7, ARM = 290;
-    let angle = 0.14, vel = 0, target = 0, dragging = false, startX = 0, startAngle = 0, moved = 0, downAt = 0;
+    const hang = $('hang'), badge = $('badge'), box = $('lanyard'), gyroBtn = $('gyro-btn');
+    if (!hang || reduce) return;
+    const K = 7, C = 0.9, ARM = 690;   // ARM = pivot-to-card-bottom length in px
+    let angle = 0, vel = 0, target = 0, dragging = false, startX = 0, startAngle = 0, moved = 0, downAt = 0;
     let lastX = 0, lastT = 0, flingVel = 0, last = 0, visible = true, running = false;
-    // Never let the card swing past the edges of a narrow screen.
-    const limit = () => Math.max(0.3, Math.min(0.55, Math.asin(Math.max(0, Math.min(1, (window.innerWidth / 2 - 115) / ARM)))));
-    const clamp = (v) => Math.max(-limit(), Math.min(limit(), v));
+    // Largest angle at which the card still stays fully on screen (measured from where the lanyard actually sits).
+    const limit = () => {
+      const r = box.getBoundingClientRect(), cx = r.left + r.width / 2;
+      const room = Math.min(cx, window.innerWidth - cx) - 140;
+      return Math.max(0.05, Math.min(0.26, Math.asin(Math.max(0, Math.min(1, room / ARM)))));
+    };
+    const clamp = (v) => { const L = limit(); return Math.max(-L, Math.min(L, v)); };
+    angle = 0.9 * limit();             // the little swing on load
 
     function frame(now) {
       const dt = Math.min(0.033, (now - last) / 1000); last = now;
       if (!dragging) {
         vel += (-K * (angle - target) - C * vel) * dt;
         angle = clamp(angle + vel * dt);
-        if (Math.abs(angle - target) < 0.0008 && Math.abs(vel) < 0.002) { angle = target; vel = 0; }
+        if (Math.abs(angle - target) < 0.0006 && Math.abs(vel) < 0.002) { angle = target; vel = 0; }
       }
-      swing.style.transform = 'rotate(' + angle.toFixed(4) + 'rad)';
+      hang.style.transform = 'rotate(' + angle.toFixed(4) + 'rad)';
       if ((!dragging && angle === target && vel === 0) || !visible || document.hidden) { running = false; return; }
       requestAnimationFrame(frame);
     }
@@ -112,7 +117,7 @@
     if ('IntersectionObserver' in window) new IntersectionObserver((e) => { visible = e[0].isIntersecting; if (visible) start(); }).observe(box);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
 
-    // Dragging right moves the bottom of the card right (a negative rotation).
+    // Dragging right moves the card right (a negative rotation).
     badge.addEventListener('pointerdown', (e) => {
       dragging = true; moved = 0; downAt = performance.now(); startX = lastX = e.clientX; lastT = downAt; flingVel = 0; startAngle = angle;
       try { badge.setPointerCapture(e.pointerId); } catch (x) {}
@@ -122,12 +127,12 @@
       const now = performance.now();
       if (dragging) {
         moved = Math.max(moved, Math.abs(e.clientX - startX));
-        const next = clamp(startAngle - (e.clientX - startX) / 220);
+        const next = clamp(startAngle - (e.clientX - startX) / 540);
         if (now > lastT) flingVel = (next - angle) / ((now - lastT) / 1000);
         angle = next; vel = 0; lastX = e.clientX; lastT = now;
       } else if (e.pointerType === 'mouse') {
         // Brushing the card with the mouse gives it a small push.
-        vel = Math.max(-5, Math.min(5, vel - (e.clientX - lastX) * 0.03)); lastX = e.clientX; start();
+        vel = Math.max(-0.8, Math.min(0.8, vel - (e.clientX - lastX) * 0.006)); lastX = e.clientX; start();
       }
     });
     badge.addEventListener('pointerenter', (e) => { lastX = e.clientX; });
@@ -136,23 +141,23 @@
       dragging = false;
       try { badge.releasePointerCapture(e.pointerId); } catch (x) {}
       if (moved < 8 && performance.now() - downAt < 450) {
-        // A tap pushes the card away from the side that was tapped.
+        // A tap pushes the lanyard away from the side that was tapped.
         const r = badge.getBoundingClientRect();
-        vel += (e.clientX >= r.left + r.width / 2 ? 1 : -1) * 2.4;
+        vel += (e.clientX >= r.left + r.width / 2 ? 1 : -1) * 0.6;
       } else {
-        vel = Math.max(-6, Math.min(6, flingVel * 0.6));
+        vel = Math.max(-1.5, Math.min(1.5, flingVel * 0.6));
       }
       start();
     };
     badge.addEventListener('pointerup', release); badge.addEventListener('pointercancel', release);
 
-    /* ---- Gyro: the card hangs toward real gravity as the phone tilts ---- */
+    /* ---- Gyro: the lanyard hangs toward real gravity as the phone tilts ---- */
     let smooth = 0;
     function onTilt(e) {
       if (e.gamma == null && e.beta == null) return;
       const o = (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle : (window.orientation || 0);
       const deg = o === 90 ? e.beta : (o === 270 || o === -90) ? -e.beta : o === 180 ? -e.gamma : e.gamma;
-      smooth += ((-(deg || 0) * Math.PI / 180 * 0.9) - smooth) * 0.25;
+      smooth += ((-(deg || 0) * Math.PI / 180 * 0.6) - smooth) * 0.25;
       target = clamp(smooth);
       start();
     }
@@ -172,6 +177,7 @@
         enableTilt(); // Android and other browsers: no prompt needed
       }
     }
+    window.addEventListener('resize', () => { angle = clamp(angle); target = clamp(target); start(); });
     start();
   })();
 

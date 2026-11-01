@@ -17,7 +17,7 @@ explore web technologies, and turn ideas into practical digital tools.
 
 ## Preview
 
-![Portfolio website preview](preview.png)
+![Portfolio website preview](fabric.ico)
 
 ## Highlights
 

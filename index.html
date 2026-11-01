@@ -651,6 +651,28 @@ window.addEventListener('DOMContentLoaded', function () {
       contact.parentNode.insertBefore(wrap, contact);
     } catch (e) { console.warn('Managed content could not load', e); }
   })();
+
+  /* ---------- Profile picture (changed from the admin dashboard) ----------
+     The newest image in the public "certificates" bucket, folder profile/, replaces the GitHub picture
+     on the ID card and in the About section. If there is none, or anything fails, the GitHub picture stays. */
+  (async function loadProfilePicture() {
+    if (!db) return;
+    try {
+      const { data, error } = await db.storage.from('certificates').list('profile', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
+      if (error || !data) return;
+      const files = data.filter((f) => f.id && /\.(webp|jpe?g|png)$/i.test(f.name))
+        .sort((a, b) => (new Date(b.created_at) - new Date(a.created_at)) || (a.name < b.name ? 1 : a.name > b.name ? -1 : 0));
+      if (!files.length) return;
+      const url = db.storage.from('certificates').getPublicUrl('profile/' + files[0].name).data.publicUrl;
+      const probe = new Image();
+      probe.onload = () => document.querySelectorAll('.photo, .portrait').forEach((box) => {
+        let img = box.querySelector('img');
+        if (!img) { img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.draggable = false; box.appendChild(img); }
+        img.src = url;
+      });
+      probe.src = url;
+    } catch (e) { console.info('Using the default profile picture.', e); }
+  })();
 });
 </script>
 </body>

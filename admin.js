@@ -45,7 +45,7 @@
   /* ---------- Tabs ---------- */
   document.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => {
     document.querySelectorAll('[data-view]').forEach((x) => x.classList.toggle('active', x === b));
-    ['certs', 'links', 'content'].forEach((v) => $('view-' + v).classList.toggle('hidden', v !== b.dataset.view));
+    ['certs', 'links', 'content', 'profile'].forEach((v) => $('view-' + v).classList.toggle('hidden', v !== b.dataset.view));
   }));
 
   /* ---------- Metrics ---------- */
@@ -213,7 +213,194 @@
     }
   });
 
-  async function loadAll() { await Promise.all([loadCerts(), loadLinks(), loadContent(), loadMetrics()]); }
+  /* ---------- Profile picture ---------- */
+  // The picture is stored in the existing public "certificates" bucket, inside a profile/ folder,
+  // so no database change is needed. The public page shows the newest file in that folder and
+  // falls back to the GitHub picture when the folder is empty.
+  const PROFILE_DIR = 'profile';
+  const DEFAULT_PICTURE = 'https://github.com/tenjicpuz.png'; // the same default the public page ships with
+  const PIC_MAX_INPUT = 25 * 1024 * 1024;
+  const sayPic = (msg, ok) => { const s = $('p-status'); s.textContent = msg; s.classList.toggle('ok', !!ok); };
+  const picState = { custom: false, editing: false };
+  const pic = { img: null, url: null, cx: 0, cy: 0, zoom: 1, drag: null };
+  const cv = $('p-canvas'), cctx = cv.getContext('2d');
+  const newCard = $('p-new-card'), newRound = $('p-new-round');
+  // Newest first. The public page uses the exact same ordering.
+  const newest = (a, b) => (new Date(b.created_at) - new Date(a.created_at)) || (a.name < b.name ? 1 : a.name > b.name ? -1 : 0);
+  const pictureUrl = (name) => db.storage.from(BUCKET).getPublicUrl(PROFILE_DIR + '/' + name).data.publicUrl;
+
+  async function listProfileFiles() {
+    const { data, error } = await db.storage.from(BUCKET).list(PROFILE_DIR, { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
+    if (error) throw error;
+    return (data || []).filter((f) => f.id && /\.(webp|jpe?g|png)$/i.test(f.name)).sort(newest);
+  }
+
+  function syncPicUi() {
+    const ed = picState.editing;
+    $('p-editor').classList.toggle('hidden', !ed);
+    $('p-drop').classList.toggle('hidden', ed);
+    ['p-cur-card', 'p-cur-round'].forEach((id) => $(id).classList.toggle('hidden', ed));
+    ['p-new-card', 'p-new-round'].forEach((id) => $(id).classList.toggle('hidden', !ed));
+    $('p-source').classList.toggle('hidden', ed);
+    $('p-reset').classList.toggle('hidden', ed || !picState.custom);
+    $('p-prev-title').textContent = ed ? 'Preview' : 'Currently live';
+  }
+
+  // Shows which picture visitors see right now. Returns the files found, or null if the check failed.
+  async function loadProfile() {
+    let files = null;
+    try { files = await listProfileFiles(); }
+    catch (err) { sayPic('Could not check your current picture: ' + (err.message || 'unknown error')); }
+    const note = $('p-source').firstElementChild;
+    if (files === null) {
+      picState.custom = false;
+      note.textContent = 'Your current picture could not be checked.';
+    } else {
+      picState.custom = files.length > 0;
+      const url = files.length ? pictureUrl(files[0].name) : DEFAULT_PICTURE;
+      $('p-cur-card').src = url; $('p-cur-round').src = url;
+      note.textContent = files.length ? 'This is the picture you uploaded.' : 'You have not uploaded a picture, so the site shows your GitHub picture.';
+    }
+    syncPicUi();
+    return files;
+  }
+
+  /* The editor keeps a square crop: (cx, cy) is the point of the photo at the centre of the frame,
+     zoom >= 1 shrinks the visible square. The ID card shows the middle 80% of that square (4:5),
+     the About section shows all of it, so the previews below are drawn exactly that way. */
+  const picVis = () => Math.min(pic.img.naturalWidth, pic.img.naturalHeight) / pic.zoom;
+  function clampPic() {
+    const v = picVis(), w = pic.img.naturalWidth, h = pic.img.naturalHeight;
+    pic.cx = Math.min(Math.max(pic.cx, v / 2), w - v / 2);
+    pic.cy = Math.min(Math.max(pic.cy, v / 2), h - v / 2);
+  }
+  function drawSquare(ctx, size) {
+    const v = picVis();
+    ctx.fillStyle = '#151515'; ctx.fillRect(0, 0, size, size);
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(pic.img, pic.cx - v / 2, pic.cy - v / 2, v, v, 0, 0, size, size);
+  }
+  function renderPic() {
+    if (!pic.img) return;
+    clampPic();
+    drawSquare(cctx, cv.width);
+    const rc = newRound.getContext('2d'), kc = newCard.getContext('2d');
+    rc.imageSmoothingQuality = 'high'; kc.imageSmoothingQuality = 'high';
+    rc.drawImage(cv, 0, 0, cv.width, cv.height, 0, 0, newRound.width, newRound.height);
+    kc.drawImage(cv, cv.width * 0.1, 0, cv.width * 0.8, cv.height, 0, 0, newCard.width, newCard.height);
+  }
+  function closePicEditor() {
+    if (pic.url) URL.revokeObjectURL(pic.url);
+    pic.img = null; pic.url = null; pic.drag = null;
+    $('p-file').value = '';
+    picState.editing = false; syncPicUi();
+  }
+  function openPicFile(file) {
+    sayPic('');
+    if (!file) return;
+    if (!/^image\//.test(file.type)) { sayPic('Choose an image file (JPG, PNG or WEBP).'); return; }
+    if (file.size > PIC_MAX_INPUT) { sayPic('That file is larger than 25 MB. Choose a smaller photo.'); return; }
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      if (!img.naturalWidth || !img.naturalHeight) { URL.revokeObjectURL(url); sayPic('This image has no usable size. Try a JPG, PNG or WEBP photo.'); return; }
+      if (pic.url) URL.revokeObjectURL(pic.url);
+      pic.img = img; pic.url = url; pic.zoom = 1; pic.drag = null;
+      pic.cx = img.naturalWidth / 2; pic.cy = img.naturalHeight / 2;
+      $('p-zoom').value = '1';
+      picState.editing = true; syncPicUi(); renderPic();
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); sayPic('This file could not be read as an image. Try a JPG, PNG or WEBP photo.'); };
+    img.src = url;
+  }
+  // Final image: a square, at most 900 px, saved as WEBP (JPEG where the browser cannot encode WEBP).
+  function exportPic() {
+    const size = Math.max(256, Math.min(900, Math.round(picVis())));
+    const out = document.createElement('canvas'); out.width = size; out.height = size;
+    drawSquare(out.getContext('2d'), size);
+    return new Promise((resolve, reject) => {
+      out.toBlob((webp) => {
+        if (webp && webp.type === 'image/webp') { resolve(webp); return; }
+        out.toBlob((jpg) => (jpg ? resolve(jpg) : reject(new Error('Could not prepare the image.'))), 'image/jpeg', 0.9);
+      }, 'image/webp', 0.9);
+    });
+  }
+
+  $('p-file').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; openPicFile(f); });
+  const drop = $('p-drop');
+  ['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', (e) => openPicFile(e.dataTransfer && e.dataTransfer.files[0]));
+
+  $('p-zoom').addEventListener('input', (e) => { pic.zoom = Math.min(4, Math.max(1, Number(e.target.value) || 1)); renderPic(); });
+  cv.addEventListener('pointerdown', (e) => {
+    if (!pic.img) return;
+    pic.drag = { x: e.clientX, y: e.clientY, cx: pic.cx, cy: pic.cy };
+    cv.setPointerCapture(e.pointerId);
+  });
+  cv.addEventListener('pointermove', (e) => {
+    if (!pic.drag || !pic.img) return;
+    const k = picVis() / cv.getBoundingClientRect().width;
+    pic.cx = pic.drag.cx - (e.clientX - pic.drag.x) * k;
+    pic.cy = pic.drag.cy - (e.clientY - pic.drag.y) * k;
+    renderPic();
+  });
+  const endDrag = (e) => { pic.drag = null; try { cv.releasePointerCapture(e.pointerId); } catch (x) {} };
+  cv.addEventListener('pointerup', endDrag); cv.addEventListener('pointercancel', endDrag);
+  cv.addEventListener('keydown', (e) => {
+    if (!pic.img) return;
+    const s = picVis() * 0.03;
+    // The photo moves the way the arrow points, like dragging it.
+    const d = { ArrowLeft: [s, 0], ArrowRight: [-s, 0], ArrowUp: [0, s], ArrowDown: [0, -s] }[e.key];
+    if (!d) return;
+    e.preventDefault(); pic.cx += d[0]; pic.cy += d[1]; renderPic();
+  });
+
+  $('p-cancel').addEventListener('click', () => { closePicEditor(); sayPic(''); });
+  $('p-save').addEventListener('click', async () => {
+    if (!pic.img) return;
+    const save = $('p-save'), cancel = $('p-cancel');
+    save.disabled = true; cancel.disabled = true;
+    try {
+      sayPic('Preparing the picture…');
+      const blob = await exportPic();
+      const name = Date.now() + '-' + crypto.randomUUID().slice(0, 8) + '.' + (blob.type === 'image/webp' ? 'webp' : 'jpg');
+      sayPic('Uploading…');
+      const up = await db.storage.from(BUCKET).upload(PROFILE_DIR + '/' + name, blob, { upsert: false, contentType: blob.type, cacheControl: '31536000' });
+      if (up.error) throw up.error;
+      // The new picture is live now. Remove older ones so storage does not pile up.
+      let note = '';
+      try {
+        const old = (await listProfileFiles()).filter((f) => f.name !== name).map((f) => PROFILE_DIR + '/' + f.name);
+        if (old.length) {
+          const r = await db.storage.from(BUCKET).remove(old); if (r.error) throw r.error;
+          // A blocked delete can come back without an error, so check what is really left.
+          if ((await listProfileFiles()).some((f) => f.name !== name)) throw new Error('Old picture still in storage.');
+        }
+      } catch (cleanupErr) { note = ' The previous picture could not be removed from storage.'; }
+      closePicEditor();
+      await loadProfile();
+      sayPic('Profile picture saved. Refresh your portfolio to see it.' + note, true);
+    } catch (err) {
+      sayPic(err.message || 'Upload failed. Try again.');
+    } finally { save.disabled = false; cancel.disabled = false; }
+  });
+  $('p-reset').addEventListener('click', async () => {
+    if (!confirm('Remove your uploaded picture and show your GitHub picture instead?')) return;
+    const btn = $('p-reset'); btn.disabled = true;
+    try {
+      const files = await listProfileFiles();
+      if (files.length) {
+        const { error } = await db.storage.from(BUCKET).remove(files.map((f) => PROFILE_DIR + '/' + f.name));
+        if (error) throw error;
+      }
+      const left = await loadProfile();
+      if (left && left.length) throw new Error('The picture could not be removed. Check that the storage delete policy from supabase_setup.sql is in place.');
+      sayPic('The site now shows your GitHub picture.', true);
+    } catch (err) { sayPic(err.message || 'Could not remove the picture.'); }
+    finally { btn.disabled = false; }
+  });
+
+  async function loadAll() { await Promise.all([loadCerts(), loadLinks(), loadContent(), loadMetrics(), loadProfile()]); }
   db.auth.onAuthStateChange((event) => { if (event === 'SIGNED_OUT') setTimeout(refreshSession, 0); });
   refreshSession();
 })();

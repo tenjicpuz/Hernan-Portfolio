@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
-Sitemap: https://pages.dev
+Sitemap: https://tenjicpuz.is-a.dev/sitemap.xml

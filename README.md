@@ -1,4 +1,4 @@
-#Portfolio
+# Portfolio
 
 ![Portfolio banner](banner.png)
 
@@ -22,13 +22,14 @@ explore web technologies, and turn ideas into practical digital tools.
 ## Highlights
 
 -   Responsive portfolio layout for desktop and mobile
--   About, skills, projects, certificates, education, and contact
-    sections
--   Projects loaded from my public GitHub repositories
--   Live GitHub profile statistics
--   Certificate gallery connected to Supabase
--   Light and dark appearance modes
--   Contact-link management for the portfolio owner
+-   Draggable hanging ID card, scroll progress bar and reveal animations
+    (all switched off for visitors who prefer reduced motion)
+-   Projects loaded from my public GitHub repositories, with search and
+    language filters
+-   Live GitHub profile statistics and recent activity
+-   Certificate gallery connected to Supabase, with a preview you can
+    step through
+-   Profile picture and contact links managed from a private dashboard
 -   Print-friendly layout for saving the portfolio as a PDF
 
 ## Tech Stack
@@ -40,22 +41,26 @@ explore web technologies, and turn ideas into practical digital tools.
   JavaScript                        Interactive features and dynamic content
   GitHub API                        Public repository and profile information
   Supabase                          Certificate gallery and contact-link data
-  GitHub Pages / Cloudflare Pages   Website hosting and deployment
+  GitHub Pages / Cloudflare Pages   Website hosting and deployment (custom domain)
 
 ## Repository Structure
 
 ``` text
 .
-├── index.html
-├── 404.html
-├── admin.html
-├── admin-legacy.html
+├── index.html           public site (markup and styles)
+├── site.js              public site behaviour
+├── admin.html           private owner dashboard
 ├── admin.js
-├── config.js
-├── banner.png
-├── preview.png
-├── .nojekyll
-└── README.md
+├── config.js            public Supabase URL and anon key
+├── supabase_setup.sql   the one database setup file (safe to re-run)
+├── 404.html
+├── sitemap.xml
+├── robots.txt
+├── CNAME                custom domain
+├── favicon.ico / favicon.png / og-image.png
+├── banner.png / preview.png
+├── google255eb07db4aa57cb.html   Search Console verification (keep it)
+└── .nojekyll
 ```
 
 ## Run Locally
@@ -75,13 +80,19 @@ explore web technologies, and turn ideas into practical digital tools.
 3.  Open `index.html` in your browser.
 
 Some features, including the certificate gallery and contact management,
-require the appropriate Supabase configuration.
+require the appropriate Supabase configuration. For the best result,
+serve the folder with any static server (for example
+`python3 -m http.server`) instead of opening the file directly.
 
 ## Configuration
 
 The website uses `config.js` for its public client-side configuration.
 Add the required Supabase project URL and anon key there if you want to
 enable the connected features.
+
+Run `supabase_setup.sql` once in the Supabase SQL Editor, then turn off
+"Allow new users to sign up" under Authentication. Every write is
+restricted to the owner account by database policies.
 
 **Security note:** Never place a Supabase service-role key, private API
 key, or account password in a public repository. Use only the public

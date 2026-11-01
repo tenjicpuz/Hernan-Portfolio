@@ -11,21 +11,25 @@
   <meta name="author" content="Hernan Glenn Belarmino Amon">
   <meta name="keywords" content="Hernan Glenn Belarmino Amon, Hernan Amon, IT student Philippines, developer portfolio, web development, GitHub, Silang Cavite">
   <meta name="theme-color" content="#050505">
-  <meta name="theme-color" content="#050505">
-  <link rel="canonical" href="https://tenjicpuz.pages.dev/">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src https://api.github.com https://*.supabase.co; base-uri 'self'; form-action 'none'; object-src 'none'">
+  <link rel="canonical" href="https://tenjicpuz.is-a.dev/">
   <meta property="og:title" content="Hernan Glenn Belarmino Amon | BSIT Student and Developer" />
   <meta property="og:description" content="BSIT student from Cavite, Philippines. Web and software projects, skills and certificates." />
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Hernan Glenn Belarmino Amon">
   <meta property="og:locale" content="en_PH">
-  <meta property="og:url" content="https://tenjicpuz.github.io/Hernan-Portfolio/">
-  <meta property="og:image" content="https://github.com/tenjicpuz.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:url" content="https://tenjicpuz.is-a.dev/">
+  <meta property="og:image" content="https://tenjicpuz.is-a.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hernan Glenn Amon, full-stack developer and BSIT student">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hernan Glenn Belarmino Amon | BSIT Student and Developer">
   <meta name="twitter:description" content="BSIT student from Cavite, Philippines. Web and software projects, skills and certificates.">
-  <meta name="twitter:image" content="https://github.com/tenjicpuz.png">
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="shortcut icon" href="./favicon.ico">
+  <meta name="twitter:image" content="https://tenjicpuz.is-a.dev/og-image.png">
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="./favicon.png">
   <link rel="apple-touch-icon" href="./favicon.png">
   <link rel="preconnect" href="https://api.github.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -33,37 +37,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <noscript><style>.splash{display:none!important}</style></noscript>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#website",
-      "url": "https://tenjicpuz.github.io/Hernan-Portfolio/",
+      "@id": "https://tenjicpuz.is-a.dev/#website",
+      "url": "https://tenjicpuz.is-a.dev/",
       "name": "Hernan Glenn Belarmino Amon | Portfolio",
       "inLanguage": "en-PH",
       "publisher": {
-        "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#person"
+        "@id": "https://tenjicpuz.is-a.dev/#person"
       }
     },
     {
       "@type": "ProfilePage",
-      "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#profile",
-      "url": "https://tenjicpuz.github.io/Hernan-Portfolio/",
+      "@id": "https://tenjicpuz.is-a.dev/#profile",
+      "url": "https://tenjicpuz.is-a.dev/",
       "isPartOf": {
-        "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#website"
+        "@id": "https://tenjicpuz.is-a.dev/#website"
       },
       "mainEntity": {
-        "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#person"
+        "@id": "https://tenjicpuz.is-a.dev/#person"
       },
       "dateModified": "2026-11-01"
     },
     {
       "@type": "Person",
-      "@id": "https://tenjicpuz.github.io/Hernan-Portfolio/#person",
+      "@id": "https://tenjicpuz.is-a.dev/#person",
       "name": "Hernan Glenn Belarmino Amon",
-      "url": "https://tenjicpuz.github.io/Hernan-Portfolio/",
+      "url": "https://tenjicpuz.is-a.dev/",
       "image": "https://github.com/tenjicpuz.png",
       "jobTitle": "Full-stack developer and Information Technology student",
       "description": "BSIT student at Olivarez College from Silang, Cavite, Philippines, building full-stack web applications.",
@@ -84,7 +89,8 @@
         }
       ],
       "sameAs": [
-        "https://github.com/tenjicpuz"
+        "https://github.com/tenjicpuz",
+        "https://guns.lol/kensojukisaki"
       ],
       "knowsAbout": [
         "Information Technology",
@@ -113,6 +119,7 @@
       color-scheme: dark;
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     html { scroll-behavior: smooth; scroll-padding-top: 90px; }
     body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.7 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     body:before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
@@ -129,6 +136,9 @@
     /* splash */
     .splash { position: fixed; inset: 0; z-index: 200; background: #000; display: grid; place-items: center; text-align: center; transition: opacity .7s ease, visibility .7s; cursor: pointer; }
     .splash.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    /* Safety net: even if the script never runs, the intro screen leaves on its own. */
+    .splash { animation: splash-out .7s 3.2s forwards; }
+    @keyframes splash-out { to { opacity: 0; visibility: hidden; pointer-events: none; } }
     .splash-icons { display: flex; gap: 16px; justify-content: center; margin-bottom: 22px; }
     .splash-icons i { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font: 500 .8rem var(--mono); color: #bbb; font-style: normal; background: #0d0d0d; }
     .splash h2 { font: 800 clamp(1.5rem, 4vw, 2.3rem)/1.2 var(--display); margin: 0 0 14px; letter-spacing: -.01em; }
@@ -147,12 +157,17 @@
     .nav li a[aria-current="true"] { color: #fff; border-bottom-color: #fff; }
 
     /* hero */
-    .hero { min-height: 100vh; display: flex; align-items: center; padding: 110px 0 60px; position: relative; }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, 1fr); gap: 40px; align-items: center; width: 100%; }
+    .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 110px 0 60px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr); gap: 40px; align-items: center; width: 100%; }
+    .hero-copy { min-width: 0; container-type: inline-size; }
     .status { display: inline-flex; align-items: center; gap: 10px; font: 400 .75rem var(--mono); color: var(--muted); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 22px; }
     .status:before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
-    h1 { font: 800 clamp(2.8rem, 7.4vw, 6rem)/.98 var(--display); letter-spacing: -.02em; margin: 0 0 22px; }
-    h1 span { display: block; background: linear-gradient(180deg, #9a9a9a, #4b4b4b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    /* Sized from the column it sits in (cqw), so the widest line can never be wider than its box. */
+    h1 { font: 800 clamp(1.9rem, 10.6cqw, 6rem)/1 var(--display); letter-spacing: -.02em; margin: 0 0 22px; }
+    h1 span { display: block; white-space: nowrap; }
+    /* The gradient is only painted inside this box, so it gets room for descenders (the p) and the last letter. */
+    h1 .grad { width: fit-content; max-width: 100%; padding: 0 .08em .2em 0; margin-bottom: -.2em; background: linear-gradient(180deg, #9a9a9a, #4b4b4b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    @supports not (width: 1cqw) { h1 { font-size: clamp(1.9rem, 5.2vw, 4.4rem); } }
     .typed { font: 400 1.05rem var(--mono); color: #bdbdbd; min-height: 1.8em; margin: 0 0 14px; }
     .typed:after { content: "_"; animation: blink 1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
@@ -253,7 +268,7 @@
     dialog { border: 0; padding: 0; background: transparent; max-width: 92vw; max-height: 92vh; overflow: visible; }
     dialog::backdrop { background: rgba(0,0,0,.86); }
     dialog img { display: block; max-width: 92vw; max-height: 88vh; border-radius: 10px; background: #fff; }
-    dialog button { position: absolute; top: -14px; right: -14px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: #fff; color: #000; font-size: 1.1rem; cursor: pointer; }
+    #cert-close { position: absolute; top: -14px; right: -14px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: #fff; color: #000; font-size: 1.1rem; cursor: pointer; }
 
     .managed-content { padding: 20px 0 80px; }
     .managed-content h3 { text-transform: capitalize; margin: 28px 0 14px; font: 700 1.1rem var(--display); }
@@ -275,6 +290,37 @@
     #contact-links a:hover { text-decoration: underline; }
     footer { padding: 36px 0 44px; text-align: center; color: var(--dim); font: 400 .74rem var(--mono); border-top: 1px solid var(--line); }
 
+
+    /* ---------- additions ---------- */
+    .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 150; pointer-events: none; }
+    .progress i { display: block; height: 100%; background: #fff; transform: scaleX(0); transform-origin: 0 50%; }
+    .to-top { position: fixed; right: 18px; bottom: 18px; z-index: 90; padding: 10px 16px; font: 400 .78rem var(--mono); text-decoration: none; color: #cfcfcf; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s, transform .25s, visibility .25s; }
+    .to-top.show { opacity: 1; visibility: visible; transform: none; }
+    .to-top:hover { color: #fff; border-color: rgba(255,255,255,.4); }
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+    .filters { display: grid; gap: 12px; margin: 0 0 22px; }
+    .filters input { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: 400 .88rem var(--mono); }
+    .filters input::placeholder { color: var(--dim); }
+    .fchips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .fchip { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 400 .78rem var(--mono); cursor: pointer; }
+    .fchip small { color: var(--dim); font-size: .72rem; }
+    .fchip:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .fchip[aria-pressed="true"] { background: #fff; color: #000; border-color: #fff; }
+    .fchip[aria-pressed="true"] small { color: #444; }
+    .fcount { margin: 0; font: 400 .74rem var(--mono); color: var(--dim); }
+    .activity { margin-top: 14px; }
+    .activity ul { list-style: none; margin: 10px 0 0; padding: 0; }
+    .activity li { display: flex; justify-content: space-between; gap: 14px; padding: 10px 0; border-top: 1px solid var(--line); font: 400 .84rem var(--mono); color: var(--muted); }
+    .activity li a { color: #fff; text-decoration: none; overflow-wrap: anywhere; }
+    .activity li a:hover { text-decoration: underline; }
+    .activity .when { color: var(--dim); white-space: nowrap; }
+    .stars { color: #cfcfcf; }
+    dialog { position: relative; }
+    .cert-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; color: #d6d6d6; font: 400 .8rem var(--mono); }
+    .cert-bar button { width: 38px; height: 38px; border-radius: 50%; border: 0; background: #fff; color: #000; font-size: 1.1rem; cursor: pointer; flex: none; }
+    .cert-bar span { text-align: center; overflow-wrap: anywhere; }
+
     @media (max-width: 900px) {
       .hero-grid, .about-grid { grid-template-columns: 1fr; }
       .lanyard { height: 470px; order: -1; margin-top: -30px; }
@@ -294,10 +340,11 @@
       .nav li a { padding: 6px 9px; font-size: .72rem; }
     }
     @media (max-width: 560px) { .facts { grid-template-columns: 1fr; } .facts dt { border-bottom: 0; padding-bottom: 0; } .facts dd { border-top: 0; padding-top: 4px; } .scroll-cue { display: none; } .tabs button { font-size: .72rem; } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .splash-in { animation: none; opacity: 1; } .typed:after { animation: none; } [role="tabpanel"] { animation: none; } .pcard { transition: none; } .splash { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; transition: none; } .to-top { transition: none; } .splash { animation: none; } html { scroll-behavior: auto; } .splash-in { animation: none; opacity: 1; } .typed:after { animation: none; } [role="tabpanel"] { animation: none; } .pcard { transition: none; } .splash { transition: none; } }
     @media print {
       :root { --bg: #fff; --panel: #fff; --line: #bbb; --ink: #000; --muted: #333; --dim: #555; }
-      body:before, .splash, .nav, .lanyard, .scroll-cue, .tabs, .btns, .more, footer { display: none !important; }
+      body:before, .splash, .nav, .lanyard, .scroll-cue, .tabs, .btns, .more, footer, .progress, .to-top, .filters, dialog { display: none !important; }
+      .js .reveal { opacity: 1 !important; transform: none !important; }
       [role="tabpanel"][hidden] { display: block !important; }
       h1 span { color: #000; background: none; }
       .hero { min-height: 0; padding: 20px 0; } .block { padding: 24px 0; }
@@ -308,12 +355,13 @@
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"><i></i></div>
 
-  <div class="splash" id="splash" role="presentation">
+  <div class="splash" id="splash" aria-hidden="true">
     <div class="splash-in">
       <div class="splash-icons" aria-hidden="true"><i>&lt;/&gt;</i><i>DB</i><i>API</i></div>
       <h2>Welcome to my Portfolio</h2>
-      <p>tenjicpuz.pages.dev</p>
+      <p>tenjicpuz.is-a.dev</p>
     </div>
   </div>
 
@@ -335,9 +383,9 @@
   <main id="content">
     <section class="hero" id="home">
       <div class="wrap hero-grid">
-        <div>
+        <div class="hero-copy">
           <div class="status">Available for internships</div>
-          <h1>Full-Stack <span>Developer</span></h1>
+          <h1><span>Full-Stack</span> <span class="grad">Developer</span></h1>
           <p class="typed" id="typed" aria-live="off">BSIT Student</p>
           <p class="desc">I build complete web applications, from responsive interfaces to authenticated back ends and secured databases. Second-year Information Technology student at Olivarez College, based in Silang, Cavite, Philippines.</p>
           <ul class="chips" aria-label="Core stack"><li>JavaScript</li><li>PostgreSQL</li><li>Supabase</li></ul>
@@ -347,7 +395,7 @@
           <div class="swing" id="swing">
             <div class="strap"></div><div class="clip"></div>
             <div class="badge" id="badge">
-              <div class="photo"><span>HA</span><img src="https://github.com/tenjicpuz.png" alt="" width="190" height="238" decoding="async" draggable="false" onerror="this.remove()"></div>
+              <div class="photo"><span>HA</span><img src="https://github.com/tenjicpuz.png" alt="" width="190" height="238" decoding="async" draggable="false" data-fallback></div>
               <div class="badge-name">Hernan Glenn Amon</div>
               <div class="badge-role">full-stack / bsit</div>
             </div>
@@ -366,11 +414,11 @@
             <p>Second-year Information Technology student at Olivarez College who builds independent web and software projects. I care about every layer of an application: a clear interface, sound logic, a properly modeled database and secure sign-in.</p>
             <div class="quote">"Building complete, secure web applications, one layer at a time."</div>
             <div class="btns">
-              <button class="btn solid" id="print-resume" type="button">Download CV</button>
+              <button class="btn solid" id="print-resume" type="button">Save as PDF</button>
               <a class="btn" href="#portfolio">View projects</a>
             </div>
           </div>
-          <div class="portrait" aria-hidden="true">HA<img src="https://github.com/tenjicpuz.png" alt="" width="300" height="300" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" aria-hidden="true">HA<img src="https://github.com/tenjicpuz.png" alt="" width="300" height="300" decoding="async" data-fallback></div>
         </div>
         <div class="cards" aria-label="GitHub activity, loaded live">
           <div class="card stat"><strong id="github-repo-count">–</strong><span>Public repositories</span></div>
@@ -381,6 +429,7 @@
           <div class="card"><span class="label">Current</span><h3>BS Information Technology</h3><p>Olivarez College, second year.</p></div>
           <div class="card"><span class="label">Completed</span><h3>Senior High School</h3><p>Olivarez College Tagaytay.</p></div>
         </div>
+        <div class="card activity" id="activity" hidden><span class="label">Recent GitHub activity</span><ul id="activity-list"></ul></div>
       </div>
     </section>
 
@@ -421,12 +470,18 @@
         </div>
 
         <div role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
+          <div class="filters" id="project-filters">
+            <input type="search" id="project-search" placeholder="search projects..." aria-label="Search projects" autocomplete="off">
+            <div class="fchips" id="lang-chips" role="group" aria-label="Filter by language"></div>
+            <p class="fcount" id="project-count" aria-live="polite"></p>
+          </div>
           <ul class="pgrid" id="project-grid">
             <li class="pcard"><div class="pcard-top"><span class="lang">Batchfile</span></div><h3>OpenDriverUpdater</h3><p>A transparent, zero-dependency batch script that backs up and updates drivers on Windows 10 and 11.</p><a class="btn" href="https://github.com/tenjicpuz/OpenDriverUpdater" target="_blank" rel="noopener noreferrer">View source &#8599;</a></li>
             <li class="pcard"><div class="pcard-top"><span class="lang">Python</span></div><h3>Code-Archaeologist</h3><p>Evidence-grounded code intelligence for developers.</p><a class="btn" href="https://github.com/tenjicpuz/Code-Archaeologist" target="_blank" rel="noopener noreferrer">View source &#8599;</a></li>
             <li class="pcard"><div class="pcard-top"><span class="lang">Python</span></div><h3>Snake-game-but-in-relapse</h3><p>A snake game written in Python.</p><a class="btn" href="https://github.com/tenjicpuz/Snake-game-but-in-relapse" target="_blank" rel="noopener noreferrer">View source &#8599;</a></li>
             <li class="pcard"><div class="pcard-top"><span class="lang">HTML</span></div><h3>Book-of-guides</h3><p>A collection of written how-to guides.</p><a class="btn" href="https://github.com/tenjicpuz/Book-of-guides" target="_blank" rel="noopener noreferrer">View source &#8599;</a></li>
           </ul>
+          <p class="empty-certificates" id="project-empty" hidden>No projects match that search.</p>
           <p class="more"><a href="https://github.com/tenjicpuz?tab=repositories" target="_blank" rel="noopener noreferrer">see all repositories on github</a></p>
         </div>
 
@@ -462,220 +517,12 @@
   <noscript><p style="padding:16px;margin:0;text-align:center;color:#999;font-family:sans-serif">Live sections (GitHub activity, project list, certificates, extra links) and animations need JavaScript.</p></noscript>
   <footer>&copy; 2026 Hernan Glenn Belarmino Amon. All rights reserved.</footer>
 
-  <dialog id="cert-dialog" aria-label="Certificate preview"><button type="button" id="cert-close" aria-label="Close preview">&times;</button><img id="cert-img" alt=""></dialog>
+  <a class="pill to-top" id="to-top" href="#home" aria-label="Back to top">&uarr; top</a>
+
+  <dialog id="cert-dialog" aria-label="Certificate preview"><button type="button" id="cert-close" aria-label="Close preview">&times;</button><img id="cert-img" alt=""><div class="cert-bar"><button type="button" id="cert-prev" aria-label="Previous certificate">&larr;</button><span id="cert-cap"></span><button type="button" id="cert-next" aria-label="Next certificate">&rarr;</button></div></dialog>
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script defer src="./config.js"></script>
-  <script>
-window.addEventListener('DOMContentLoaded', function () {
-  'use strict';
-  const GITHUB_USER = 'tenjicpuz';
-  const $ = (id) => document.getElementById(id);
-  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const escapeHtml = (value) => String(value == null ? '' : value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  // Only allow safe link schemes in anything that comes from the database.
-  const safeUrl = (value) => { try { const u = new URL(String(value), location.href); return ['http:', 'https:'].includes(u.protocol) ? u.href : '#'; } catch (e) { return '#'; } };
-
-  /* ---------- One shared Supabase client ---------- */
-  const cfg = window.PORTFOLIO_CONFIG || {};
-  const hasSupabase = !!(window.supabase && cfg.supabaseUrl && cfg.supabaseAnonKey && !String(cfg.supabaseUrl).includes('YOUR_'));
-  const db = hasSupabase ? window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey) : null;
-
-  /* ---------- Intro splash (once per session, skippable) ---------- */
-  const splash = $('splash');
-  let seen = false;
-  try { seen = sessionStorage.getItem('hernan-splash') === '1'; } catch (e) {}
-  const hideSplash = () => { splash.classList.add('done'); try { sessionStorage.setItem('hernan-splash', '1'); } catch (e) {} setTimeout(() => splash.remove(), 900); };
-  if (seen || reduce) splash.remove(); else { setTimeout(hideSplash, 2300); splash.addEventListener('click', hideSplash); document.addEventListener('keydown', hideSplash, { once: true }); }
-
-  $('print-resume').addEventListener('click', () => window.print());
-
-  /* ---------- Typing line ---------- */
-  const typed = $('typed');
-  const phrases = ['BSIT Student', 'Full-Stack Developer', 'Supabase + PostgreSQL', 'Open to internships'];
-  if (!reduce) {
-    let p = 0, i = 0, dir = 1;
-    (function tick() {
-      const word = phrases[p];
-      i += dir;
-      typed.textContent = word.slice(0, i);
-      let wait = dir === 1 ? 85 : 40;
-      if (dir === 1 && i === word.length) { dir = -1; wait = 1600; }
-      else if (dir === -1 && i === 0) { dir = 1; p = (p + 1) % phrases.length; wait = 350; }
-      setTimeout(tick, wait);
-    })();
-  }
-
-  /* ---------- Hanging ID card (simple pendulum, draggable) ---------- */
-  (function lanyard() {
-    const swing = $('swing'), badge = $('badge'), box = $('lanyard');
-    if (!swing || reduce) return;
-    let angle = 0.12, vel = 0, dragging = false, startX = 0, startAngle = 0, last = performance.now(), visible = true;
-    const K = 18, C = 1.6, LIMIT = 0.7;
-    if ('IntersectionObserver' in window) new IntersectionObserver((e) => { visible = e[0].isIntersecting; }).observe(box);
-    function frame(now) {
-      const dt = Math.min(0.033, (now - last) / 1000); last = now;
-      if (visible && !dragging) {
-        vel += (-K * angle - C * vel) * dt;
-        angle += vel * dt;
-        if (Math.abs(angle) < 0.0008 && Math.abs(vel) < 0.002) { angle = 0; vel = 0; }
-      }
-      if (visible) swing.style.transform = 'rotate(' + angle.toFixed(4) + 'rad)';
-      requestAnimationFrame(frame);
-    }
-    badge.addEventListener('pointerdown', (e) => { dragging = true; startX = e.clientX; startAngle = angle; badge.setPointerCapture(e.pointerId); });
-    badge.addEventListener('pointermove', (e) => { if (dragging) { angle = Math.max(-LIMIT, Math.min(LIMIT, startAngle + (e.clientX - startX) / 220)); vel = 0; } });
-    const release = (e) => { if (!dragging) return; dragging = false; try { badge.releasePointerCapture(e.pointerId); } catch (x) {} };
-    badge.addEventListener('pointerup', release); badge.addEventListener('pointercancel', release);
-    requestAnimationFrame(frame);
-  })();
-
-  /* ---------- Nav highlight ---------- */
-  const navLinks = Array.from(document.querySelectorAll('#main-navigation a'));
-  const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  if ('IntersectionObserver' in window) {
-    const spy = new IntersectionObserver((entries) => entries.forEach((en) => {
-      if (en.isIntersecting) navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + en.target.id)));
-    }), { rootMargin: '-35% 0px -55% 0px' });
-    sections.forEach((s) => spy.observe(s));
-  }
-
-  /* ---------- Tabs ---------- */
-  const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-  function selectTab(tab, focus) {
-    tabs.forEach((t) => {
-      const on = t === tab;
-      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
-      $(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    if (focus) tab.focus();
-  }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => selectTab(t));
-    t.addEventListener('keydown', (e) => {
-      let n = null;
-      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
-      if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
-      if (e.key === 'Home') n = tabs[0];
-      if (e.key === 'End') n = tabs[tabs.length - 1];
-      if (n) { e.preventDefault(); selectTab(n, true); }
-    });
-  });
-
-  /* ---------- GitHub: ONE request feeds both the summary and projects ---------- */
-  const CACHE_KEY = 'hernan-portfolio-gh-v1';
-  const CACHE_MS = 15 * 60 * 1000;
-  async function fetchGithub() {
-    try {
-      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
-      if (cached && Date.now() - cached.t < CACHE_MS) return cached.d;
-    } catch (e) {}
-    const headers = { Accept: 'application/vnd.github+json' };
-    const [profileRes, reposRes] = await Promise.all([
-      fetch('https://api.github.com/users/' + GITHUB_USER, { headers }),
-      fetch('https://api.github.com/users/' + GITHUB_USER + '/repos?sort=updated&per_page=100', { headers })
-    ]);
-    if (!profileRes.ok || !reposRes.ok) throw new Error('GitHub API unavailable');
-    const data = { profile: await profileRes.json(), repos: await reposRes.json() };
-    try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
-    return data;
-  }
-  const monthYear = (iso) => new Date(iso).toLocaleDateString('en', { month: 'short', year: 'numeric' });
-
-  fetchGithub().then(({ profile, repos }) => {
-    const own = repos.filter((r) => !r.fork && !r.archived && r.name.toLowerCase() !== GITHUB_USER + '.github.io');
-    $('github-repo-count').textContent = profile.public_repos;
-    const langs = {};
-    own.forEach((r) => { if (r.language) langs[r.language] = (langs[r.language] || 0) + 1; });
-    const top = Object.keys(langs).sort((a, b) => langs[b] - langs[a])[0];
-    $('github-top-language').textContent = top || '–';
-    const latest = repos.map((r) => r.pushed_at).filter(Boolean).sort().pop();
-    $('github-last-push').textContent = latest ? monthYear(latest) : '–';
-
-    const projects = own.sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at)).slice(0, 6);
-    if (!projects.length) return;
-    $('project-grid').innerHTML = projects.map((r) => {
-      const link = escapeHtml(safeUrl(r.html_url));
-      return '<li class="pcard"><div class="pcard-top"><span class="lang">' + escapeHtml(r.language || 'Project') + '</span><span>' + (r.pushed_at ? 'Updated ' + escapeHtml(monthYear(r.pushed_at)) : '') + '</span></div><h3>' + escapeHtml(r.name) + '</h3><p>' +
-        escapeHtml(r.description || 'Independent project. Source code and details are on GitHub.') + '</p><a class="btn" href="' + link + '" target="_blank" rel="noopener noreferrer">View source &#8599;</a></li>';
-    }).join('');
-  }).catch((e) => console.info('Showing the built-in project list; GitHub data unavailable.', e));
-
-  /* ---------- Certificates (images open in a preview, PDFs open in a new tab) ---------- */
-  const dialog = $('cert-dialog');
-  $('cert-close').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-  (async function loadCertificates() {
-    const gallery = $('certificate-gallery');
-    if (!db) { gallery.innerHTML = '<p class="empty-certificates">Certificates are temporarily unavailable.</p>'; return; }
-    const { data, error } = await db.from('certificates').select('id,title,issuer,issued_on,public_url,storage_path').order('created_at', { ascending: false });
-    if (error) { console.info('Certificates could not be loaded.', error); gallery.innerHTML = '<p class="empty-certificates">Certificates could not be loaded right now. Please try again later.</p>'; return; }
-    if (!data || !data.length) { gallery.innerHTML = '<p class="empty-certificates">No certificates have been added yet.</p>'; return; }
-    gallery.innerHTML = data.map((item) => {
-      const url = escapeHtml(safeUrl(item.public_url));
-      const isPdf = /\.pdf$/i.test(item.storage_path || '');
-      const media = isPdf
-        ? '<a href="' + url + '" target="_blank" rel="noopener noreferrer" aria-label="Open ' + escapeHtml(item.title) + '"><div class="pdf-thumb" aria-hidden="true">PDF</div></a>'
-        : '<button type="button" class="cert-open" data-src="' + url + '" data-title="' + escapeHtml(item.title) + '" aria-label="Preview ' + escapeHtml(item.title) + '"><img src="' + url + '" alt="' + escapeHtml(item.title) + '" loading="lazy" decoding="async"></button>';
-      return '<article class="certificate-card">' + media + '<div class="certificate-info"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.issuer || 'Certificate') + (item.issued_on ? ', ' + escapeHtml(item.issued_on) : '') + '</p></div></article>';
-    }).join('');
-    gallery.querySelectorAll('.cert-open').forEach((b) => b.addEventListener('click', () => {
-      $('cert-img').src = b.dataset.src; $('cert-img').alt = b.dataset.title || 'Certificate'; dialog.showModal();
-    }));
-  })();
-
-  /* ---------- Public contact links + managed content (read-only, no admin UI here) ---------- */
-  const hrefFor = (item) => item.type === 'email' ? 'mailto:' + item.value : item.type === 'phone' ? 'tel:' + String(item.value).replace(/[^+0-9]/g, '') : safeUrl(item.value);
-  (async function loadContactLinks() {
-    if (!db) return;
-    const { data, error } = await db.from('contact_links').select('id,label,category,type,value').order('sort_order').order('created_at');
-    if (error || !data || !data.length) return;
-    $('contact-links').innerHTML = data.map((item) => '<p><strong>' + escapeHtml(item.label) + '</strong><a href="' + escapeHtml(hrefFor(item)) + '"' + (item.type === 'url' ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(item.value) + '</a></p>').join('');
-  })();
-
-  (async function loadManagedContent() {
-    if (!db) return;
-    try {
-      const { data, error } = await db.from('portfolio_content').select('section,title,subtitle,description,url,image_url,display_date,sort_order').eq('is_published', true).order('sort_order');
-      if (error || !data || !data.length) return;
-      const groups = {};
-      data.forEach((item) => { (groups[item.section] = groups[item.section] || []).push(item); });
-      const wrap = document.createElement('section');
-      wrap.id = 'managed-portfolio-content';
-      wrap.className = 'managed-content';
-      wrap.innerHTML = '<div class="wrap"><div class="center"><h2 class="big">More</h2></div>' + Object.keys(groups).map((name) =>
-        '<h3>' + escapeHtml(name) + '</h3><div class="managed-grid">' + groups[name].map((x) =>
-          '<article class="managed-card">' + (x.image_url ? '<img src="' + escapeHtml(safeUrl(x.image_url)) + '" alt="" loading="lazy" decoding="async">' : '') +
-          '<h4>' + escapeHtml(x.title) + '</h4>' + (x.subtitle ? '<p>' + escapeHtml(x.subtitle) + '</p>' : '') + (x.description ? '<p>' + escapeHtml(x.description) + '</p>' : '') +
-          (x.display_date ? '<small>' + escapeHtml(x.display_date) + '</small>' : '') +
-          (x.url ? '<p><a href="' + escapeHtml(safeUrl(x.url)) + '" target="_blank" rel="noopener noreferrer">View details &#8599;</a></p>' : '') + '</article>').join('') + '</div>').join('') + '</div>';
-      const contact = $('contact');
-      contact.parentNode.insertBefore(wrap, contact);
-    } catch (e) { console.warn('Managed content could not load', e); }
-  })();
-
-  /* ---------- Profile picture (changed from the admin dashboard) ----------
-     The newest image in the public "certificates" bucket, folder profile/, replaces the GitHub picture
-     on the ID card and in the About section. If there is none, or anything fails, the GitHub picture stays. */
-  (async function loadProfilePicture() {
-    if (!db) return;
-    try {
-      const { data, error } = await db.storage.from('certificates').list('profile', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
-      if (error || !data) return;
-      const files = data.filter((f) => f.id && /\.(webp|jpe?g|png)$/i.test(f.name))
-        .sort((a, b) => (new Date(b.created_at) - new Date(a.created_at)) || (a.name < b.name ? 1 : a.name > b.name ? -1 : 0));
-      if (!files.length) return;
-      const url = db.storage.from('certificates').getPublicUrl('profile/' + files[0].name).data.publicUrl;
-      const probe = new Image();
-      probe.onload = () => document.querySelectorAll('.photo, .portrait').forEach((box) => {
-        let img = box.querySelector('img');
-        if (!img) { img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.draggable = false; box.appendChild(img); }
-        img.src = url;
-      });
-      probe.src = url;
-    } catch (e) { console.info('Using the default profile picture.', e); }
-  })();
-});
-</script>
+  <script defer src="./site.js"></script>
 </body>
 </html>

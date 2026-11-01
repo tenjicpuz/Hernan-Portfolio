@@ -1,4 +1,4 @@
-# Hernan Glenn Belarmino Amon — Portfolio
+# Portfolio — SRC
 
 A responsive, monochrome developer portfolio hosted on **GitHub Pages**, with a private owner dashboard and a **Supabase** back end. The public site presents profile information, GitHub projects, certificates, contact links, and additional portfolio content. The owner can manage supported content through the website's admin dashboard without editing the public page for every update.
 

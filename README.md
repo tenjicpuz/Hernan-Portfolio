@@ -1,24 +1,8 @@
-# Hernan Glenn Belarmino Amon --- Portfolio
+#Portfolio
 
 ![Portfolio banner](banner.png)
 
-```{=html}
-<p align="center">
-```
 **BSIT Student · Independent Creator · Aspiring Developer**
-```{=html}
-</p>
-```
-```{=html}
-<p align="center">
-```
-`<a href="https://tenjicpuz.is-a.dev/">`{=html}Live
-Portfolio`</a>`{=html} ·
-`<a href="https://github.com/tenjicpuz">`{=html}GitHub
-Profile`</a>`{=html}
-```{=html}
-</p>
-```
 
 ------------------------------------------------------------------------
 

@@ -219,7 +219,7 @@
   // falls back to the GitHub picture when the folder is empty.
   const PROFILE_DIR = 'profile';
   const DEFAULT_PICTURE = 'https://github.com/tenjicpuz.png'; // the same default the public page ships with
-  const PIC_MAX_INPUT = 25 * 1024 * 1024;
+  const PIC_MAX_INPUT = 10 * 1024 * 1024;
   const sayPic = (msg, ok) => { const s = $('p-status'); s.textContent = msg; s.classList.toggle('ok', !!ok); };
   const picState = { custom: false, editing: false };
   const pic = { img: null, url: null, cx: 0, cy: 0, zoom: 1, drag: null };
@@ -299,7 +299,7 @@
     sayPic('');
     if (!file) return;
     if (!/^image\//.test(file.type)) { sayPic('Choose an image file (JPG, PNG or WEBP).'); return; }
-    if (file.size > PIC_MAX_INPUT) { sayPic('That file is larger than 25 MB. Choose a smaller photo.'); return; }
+    if (file.size > PIC_MAX_INPUT) { sayPic('That file is larger than 10 MB. Choose a smaller photo.'); return; }
     const url = URL.createObjectURL(file), img = new Image();
     img.onload = () => {
       if (!img.naturalWidth || !img.naturalHeight) { URL.revokeObjectURL(url); sayPic('This image has no usable size. Try a JPG, PNG or WEBP photo.'); return; }

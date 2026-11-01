@@ -83,82 +83,170 @@
     })();
   }
 
-  /* ---------- Hanging lanyard + ID card ----------
-     The lanyard hangs from a fixed point above the screen and swings as one piece (strap + card) like a real badge.
-     Move it by dragging the card, tapping either side of it, brushing it with a mouse, or tilting a phone (gyro).
-     The swing is limited so the card can never leave the screen, and the loop only runs while it is moving AND visible. */
+  /* ---------- Hanging lanyard + ID card (real rope physics) ----------
+     A verlet rope hangs from a point above the screen with the card on its end. There is no swing limit:
+     drag the card anywhere, fling it, tap either side, brush it with a mouse, or tilt a phone (gyro).
+     The loop only runs while something is moving AND the hero is visible, so a resting card costs nothing. */
   (function lanyard() {
-    const hang = $('hang'), badge = $('badge'), box = $('lanyard'), gyroBtn = $('gyro-btn');
-    if (!hang || reduce) return;
-    const K = 7, C = 0.9, ARM = 690;   // ARM = pivot-to-card-bottom length in px
-    let angle = 0, vel = 0, target = 0, dragging = false, startX = 0, startAngle = 0, moved = 0, downAt = 0;
-    let lastX = 0, lastT = 0, flingVel = 0, last = 0, visible = true, running = false;
-    // Largest angle at which the card still stays fully on screen (measured from where the lanyard actually sits).
-    const limit = () => {
-      const r = box.getBoundingClientRect(), cx = r.left + r.width / 2;
-      const room = Math.min(cx, window.innerWidth - cx) - 140;
-      return Math.max(0.05, Math.min(0.26, Math.asin(Math.max(0, Math.min(1, room / ARM)))));
-    };
-    const clamp = (v) => { const L = limit(); return Math.max(-L, Math.min(L, v)); };
-    angle = 0.9 * limit();             // the little swing on load
+    const hero = $('home'), stage = $('stage'), cvs = $('rope'), badge = $('badge'), box = $('lanyard'), gyroBtn = $('gyro-btn');
+    if (!hero || !stage || !cvs || !badge || !box) return;
+    const ctx = cvs.getContext('2d');
+    const SUB = 1 / 120, JOINT = 10, ITER = 24;
+    let W = 0, H = 0, dpr = 1, cw = 214, ch = 304, D = 0, L = 0, N = 0, SEG = 0, G = 0;
+    let pts = [], card = null, gx = 0, gy = 1, tgx = 0;
+    let dragging = false, grabX = 0, grabY = 0, px = 0, py = 0, downAt = 0, moved = 0, startX = 0;
+    let acc = 0, last = 0, running = false, visible = true;
+
+    const mk = (x, y, im) => ({ x: x, y: y, ox: x, oy: y, im: im });
+
+    function build(angle) {
+      const hr = hero.getBoundingClientRect(), br = box.getBoundingClientRect();
+      W = hr.width; H = hr.height; dpr = Math.min(2, window.devicePixelRatio || 1);
+      cvs.width = Math.round(W * dpr); cvs.height = Math.round(H * dpr);
+      cw = badge.offsetWidth || 214; ch = badge.offsetHeight || 304; D = ch / 2 + JOINT;
+      const cx = br.left - hr.left + br.width / 2;
+      const cardTop = (br.top - hr.top) + (window.innerWidth <= 900 ? 140 : 190);
+      const anchorY = -Math.max(300, window.innerHeight * 0.8);   // the rope comes from above the screen
+      L = (cardTop - JOINT) - anchorY; N = Math.max(12, Math.round(L / 34)); SEG = L / (N - 1);
+      G = L * 5;                                                    // gives a natural, unhurried swing
+      const dx = Math.sin(angle), dy = Math.cos(angle);
+      pts = [];
+      for (let i = 0; i < N; i++) pts.push(mk(cx + dx * SEG * i, anchorY + dy * SEG * i, i === 0 ? 0 : 1));
+      const top = pts[N - 1];
+      card = mk(top.x + dx * D, top.y + dy * D, 0.22);
+    }
+
+    function solve(a, b, len) {
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 1e-6, w = a.im + b.im;
+      if (!w) return;
+      const k = (d - len) / d / w;
+      a.x += dx * k * a.im; a.y += dy * k * a.im; b.x -= dx * k * b.im; b.y -= dy * k * b.im;
+    }
+
+    function substep() {
+      // smooth the gravity direction toward the gyro target
+      const ang = Math.atan2(gx, gy), want = tgx;
+      const na = ang + (want - ang) * 0.08; gx = Math.sin(na); gy = Math.cos(na);
+      const gdx = gx * G * SUB * SUB, gdy = gy * G * SUB * SUB;
+      for (let i = 1; i < pts.length; i++) {
+        const p = pts[i], vx = (p.x - p.ox) * 0.9972, vy = (p.y - p.oy) * 0.9972;
+        p.ox = p.x; p.oy = p.y; p.x += vx + gdx; p.y += vy + gdy;
+      }
+      { const vx = (card.x - card.ox) * 0.9955, vy = (card.y - card.oy) * 0.9955; card.ox = card.x; card.oy = card.y; card.x += vx + gdx; card.y += vy + gdy; }
+      if (dragging) {
+        // aim for the pointer, but never beyond what the rope can reach, so the rope stays stable
+        const a0 = pts[0], reach = (L + D) * 0.99;
+        let dx = px - grabX - a0.x, dy = py - grabY - a0.y; const dd = Math.hypot(dx, dy);
+        if (dd > reach) { dx *= reach / dd; dy *= reach / dd; }
+        card.x += (a0.x + dx - card.x) * 0.3; card.y += (a0.y + dy - card.y) * 0.3;
+      }
+      for (let it = 0; it < ITER; it++) {
+        for (let i = 0; i < pts.length - 1; i++) solve(pts[i], pts[i + 1], SEG);
+        solve(pts[pts.length - 1], card, D);
+      }
+      // cap the speed so a wild fling can never make the rope unstable
+      { const vx = card.x - card.ox, vy = card.y - card.oy, v = Math.hypot(vx, vy); if (v > 40) { card.ox = card.x - vx * 40 / v; card.oy = card.y - vy * 40 / v; } }
+      if (!isFinite(card.x + card.y)) { build(0); return; }
+      // keep the card inside the hero so it can never be lost off screen
+      const minX = cw / 2 + 6, maxX = W - cw / 2 - 6, minY = ch / 2 + 6, maxY = H - ch / 2 - 6;
+      if (card.x < minX) { card.x = minX; card.ox = card.x + (card.ox - card.x) * 0.3; }
+      if (card.x > maxX) { card.x = maxX; card.ox = card.x + (card.ox - card.x) * 0.3; }
+      if (card.y > maxY) { card.y = maxY; card.oy = card.y + (card.oy - card.y) * 0.3; }
+      if (card.y < minY) { card.y = minY; card.oy = card.y + (card.oy - card.y) * 0.3; }
+    }
+
+    function speed() {
+      let m = Math.hypot(card.x - card.ox, card.y - card.oy);
+      for (let i = 1; i < pts.length; i++) m = Math.max(m, Math.hypot(pts[i].x - pts[i].ox, pts[i].y - pts[i].oy));
+      return m;
+    }
+
+    function draw() {
+      const top = pts[pts.length - 1];
+      const theta = -Math.atan2(card.x - top.x, card.y - top.y);
+      badge.style.transform = 'translate(' + (card.x - cw / 2).toFixed(2) + 'px,' + (card.y - ch / 2).toFixed(2) + 'px) rotate(' + theta.toFixed(4) + 'rad)';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      const path = () => {
+        ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length - 1; i++) { const mx = (pts[i].x + pts[i + 1].x) / 2, my = (pts[i].y + pts[i + 1].y) / 2; ctx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my); }
+        ctx.lineTo(top.x, top.y);
+      };
+      ctx.lineCap = 'butt'; ctx.lineJoin = 'round';
+      path(); ctx.lineWidth = 34; ctx.strokeStyle = '#2f2f2f'; ctx.stroke();
+      path(); ctx.lineWidth = 32; ctx.strokeStyle = '#141414'; ctx.stroke();
+      path(); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.stroke();
+      // lettering along the band
+      ctx.font = '500 9.5px "JetBrains Mono", ui-monospace, monospace'; ctx.fillStyle = '#7d7d7d'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      let run = 0, next = 70, n = 0;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const a = pts[i], b = pts[i + 1], sl = Math.hypot(b.x - a.x, b.y - a.y);
+        while (next <= run + sl) {
+          const t = (next - run) / sl, x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t;
+          if (y > -20 && y < H + 20) { ctx.save(); ctx.translate(x, y); ctx.rotate(Math.atan2(b.y - a.y, b.x - a.x)); ctx.fillText(n % 2 ? 'FULL-STACK' : 'HERNAN AMON', 0, 0); ctx.restore(); }
+          next += 130; n++;
+        }
+        run += sl;
+      }
+    }
 
     function frame(now) {
-      const dt = Math.min(0.033, (now - last) / 1000); last = now;
-      if (!dragging) {
-        vel += (-K * (angle - target) - C * vel) * dt;
-        angle = clamp(angle + vel * dt);
-        if (Math.abs(angle - target) < 0.0006 && Math.abs(vel) < 0.002) { angle = target; vel = 0; }
-      }
-      hang.style.transform = 'rotate(' + angle.toFixed(4) + 'rad)';
-      if ((!dragging && angle === target && vel === 0) || !visible || document.hidden) { running = false; return; }
+      acc += last ? Math.max(SUB, Math.min(0.033, (now - last) / 1000)) : SUB; last = now;
+      while (acc >= SUB) { substep(); acc -= SUB; }
+      draw();
+      const calm = !dragging && speed() < 0.004 && Math.abs(tgx - Math.atan2(gx, gy)) < 0.002;
+      if (calm || !visible || document.hidden) { running = false; return; }
       requestAnimationFrame(frame);
     }
-    function start() { if (running) return; running = true; last = performance.now(); requestAnimationFrame(frame); }
-    if ('IntersectionObserver' in window) new IntersectionObserver((e) => { visible = e[0].isIntersecting; if (visible) start(); }).observe(box);
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
+    function start() { if (running || reduce) return; running = true; last = 0; acc = 0; requestAnimationFrame(frame); }
 
-    // Dragging right moves the card right (a negative rotation).
+    function init(angle) { build(angle); stage.classList.add('ready'); draw(); start(); }
+    init(reduce ? 0 : 0.9);          // the card drops in with a swing, like the reference
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!dragging) { const wasW = cw; cw = badge.offsetWidth || cw; ch = badge.offsetHeight || ch; D = ch / 2 + JOINT; if (reduce || wasW !== cw) draw(); } });
+    if (reduce) return;              // reduced motion: a still lanyard, no physics or interaction
+
+    if ('IntersectionObserver' in window) new IntersectionObserver((e) => { visible = e[0].isIntersecting; if (visible) start(); }).observe(hero);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
+    let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { init(0); }, 150); });
+
+    const local = (e) => { const r = hero.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
     badge.addEventListener('pointerdown', (e) => {
-      dragging = true; moved = 0; downAt = performance.now(); startX = lastX = e.clientX; lastT = downAt; flingVel = 0; startAngle = angle;
+      e.preventDefault(); document.body.classList.add('lanyard-drag'); const sel = window.getSelection && window.getSelection(); if (sel && sel.removeAllRanges) sel.removeAllRanges();
+      const p = local(e);
+      dragging = true; moved = 0; downAt = performance.now(); startX = e.clientX;
+      px = p[0]; py = p[1]; grabX = p[0] - card.x; grabY = p[1] - card.y;
       try { badge.setPointerCapture(e.pointerId); } catch (x) {}
       start();
     });
     badge.addEventListener('pointermove', (e) => {
-      const now = performance.now();
-      if (dragging) {
-        moved = Math.max(moved, Math.abs(e.clientX - startX));
-        const next = clamp(startAngle - (e.clientX - startX) / 540);
-        if (now > lastT) flingVel = (next - angle) / ((now - lastT) / 1000);
-        angle = next; vel = 0; lastX = e.clientX; lastT = now;
-      } else if (e.pointerType === 'mouse') {
-        // Brushing the card with the mouse gives it a small push.
-        vel = Math.max(-0.8, Math.min(0.8, vel - (e.clientX - lastX) * 0.006)); lastX = e.clientX; start();
+      const p = local(e);
+      if (dragging) { moved = Math.max(moved, Math.abs(e.clientX - startX)); px = p[0]; py = p[1]; start(); }
+      else if (e.pointerType === 'mouse' && e.movementX) {
+        // brushing the card with a mouse gives it a small push
+        card.ox -= Math.max(-60, Math.min(60, e.movementX)) * 0.05; start();
       }
     });
-    badge.addEventListener('pointerenter', (e) => { lastX = e.clientX; });
     const release = (e) => {
       if (!dragging) return;
-      dragging = false;
+      dragging = false; document.body.classList.remove('lanyard-drag');
       try { badge.releasePointerCapture(e.pointerId); } catch (x) {}
       if (moved < 8 && performance.now() - downAt < 450) {
-        // A tap pushes the lanyard away from the side that was tapped.
+        // a tap pushes the card away from the side that was tapped
         const r = badge.getBoundingClientRect();
-        vel += (e.clientX >= r.left + r.width / 2 ? 1 : -1) * 0.6;
-      } else {
-        vel = Math.max(-1.5, Math.min(1.5, flingVel * 0.6));
+        card.ox += (e.clientX >= r.left + r.width / 2 ? 1 : -1) * 4; card.oy -= 1.2;
       }
       start();
     };
     badge.addEventListener('pointerup', release); badge.addEventListener('pointercancel', release);
 
-    /* ---- Gyro: the lanyard hangs toward real gravity as the phone tilts ---- */
+    /* ---- Gyro: gravity follows the real tilt of the phone, with no limit ---- */
     let smooth = 0;
     function onTilt(e) {
       if (e.gamma == null && e.beta == null) return;
       const o = (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle : (window.orientation || 0);
       const deg = o === 90 ? e.beta : (o === 270 || o === -90) ? -e.beta : o === 180 ? -e.gamma : e.gamma;
-      smooth += ((-(deg || 0) * Math.PI / 180 * 0.6) - smooth) * 0.25;
-      target = clamp(smooth);
+      smooth += (Math.max(-1.45, Math.min(1.45, (deg || 0) * Math.PI / 180)) - smooth) * 0.3;
+      tgx = smooth;
       start();
     }
     function enableTilt() { window.addEventListener('deviceorientation', onTilt, true); }
@@ -177,8 +265,6 @@
         enableTilt(); // Android and other browsers: no prompt needed
       }
     }
-    window.addEventListener('resize', () => { angle = clamp(angle); target = clamp(target); start(); });
-    start();
   })();
 
   /* ---------- Nav highlight ---------- */
